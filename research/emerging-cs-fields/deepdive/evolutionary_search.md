@@ -33,7 +33,7 @@
 - **是什么**：在程序空间上做进化搜索，目标是启发式、算法、优化器等。
 - **代表工作**：
   - **FunSearch**（Google DeepMind，2023-12，Nature）：cap set 第 8 维找到 512 大小的构造、给出 20 年来最大的渐近下界改进；在线装箱启发式。https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10794145/
-  - **AlphaEvolve**（Google DeepMind，2025-05 博客 / 2025-06 白皮书 arXiv 2506.13131）：14 个矩阵乘法目标刷新 SOTA；50+ 开放数学问题中约 75% 复现 SOTA、约 20% 改进。https://deepmind.google/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/
+  - **AlphaEvolve**（Google DeepMind，2025-05 博客 / 2025-06 白皮书 arXiv 2506.13131）：14 个矩阵乘法目标刷新 SOTA；50+ 开放数学问题（数量为背景知识）中约 75% 复现 SOTA、约 20% 改进。https://deepmind.google/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/
   - **EoH / ReEvo**（CityU HK 张青富组等，2024，ICML 2024 / NeurIPS 2024(背景知识)）：同时演化"思想（自然语言）+代码"或加入反思，样本效率显著高于 FunSearch。https://arxiv.org/abs/2401.02051v3
   - **ShinkaEvolve**（Sakana AI，2025-09，ICLR 2026）：父代采样平衡探索/利用、代码新颖性拒绝采样、bandit 选择 LLM 集成；26 圆填充仅 150 个样本达 SOTA。https://sakana.ai/shinka-evolve/
 - **现状**：框架爆炸（OpenEvolve、CodeEvolve、EvoX、SeaEvo、SMCEvolve、GEAR……），2026 年起"元进化"（EvoX 让选择规则本身共同演化）与"策略空间演化"成热点。
