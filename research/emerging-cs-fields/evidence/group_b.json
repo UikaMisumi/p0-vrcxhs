@@ -1,0 +1,214 @@
+[
+  {
+    "id": "mech_interp",
+    "name_zh": "机制可解释性",
+    "name_en": "Mechanistic Interpretability (SAEs, transcoders, attribution graphs / circuit tracing, model diffing)",
+    "domain": "AI-可信与推理",
+    "scores": {"G": 4, "S": 4, "C": 3, "E": 4, "R": 4, "H": 5, "X": 3, "P": 4},
+    "rationale": {
+      "G": "一项文献计量研究统计：主要会议中该主题论文2025年约100篇，同比约3.7倍；关键词计数2022→2023→2024为3→9→23，持续高速增长，但基数仍小。",
+      "S": "已有ICML/NeurIPS专门workshop与Neuronpedia/Gemma Scope等公共基础设施，并入选MIT Technology Review 2026十大突破技术；在顶会论文中占比仍很小，且SAE与线性探针、神经元基等范式仍有争论，尚无共识范式，处于起飞期后段。",
+      "C": "Anthropic的attribution graphs在Claude 3.5 Haiku上展示了提前规划、跨语言概念等电路（2025-03），属于较强的存在性证明；但GDM报告SAE在有害意图OOD检测上不如线性探针，并降低了基础SAE研究的优先级，实际可用收益较窄。",
+      "E": "Gemma Scope 2已覆盖到27B参数，circuit-tracing工具开源，TransformerLens/nnsight/Neuronpedia成熟；对前沿闭源模型无内部访问是主要瓶颈。",
+      "R": "Anthropic、GDM、OpenAI均设有专门团队；Goodfire于2026-02完成1.5亿美元B轮（估值12.5亿美元）；整体资金规模远低于10亿美元级的前沿方向。",
+      "H": "特征完备性、叠加（superposition）、可解释性评估标准、电路的可扩展自动化等基础问题大量开放，且在7B以下开源模型上用学术算力即可研究。",
+      "X": "可外溢到模型调试、对齐审计、科学模型（如生物基础模型）中的知识发现，但主要仍是服务于ML本身的工具学科。",
+      "P": "炒作与实际效果有落差（SAE负面结果），方法论的可复现性和“解释是否忠实”仍受质疑；扣4分。"
+    },
+    "inflection_event": "2024-05 Anthropic “Scaling Monosemanticity” 在生产级模型Claude 3 Sonnet上提取数百万可解释特征（“金门大桥Claude”），再到2025-03 attribution graphs 追踪Claude 3.5 Haiku的完整计算电路；真正的“GPT-3时刻”尚待到来：能在前沿模型上可靠地发现并修复真实未知的错误行为。",
+    "key_evidence": [
+      {"claim": "该主题在主要会议中2025年达到约100篇论文，同比增长约3.7倍；关键词计数2022/2023/2024为3/9/23篇", "source": "https://arxiv.org/pdf/2606.12828", "date": "2026-06"},
+      {"claim": "Anthropic用attribution graphs追踪Claude 3.5 Haiku，发现诗歌写作中的提前规划、语言无关的概念电路，并开源circuit tracing工具", "source": "https://pub.towardsai.net/mechanistic-interpretability-is-having-its-moment-what-engineers-actually-need-to-know-e4421f305f84", "date": "2025-03"},
+      {"claim": "DeepMind Gemma Scope 2 将SAE分析扩展到27B参数模型", "source": "https://pub.towardsai.net/mechanistic-interpretability-is-having-its-moment-what-engineers-actually-need-to-know-e4421f305f84", "date": "2025-12"},
+      {"claim": "GDM机制可解释性团队报告：SAE在有害意图OOD检测上逊于线性探针，决定降低基础SAE研究优先级", "source": "https://www.alignmentforum.org/posts/HpAr8k74mW4ivCvCu/", "date": "2025-03"},
+      {"claim": "Goodfire于2026年2月完成1.5亿美元B轮，估值12.5亿美元；MIT Technology Review将机制可解释性列为2026年突破技术", "source": "https://www.longtermwiki.com/wiki/goodfire", "date": "2026-02"},
+      {"claim": "ICML 2026论文表明MLP神经元本身与SAE一样稀疏，约100个神经元的电路即可控制主谓一致行为——基础表示单元仍无共识", "source": "https://arxiv.org/abs/2601.22594", "date": "2026-01"}
+    ],
+    "open_problems": [
+      "如何评估解释的忠实性与完备性（缺少ground truth与统一的度量基准）",
+      "SAE/transcoder的特征是否是模型的“自然单元”，以及如何处理特征分裂、吸收与暗物质（未解释方差）",
+      "将电路级分析扩展到长推理链、智能体轨迹与前沿规模模型，并转化为可靠的下游安全/调试收益"
+    ],
+    "entry_points": [
+      "基于Gemma Scope 2、Neuronpedia和开源circuit-tracer，在≤9B开源模型上做特征/电路的忠实性评测与对比（SAE vs 探针 vs 神经元基）",
+      "做“模型差分”（base vs 微调/RL后模型）找出训练引入的行为变化，或将可解释性方法用于生物/科学基础模型中的知识发现"
+    ]
+  },
+  {
+    "id": "ai_control_oversight",
+    "name_zh": "AI控制与可扩展监督",
+    "name_en": "AI Control & Scalable Oversight (control protocols, CoT monitoring, model organisms of misalignment, alignment auditing)",
+    "domain": "AI-可信与推理",
+    "scores": {"G": 4, "S": 5, "C": 3, "E": 4, "R": 4, "H": 4, "X": 2.5, "P": 4},
+    "rationale": {
+      "G": "2023-12 Redwood提出“AI Control”后，2025-2026出现ControlArena（14个设定）、BashArena（637个任务）、Ctrl-Z、Petri、CoT可监控性等一系列工作；未找到可靠的论文计数，按定性证据估计年增长60-100%。",
+      "S": "社区小而聚焦（Redwood、UK AISI、Anthropic、GDM、OpenAI），基准与评测库刚形成，黑客松/专门会议起步，顶会占比远低于1%，尚无共识范式，符合“LLM在2021”的窗口。",
+      "C": "CoT监控在实践中可发现奖励作弊、Petri等自动审计智能体可在前沿模型上发现失准行为，但这些是有前景的窄胜利，而非质变能力；能力进步主要来自底层模型。",
+      "E": "ControlArena开源、开源权重模型可做红蓝方，API成本可承受；主要瓶颈是缺少真正失准的前沿模型样本，只能依赖model organisms。",
+      "R": "三大前沿实验室均有团队；40余名来自OpenAI/GDM/Anthropic/Meta的研究者联名CoT可监控性论文；UK AISI Alignment Project总额达£27m（含OpenAI £5.6m）；总量远小于10亿美元。",
+      "H": "监控器-被监控者能力差、隐写/不忠实CoT、评测意识（eval awareness）、控制评估的红队充分性等问题大量开放，许多可用开源模型+API研究。",
+      "X": "主要服务AI安全与部署治理，对安全运维、智能体安全、人机协作审批流程有一定外溢。",
+      "P": "可监控性依赖“模型用自然语言推理”这一脆弱前提，可能被潜空间推理/强结果RL破坏；评测真实性受eval-awareness影响；资金高度依赖安全导向机构；扣4分。"
+    },
+    "inflection_event": "2024-12 Anthropic/Redwood“Alignment Faking”首次在生产模型中观察到无训练诱导的策略性伪装对齐，配合2025-07多实验室CoT可监控性立场论文，标志该领域从思辨转为实证；真正的“GPT-3时刻”将是控制协议在真实前沿智能体部署中被量化证明能拦截内部破坏行为。",
+    "key_evidence": [
+      {"claim": "40余名来自OpenAI、GDM、Anthropic、Meta的研究者联合发表“CoT Monitorability: A New and Fragile Opportunity”，Hinton、Sutskever等背书", "source": "https://arxiviq.substack.com/p/chain-of-thought-monitorability-a", "date": "2025-07"},
+      {"claim": "UK AISI与Redwood发布ControlArena，含14个“正常任务+隐蔽恶意目标”设定，已被Anthropic、GDM等使用；BashArena含637个Linux运维任务与4类破坏目标", "source": "https://www.aisi.gov.uk/blog/introducing-controlarena-a-library-for-running-ai-control-experiments", "date": "2025-10"},
+      {"claim": "UK AISI Alignment Project首批资助60个项目，总资金增至£27m，新增OpenAI(£5.6m)、Microsoft等出资方", "source": "https://www.aisi.gov.uk/blog/funding-60-projects-to-advance-ai-alignment-research", "date": "2026-02"},
+      {"claim": "Anthropic开展“审计隐藏目标”的auditing game（4个人类团队），并开源Petri自动化行为审计工具，用于评估前沿模型失准程度", "source": "https://alignment.anthropic.com/", "date": "2025-12"},
+      {"claim": "Redwood Research于2023-12发表“AI Control: Improving Safety Despite Intentional Subversion”，提出可信/不可信模型监控协议框架", "source": "background knowledge", "date": "2023-12"},
+      {"claim": "OpenAI报告用较弱模型监控推理模型CoT可有效发现奖励作弊，但对CoT施加优化压力会导致“隐藏意图”", "source": "background knowledge", "date": "2025-03"}
+    ],
+    "open_problems": [
+      "如何保证CoT忠实且可监控，以及在潜空间推理/强化学习下保持可监控性",
+      "当被监控模型强于监控器时的可扩展监督（辩论、递归监督、弱到强）是否有效",
+      "控制评估的红队是否充分（模型故意藏拙/sandbagging、评测意识）以及如何给出可信的安全论证（safety case）"
+    ],
+    "entry_points": [
+      "基于ControlArena/BashArena，用开源模型做新的监控协议（如多监控器集成、重采样Ctrl-Z）或新的攻击策略并报告安全-有用性帕累托曲线",
+      "构建小规模model organisms（如通过微调植入隐藏目标/奖励作弊），研究可解释性或黑盒审计方法的检出率"
+    ]
+  },
+  {
+    "id": "agent_security",
+    "name_zh": "智能体安全",
+    "name_en": "AI Agent Security (prompt-injection defenses, tool-use security, agent sandboxing, AgentDojo-style benchmarks)",
+    "domain": "AI-可信与推理",
+    "scores": {"G": 5, "S": 4, "C": 3, "E": 5, "R": 5, "H": 4, "X": 3, "P": 5},
+    "rationale": {
+      "G": "2024-2026涌现AgentDojo、WASP、PIArena、LongPIBench、AgentVigil等大量基准与攻防论文；未找到可靠的arXiv计数，但产业端2026年AI安全种子轮已达8.55亿美元/150+轮，按定性证据判断>100%/年。",
+      "S": "OWASP将提示注入列为LLM01:2025首要风险，RSAC 2026创新沙盒聚焦智能体安全，产业已大规模介入；学术界在安全四大会上已有专门session，但防御范式仍无共识（模型级防御被自适应攻击击穿，系统级方案仍在探索），处于起飞向成熟过渡段。",
+      "C": "CaMeL等系统级设计在AgentDojo上实现77%任务的可证明安全，是重要的存在性证明；但“The Attacker Moves Second”用自适应攻击使12种防御中多数攻击成功率>90%，人类红队100%攻破，能力拐点更多来自威胁侧而非防御侧。",
+      "E": "基准、开源模型、MCP/工具生态、沙箱均广泛可得，计算成本低。",
+      "R": "智能体安全初创累计融资约36亿美元，Palo Alto收购Protect AI、Check Point收购Lakera、SentinelOne收购Prompt Security等密集并购；OpenAI/Anthropic/GDM均有专门团队。",
+      "H": "指令-数据分离、面向智能体的信息流控制与能力系统、可证明防御、自适应评测方法论等根本问题开放，学术算力即可研究。",
+      "X": "重塑系统安全、操作系统/浏览器安全、Web安全与软件供应链安全（MCP），但主要仍是安全子领域。",
+      "P": "攻防猫鼠游戏、大量防御论文评测不充分（自适应攻击下失效）、厂商炒作明显；可能被并入通用安全工程与模型安全训练；扣5分。"
+    },
+    "inflection_event": "2023-02 Greshake等提出“间接提示注入”确立威胁模型；2024-06 AgentDojo成为统一基准；2025-03 CaMeL首次给出“设计上安全”的系统级防御。尚缺的“GPT-3时刻”是：在自适应攻击下仍保持高实用性的通用可证明防御。",
+    "key_evidence": [
+      {"claim": "CaMeL通过从可信查询中显式抽取控制/数据流，在AgentDojo上实现约67%–77%任务的可证明安全", "source": "https://liner.com/review/defeating-prompt-injections-by-design", "date": "2025-03"},
+      {"claim": "OpenAI/Anthropic/GDM等14位作者的“The Attacker Moves Second”用自适应攻击绕过12种防御，多数攻击成功率>90%，500人红队竞赛100%攻破", "source": "https://arxiv.org/abs/2510.09023", "date": "2025-10"},
+      {"claim": "Agent数据注入攻击成功率最高50%，仅CaMeL Strict完全阻止（0% ASR），其他防御仍有22.2%–50%", "source": "https://arxiv.org/pdf/2607.05120", "date": "2026-07"},
+      {"claim": "智能体AI安全初创合计融资36亿美元，2026年4–9月12笔融资共4.35亿美元；Palo Alto/Protect AI、Check Point/Lakera、SentinelOne/Prompt Security等并购", "source": "https://softwarestrategiesblog.com/2026/03/28/agentic-ai-security-startups-funding-mna-rsac-2026/", "date": "2026-03"},
+      {"claim": "2026年迄今AI安全种子轮融资8.55亿美元、150余轮；OWASP将提示注入列为LLM01:2025", "source": "https://aiweekly.co/alerts/ai-security-startups-pull-855m-across-150-seed-rounds-in-2026", "date": "2026-06"},
+      {"claim": "PIArena（2026）、LongPIBench（2026）等新基准持续出现，说明评测体系仍在快速形成", "source": "https://arxiv.org/pdf/2604.08499", "date": "2026-04"}
+    ],
+    "open_problems": [
+      "在不牺牲实用性的前提下实现指令/数据的根本分离与可证明的信息流控制",
+      "针对自适应攻击者的标准化评测方法（避免“静态攻击集下接近0%”的虚假安全）",
+      "多智能体/MCP工具生态中的权限最小化、供应链投毒与长时程任务中的延迟触发攻击"
+    ],
+    "entry_points": [
+      "在AgentDojo/WASP上用自适应攻击（RL/搜索）系统重评现有防御，或设计基于能力/IFC的系统级防御并报告效用-安全权衡",
+      "研究MCP服务器与工具描述投毒、浏览器/计算机使用智能体的沙箱与权限策略，结合传统系统安全方法（形式化策略、引用监视器）"
+    ]
+  },
+  {
+    "id": "ai_math_formal",
+    "name_zh": "AI数学与形式化定理证明",
+    "name_en": "AI for Mathematics & Formal Theorem Proving (Lean, AlphaProof, autoformalization, Seed-Prover, IMO gold, Erdős problems)",
+    "domain": "AI-可信与推理",
+    "scores": {"G": 5, "S": 4, "C": 5, "E": 4, "R": 5, "H": 3.5, "X": 4, "P": 3},
+    "rationale": {
+      "G": "PutnamBench从Seed-Prover的50.4%到Seed-Prover 1.5的88%仅用数月，miniF2F已饱和（99.6%）；Harmonic、Axiom、Math Inc等融资密集；新基准（FrontierMath Erdős，68个Lean形式化开放问题）不断出现；按定性证据判断>100%/年。",
+      "S": "ICML/NeurIPS AI for Math workshop连续举办，Lean/Mathlib社区迅速扩张；在顶会占比仍小（约1-2%量级，背景判断），范式在收敛（Lean反馈+RL+引理式搜索）但非形式化LLM与形式化路线之争未定；已过最早期，评4。",
+      "C": "明确的“GPT-3时刻”：2025-07多家系统IMO金牌水平、Seed-Prover形式化证出5/6题；2025-12 AxiomProver Putnam 120/120；2026-05 OpenAI模型给出Erdős单位距离猜想（1946）的反例，被称为首个历史意义的AI证明；且有清晰的扩展趋势。",
+      "E": "Lean 4/Mathlib开源，DeepSeek-Prover、Goedel-Prover等开源模型可用；瓶颈是大规模RL所需算力与高质量形式化数据。",
+      "R": "GDM、OpenAI、字节Seed、DeepSeek均有大投入；Harmonic C轮1.2亿美元（估值14.5亿）、Axiom A轮2亿美元（估值16亿+）；DOE/DARPA等政府项目；合计超10亿美元级。",
+      "H": "竞赛数学已成工业算力竞赛，但自动形式化、研究级数学库建设、证明可读性与人机协作仍为学术可为；评3.5。",
+      "X": "形式化验证可作为可信推理的通用底座，外溢到可验证代码生成、物理/科学推理与AI对齐中的“可验证奖励”。",
+      "P": "存在数据污染与成果宣传口径问题（“GPT-5解决Erdős问题”被指部分为文献检索），非形式化LLM可能削弱形式化路线的必要性；扣3分。"
+    },
+    "inflection_event": "2025-07 IMO 2025：GDM Gemini Deep Think与OpenAI实验模型达金牌水平，字节Seed-Prover/Harmonic Aristotle以Lean形式化证明获金牌级成绩；2026-05 OpenAI模型给出Erdős单位距离猜想反例，被Quanta称为数学界的“相变”。",
+    "key_evidence": [
+      {"claim": "Seed-Prover证明78.1%历届IMO形式化题、miniF2F 99.6%、PutnamBench>50%，IMO 2025形式化证出5/6题；Seed-Prover 1.5在PutnamBench达88%，9小时内解出Putnam 2025的11/12题", "source": "https://arxiv.org/pdf/2507.23726", "date": "2025-07"},
+      {"claim": "AxiomProver在Putnam 2025获120/120满分（人类最高110），证明经Lean机器校验", "source": "https://www.tamradar.com/funding-rounds/axiom-series-a-200m", "date": "2025-12"},
+      {"claim": "2026-05-20 OpenAI内部模型给出1946年Erdős单位距离猜想的反例，被视为首个具有历史意义的AI证明；2026-08 未发布模型Astra再取得10项数学进展", "source": "https://www.quantamagazine.org/how-ai-tore-through-a-mathematical-community-20260803/", "date": "2026-08"},
+      {"claim": "Epoch AI发布FrontierMath Erdős：68个截至2026-08仍开放、由Thomas Bloom整理并用Lean形式化的Erdős问题", "source": "https://epoch.ai/latest/announcing-frontiermath-erdos", "date": "2026-08"},
+      {"claim": "Harmonic完成1.2亿美元C轮，估值14.5亿美元（2024-09 A轮估值3.25亿）", "source": "https://siliconangle.com/2025/11/25/harmonic-ai-raises-120m-1-45b-valuation-advance-mathematical-reasoning/", "date": "2025-11"},
+      {"claim": "Axiom完成2亿美元A轮，估值16亿美元以上，距6400万美元种子轮仅5个月", "source": "https://siliconangle.com/2026/03/12/verifiable-ai-startup-axiom-raises-200m-prove-ai-generated-code-safe-use/", "date": "2026-03"},
+      {"claim": "AlphaProof/AlphaGeometry 2在IMO 2024取得银牌水平（28/42）", "source": "background knowledge", "date": "2024-07"}
+    ],
+    "open_problems": [
+      "研究级数学的自动形式化（定义、陈述与大规模库的对齐），而非竞赛题",
+      "从“证明给定命题”走向“提出有意义的猜想与概念”，以及长程（数月级）证明项目的规划",
+      "非形式化证明的可靠自动检验，以及形式化与非形式化推理的结合与互相监督"
+    ],
+    "entry_points": [
+      "在Lean/Mathlib上做自动形式化基准与工具（如把论文/教科书定理转写为Lean），或为某一细分数学领域建设可供RL使用的形式化数据集",
+      "基于开源证明器（DeepSeek-Prover、Goedel-Prover）研究高效测试时搜索、引理复用与证明修复，在PutnamBench/FrontierMath Erdős上低成本报告结果"
+    ]
+  },
+  {
+    "id": "vericoding",
+    "name_zh": "LLM驱动的形式化验证 / 可验证代码生成",
+    "name_en": "LLM-driven Formal Verification & Verified Code Generation (\"vericoding\": Verus/Dafny/Lean code with proofs)",
+    "domain": "AI-可信与推理",
+    "scores": {"G": 4.5, "S": 5, "C": 4, "E": 4, "R": 3.5, "H": 5, "X": 4, "P": 3},
+    "rationale": {
+      "G": "纯Dafny验证成功率一年内从68%升至96%；2025-2026相继出现Vericoding基准（12,504个规约）、VeriSoftBench（500个仓库级Lean义务）、Vero（43个多模块仓库）、VeruSyn（690万条已验证Rust程序）、KVerus等；未找到论文总量统计，按定性证据评4.5。",
+      "S": "社区很小（PL/FM与ML交叉），POPL 2026 Dafny workshop、新基准刚成形，顶会占比远低于1%，尚无共识范式（规约生成、证明搜索、语言选择均未定），处于典型“2021窗口”。",
+      "C": "现成LLM在Vericoding基准上Dafny 82%、Verus 44%、Lean 27%；AutoVerus在150个任务上>90%；Certora借助LLM两周内完成zlib inflate_table内存安全证明（约2万行Lean）——强存在性证明，但仓库级与规约侧扩展性未明。",
+      "E": "Dafny/Verus/Lean工具链开源，基准与合成数据（VeruSyn）可得；瓶颈是高质量规约与真实工程级训练数据。",
+      "R": "Microsoft Research（Verus/AutoVerus）、AWS、Certora投入；Axiom以“可验证AI代码”为目标获2亿美元；Atlas Computing、Schmidt Sciences等资助；前沿实验室尚未作为核心方向。",
+      "H": "规约获取与验证、仓库级证明、证明修复与维护、跨语言验证等根本问题开放，且以PL方法+中等算力即可取得成果。",
+      "X": "若成熟可重塑软件工程与安全（AI写代码+机器可检证明），也为AI安全提供可信执行基础，是潜在通用底座。",
+      "P": "“规约即正确”问题（错误规约下的已验证代码）、工业采纳门槛高，可能被AI数学/通用编码智能体方向吸收；扣3分。"
+    },
+    "inflection_event": "2025-09 MIT/Tegmark等发布Vericoding基准，显示现成LLM在Dafny上已达82%、一年内纯验证从68%升至96%；2026年Certora用LLM两周完成zlib关键函数内存安全形式化证明。待到来的“GPT-3时刻”：AI智能体端到端产出真实规模（万行级）带完整证明的软件仓库。",
+    "key_evidence": [
+      {"claim": "Vericoding基准含12,504个形式化规约（Dafny 3,029 / Verus 2,334 / Lean 7,141）；现成LLM成功率Lean 27%、Verus 44%、Dafny 82%；纯Dafny验证一年内从68%升到96%", "source": "https://arxiv.org/abs/2509.22908v1", "date": "2025-09"},
+      {"claim": "AutoVerus（MSR）多智能体为Rust/Verus自动生成证明，在150个非平凡任务上成功率>90%", "source": "https://www.microsoft.com/en-us/research/?p=1097760", "date": "2024-09"},
+      {"claim": "VeruSyn数据合成管线生成690万条带规约与证明的已验证Rust程序", "source": "https://arxiv.org/abs/2602.04910v2", "date": "2026-02"},
+      {"claim": "Certora借助Lean与LLM在两周内完成zlib inflate_table（266行C）的内存安全与终止性证明，约2万行Lean", "source": "https://www.certora.com/blog/formally-verifying-zlib-memory-safety-with-lean", "date": "2026-05"},
+      {"claim": "Vero基准评测AI智能体在Lean 4中联合合成实现与证明的仓库级能力（43个多模块实例）；VeriSoftBench含500个仓库级Lean证明义务", "source": "https://www.alphaxiv.org/abs/2608.13522", "date": "2026-08"},
+      {"claim": "Axiom以“Verified AI”定位融资2亿美元，目标是证明AI生成代码可安全使用", "source": "https://siliconangle.com/2026/03/12/verifiable-ai-startup-axiom-raises-200m-prove-ai-generated-code-safe-use/", "date": "2026-03"}
+    ],
+    "open_problems": [
+      "从自然语言意图得到正确且完整的形式化规约，并评估规约本身的质量",
+      "仓库级/跨模块验证：证明的组合、维护与随代码演化的自动修复",
+      "将验证扩展到并发、系统级代码与C/Rust等主流语言，并降低证明体积与验证时间"
+    ],
+    "entry_points": [
+      "在Vericoding/VerusBench/VeriSoftBench上研究检索增强+验证器反馈的证明修复与规约生成，用小模型+RL验证可奖励信号",
+      "选一个真实开源组件（如解析器、压缩库、密码库函数）做LLM辅助的端到端验证案例研究，并沉淀为新基准"
+    ]
+  },
+  {
+    "id": "ai_scientist",
+    "name_zh": "自动化科研 / AI科学家",
+    "name_en": "Automated Research / AI Scientist (AI Scientist, AlphaEvolve-style discovery, Co-Scientist, autonomous labs)",
+    "domain": "AI-可信与推理",
+    "scores": {"G": 5, "S": 4, "C": 3.5, "E": 3, "R": 5, "H": 4, "X": 5, "P": 6},
+    "rationale": {
+      "G": "2024-08 AI Scientist v1后，AI Scientist v2、Google Co-Scientist、AlphaEvolve、Kosmos等相继发布，Agents4Science等新会议出现；未找到可靠论文计数，按系统发布与资金流判断>100%/年。",
+      "S": "已有首个AI为第一作者的会议（Agents4Science 2025）与多场workshop，基准（如MLE-bench、PaperBench）形成中，但评估范式与“何为有效发现”无共识，顶会占比仍小；舆论热度高于学术沉淀，评4。",
+      "C": "AlphaEvolve给出可验证新结果（56年来4×4复矩阵乘法改进、kissing number、2026-08将ω上界从2.371339降至2.371177）；AI Scientist v2论文以6.33均分通过ICLR workshop评审；但端到端自主科研产出质量仍以workshop级为主，评3.5。",
+      "E": "纯计算领域（ML、算法、数学）工具齐全；湿实验自动化、可靠的新颖性/正确性评估是主要瓶颈。",
+      "R": "GDM、OpenAI for Science、FutureHouse；Lila Sciences估值超13亿美元并洽谈约20亿美元B轮、Periodic Labs融资3亿美元；DOE Genesis Mission首批3.2亿美元；总量远超10亿美元。",
+      "H": "评测、可验证性、假设生成质量、实验设计与闭环优化等大量开放问题，计算类科学可用学术算力研究。",
+      "X": "目标即为跨学科的科研基础设施，可外溢到材料、生物、数学、ML自身研究。",
+      "P": "炒作与结果落差大、AI生成论文污染同行评审、可复现性与“发现”认定争议、物理实验成本与速度限制；扣6分。"
+    },
+    "inflection_event": "2025-05 DeepMind AlphaEvolve以LLM驱动的进化搜索取得多项可验证数学/算法新纪录并在Google基础设施落地；同年AI Scientist v2首次以完全AI生成论文通过同行评审。尚待到来的“GPT-3时刻”：自主系统在湿实验或主流期刊层面独立产出被广泛认可的重要发现。",
+    "key_evidence": [
+      {"claim": "AlphaEvolve（2025-05-14）改进4×4复矩阵乘法56年纪录、推进11维kissing number等开放问题并提升Google基础设施效率", "source": "https://deepmind.google/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/", "date": "2025-05"},
+      {"claim": "借助AlphaEvolve将矩阵乘法指数ω上界从2.371339改进到2.371177（作者含Alman与Vassilevska Williams）", "source": "https://www.alphaxiv.org/abs/2608.16884", "date": "2026-08"},
+      {"claim": "Sakana AI Scientist v2的3篇完全自主论文投稿ICLR 2025 ICBINB workshop，1篇均分6.33超过录用线", "source": "https://techcrunch.com/2025/03/12/sakana-claims-its-ai-paper-passed-peer-review-but-its-a-bit-more-nuanced-than-that", "date": "2025-03"},
+      {"claim": "Stanford与Together AI举办Agents4Science 2025，要求AI为第一作者并由AI初审，2025-10-22线上召开", "source": "https://agents4science.stanford.edu", "date": "2025-10"},
+      {"claim": "Lila Sciences估值超13亿美元（Nvidia参投），2026-06洽谈约20亿美元B轮（投前估值约85亿美元）；Periodic Labs融资3亿美元建设AI科学家", "source": "https://news.bgov.com/private-equity/lila-sciences-said-in-talks-for-funds-at-8-5-billion-valuation", "date": "2026-06"},
+      {"claim": "DOE Genesis Mission首批3.2亿美元，包括14个机器人与自动化实验室项目", "source": "https://insidehpc.com/2025/12/doe-awards-320m-for-genesis-mission-ai-for-science/", "date": "2025-12"},
+      {"claim": "Google发布基于Gemini的AI Co-Scientist多智能体假设生成系统，部分假设经湿实验验证（如药物再利用、细菌基因转移机制）", "source": "background knowledge", "date": "2025-02"}
+    ],
+    "open_problems": [
+      "如何可靠评估AI产出的新颖性、正确性与重要性（避免同行评审被AI论文淹没）",
+      "开放式科研中的假设生成与实验选择（探索-利用）以及长时程闭环（含湿实验）的稳健性",
+      "从“可自动评分”的领域（算法/数学优化）推广到评价信号稀疏、噪声大的经验科学"
+    ],
+    "entry_points": [
+      "基于开源AlphaEvolve类框架（如OpenEvolve）在组合优化、编译器启发式、数值算法等可自动评分问题上寻找新纪录",
+      "构建AI科研流程的评测基准（复现、审稿、错误检测、新颖性判定），或研究AI审稿/AI生成论文检测"
+    ]
+  }
+]
