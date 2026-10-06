@@ -1,0 +1,478 @@
+[
+  {
+    "id": "qec_ftqc_stack",
+    "name_zh": "量子纠错与容错量子计算软件栈",
+    "name_en": "Quantum Error Correction & Fault-Tolerant Quantum Computing Stack",
+    "domain": "量子/密码/网络/理论",
+    "scores": {
+      "G": 4.5,
+      "S": 4.5,
+      "C": 4.5,
+      "E": 3,
+      "R": 5,
+      "H": 4,
+      "X": 3.5,
+      "P": 7
+    },
+    "rationale": {
+      "G": "Riverlane 报告：2025年1-10月同行评审 QEC 码论文120篇，2024全年仅36篇（>3倍）；2026年 lattice surgery、qLDPC 处理器、QEC 编译器（CircLS 等）预印本密集出现。",
+      "S": "已有专门的 QEC 会议/报告与 SIGARCH/QCE 专场，但在 CS 顶会中占比仍很小；表面码 vs qLDPC vs 玻色码路线未收敛，解码器/编译器无共识范式——典型的“2021年LLM”位置。",
+      "C": "Google Willow（2024-12）首次实现低于阈值：码距每+2逻辑错误率降低2.14倍，d=7逻辑错误0.143%/周期，实时解码延迟63μs；指数抑制本身即“缩放律”。Quantinuum Helios 48逻辑比特、QuEra 96逻辑比特。但尚无有用的容错计算。",
+      "E": "Stim/PyMatching 等开源模拟与解码工具完善，学界可做大规模数值实验；主要瓶颈是可做实时 QEC 的硬件访问受限于少数公司。",
+      "R": "Google、IBM（Starling 2029，200逻辑比特）、Quantinuum、Microsoft、AWS、QuEra 等全面投入；DARPA QBI 以2033年实用规模为目标分阶段评估；量子行业年融资数十亿美元。",
+      "H": "解码算法（Relay-BP 等）、qLDPC 上的逻辑门/手术、magic state 制备、资源估计与编译均为可由小组以模拟推进的开放问题；但实验验证依赖工业界。",
+      "X": "直接决定 Shor 威胁时间线（Gidney 2025：RSA-2048 <100万噪声比特），外溢到密码迁移、量子化学/材料模拟；但成为通用 CS 底座仍远。",
+      "P": "距离有用容错计算仍需5-10年、物理工程极限（布线、制冷、泄漏错误）、厂商路线图宣传与实际差距大、硬件集中于少数公司，扣7分。"
+    },
+    "inflection_event": "2024年12月 Google Willow 首次在超导处理器上实现低于表面码阈值的指数级逻辑错误抑制（Λ≈2.14）并配合实时解码——相当于QEC的“GPT-3时刻”；2025-2026年 Quantinuum/QuEra 数十个逻辑比特与 lattice surgery 演示正在把它推向“可编程逻辑计算”。",
+    "key_evidence": [
+      {
+        "claim": "Willow：d=7 表面码（101比特）逻辑错误率0.143%/周期，码距+2错误率降低2.14倍，逻辑寿命为最佳物理比特2.4倍；d=5 实时解码平均延迟63μs，持续百万周期",
+        "source": "https://postquantum.com/engineering-news/google-surface-code-threshold/",
+        "date": "2024-12"
+      },
+      {
+        "claim": "Riverlane QEC Report 2025：2025年1-10月同行评审 QEC 码论文120篇，2024全年36篇，“QEC code explosion”，并警告人才短缺",
+        "source": "https://www.riverlane.com/quantum-error-correction-report-2025",
+        "date": "2025-11"
+      },
+      {
+        "claim": "IBM 提出 Relay-BP 解码器，适合 FPGA/ASIC 实时解码，在双变量自行车(BB) qLDPC 码上显著优于 BP+OSD；IBM Starling 规划200逻辑比特、1亿门",
+        "source": "https://quantumcomputingreport.com/ibm-researchers-devise-relay-bp-algorithm-for-real-time-decoding-of-qldpc-codes/",
+        "date": "2025-06"
+      },
+      {
+        "claim": "Quantinuum Helios（98离子比特，双比特门保真度99.921%）演示48个纠错逻辑比特（2:1物理/逻辑比）；同月入选 DARPA QBI Stage B",
+        "source": "https://www.quantinuum.com/press-releases/quantinuum-selected-by-darpa-to-advance-to-stage-b-of-quantum-benchmarking-initiative",
+        "date": "2025-11"
+      },
+      {
+        "claim": "Gidney：2048位 RSA 可用<100万噪声比特、<1周分解，较2019年估计（2000万比特）降低20倍，依赖 yoked surface code 与 magic state cultivation",
+        "source": "https://arxiv.org/abs/2505.15917v1",
+        "date": "2025-05"
+      },
+      {
+        "claim": "QuEra 用高码率 [[16,6,4]] qLDPC 码编码至多96个逻辑比特并测得低于阈值运行；超导表面码处理器 lattice-surgery 逻辑操作预印本出现",
+        "source": "https://postquantum.com/quantum-research/quera-qldpc-2-to-1-physical-logical-qubit-ratio/",
+        "date": "2026-06"
+      }
+    ],
+    "open_problems": [
+      "可扩展到数千逻辑比特的低延迟、高精度实时解码（尤其是 qLDPC 码的电路级噪声解码与硬件实现）",
+      "qLDPC 码上的高效逻辑门、lattice/lifted surgery 与 magic state 生产的端到端架构与编译",
+      "面向泄漏、相关噪声、宇宙射线等非理想噪声的容错协议与可信资源估计"
+    ],
+    "entry_points": [
+      "基于 Stim + Sinter + PyMatching/BP-OSD 做新解码器或新码的电路级数值研究，并参与 Riverlane/Google 公开的解码数据集与基准对比",
+      "从编译器/体系结构角度切入：lattice surgery 调度、逻辑比特布局与资源估计工具（如 Azure Resource Estimator、Qualtran），以 PL/架构背景发表于 ISCA/MICRO/ASPLOS 量子专场"
+    ]
+  },
+  {
+    "id": "zk_proofs",
+    "name_zh": "零知识证明系统与zkVM",
+    "name_en": "Zero-Knowledge Proof Systems & zkVMs",
+    "domain": "量子/密码/网络/理论",
+    "scores": {
+      "G": 3.5,
+      "S": 3,
+      "C": 4,
+      "E": 4.5,
+      "R": 3.5,
+      "H": 4,
+      "X": 3.5,
+      "P": 5
+    },
+    "rationale": {
+      "G": "未检索到 ePrint SNARK 论文年增长的精确统计；定性看 zkVM（SP1、RISC Zero、Jolt、OpenVM、Pico、ZisK 等）2023-2025 年爆发、证明速度年提升一个数量级以上，zkML/安全测试等子方向论文快速增加，估计30-60%/年。",
+      "S": "SNARK 自 2016 年 Zcash 起已成密码学成熟方向，Plonkish/FRI-STARK/lookup 等已有共识方法，RISC-V zkVM 成为事实范式；处于“已建立赛道”阶段，而非起飞初期。",
+      "C": "SP1 Hypercube（2025-05）在200张 RTX 4090 上为 93% 以太坊区块在12秒内生成证明（平均10.3s），实现“实时证明通用计算”这一质变；zkLLM/DeepProve 已可证明 GPT-2 推理。但应用仍主要限于区块链。",
+      "E": "SP1、RISC Zero、Jolt、Google longfellow-zk 等全部开源，消费级 GPU 即可实验，基准与 soundcalc 等工具出现。",
+      "R": "Succinct 融资5500万美元、RISC Zero 4000万美元、Ingonyama 2100万美元等，加上以太坊基金会路线图与 Google 开源 ZKP 用于欧盟年龄验证；但资金高度依赖加密货币 VC，大型科技公司投入有限。",
+      "H": "后量子/哈希型 SNARK 的可证明安全（EF 要求2026年底128位可证明安全、证明≤300KiB）、递归架构形式化验证、prover 内存/时间、zkVM 健全性测试等，学术可做空间大。",
+      "X": "可成为“可验证计算”通用底座：区块链扩容、数字身份/年龄验证、zkML、可验证 AI 推理；但跨 CS 渗透仍有限。",
+      "P": "与加密货币市场强绑定、健全性漏洞频出（Arguzz 在6个 zkVM 中发现11个 bug；Solana 机密转账 Fiat-Shamir 漏洞）、营销宣称多于独立评测，扣5分。"
+    },
+    "inflection_event": "2025年5月 Succinct SP1 Hypercube 实现以太坊区块实时证明（93%区块<12s），随后以太坊基金会将 L1 zkEVM 纳入路线图并设定2026年128位可证明安全目标——通用计算“证明成本跌到实时”的拐点。",
+    "key_evidence": [
+      {
+        "claim": "SP1 Hypercube 在10,000个以太坊主网区块测试中93%在12秒内完成证明，平均10.3秒，使用200张 RTX 4090",
+        "source": "https://www.theblock.co/post/355013/succinct-introduces-zkvm-sp1-hypercube-claims-real-time-ethereum-proving",
+        "date": "2025-05"
+      },
+      {
+        "claim": "以太坊基金会发布 realtime proving 规划，并设定 L1 zkEVM 2026年中100位、年底128位可证明安全，证明大小≤600KiB→≤300KiB",
+        "source": "https://blog.ethereum.org/2025/07/10/realtime-proving",
+        "date": "2025-07"
+      },
+      {
+        "claim": "Google 开源 ZKP 库 longfellow-zk，用于欧盟年龄验证等数字身份场景",
+        "source": "https://blog.google/technology/safety-security/opening-up-zero-knowledge-proof-technology-to-promote-privacy-in-age-assurance/",
+        "date": "2025-07"
+      },
+      {
+        "claim": "Succinct 获 Paradigm 领投5500万美元；RISC Zero 获4000万美元 A 轮",
+        "source": "https://www.theblock.co/post/284002/paradigm-leads-55-million-round-in-zk-proofs-startup-succinct-labs-with-participation-from-polygon-founders",
+        "date": "2024-03"
+      },
+      {
+        "claim": "Arguzz 测试 RISC Zero、Nexus、Jolt、SP1、OpenVM、Pico 六个 zkVM，在其中三个发现11个健全性/完备性 bug，其中一个获5万美元赏金",
+        "source": "https://arxiv.org/abs/2509.10819v1",
+        "date": "2025-09"
+      },
+      {
+        "claim": "DeepProve-1 首次为完整 GPT-2 推理生成 ZK 证明；zkLLM 对至13B参数模型证明时间1-15分钟、证明<200kB",
+        "source": "https://lagrange.dev/blog/deepprove-1",
+        "date": "2025-08"
+      }
+    ],
+    "open_problems": [
+      "在保持128位可证明安全与小证明尺寸的前提下进一步降低 prover 成本（哈希/格基后量子 SNARK、递归与折叠方案的严格安全证明）",
+      "zkVM/电路的系统化健全性保障：形式化验证、差分模糊测试与安全参数计算",
+      "面向大模型推理/训练的高效 zkML（非线性算子、浮点、量化）及其在可验证 AI 中的实际部署"
+    ],
+    "entry_points": [
+      "基于开源 SP1/RISC Zero/Jolt 做 prover 性能或安全研究：如 GPU 内核优化、zkVM 差分模糊测试（参考 Arguzz、zkvmBlast）",
+      "参与以太坊 L1 zkEVM 生态的 soundcalc/安全参数分析与形式化验证，或研究 ZK 在数字身份/年龄验证（longfellow-zk、EU 数字钱包）中的协议设计"
+    ]
+  },
+  {
+    "id": "fhe_acceleration",
+    "name_zh": "全同态加密及其硬件加速",
+    "name_en": "Fully Homomorphic Encryption & Hardware Acceleration",
+    "domain": "量子/密码/网络/理论",
+    "scores": {
+      "G": 3,
+      "S": 4,
+      "C": 3.5,
+      "E": 3,
+      "R": 3.5,
+      "H": 4.5,
+      "X": 3,
+      "P": 6
+    },
+    "rationale": {
+      "G": "未找到精确论文计数；定性看自 F1(2021)、CraterLake(2022) 后 ISCA/MICRO/HPCA 每年多篇 FHE 加速器论文，2024-2026 年 GPU-FHE 与加密 LLM 推理论文明显增多，估计30-60%/年。",
+      "S": "体系结构界已有持续的 FHE 加速器研究线与 FHE.org 专门会议，但在顶会中占比仍小；CKKS vs TFHE、ASIC vs GPU vs 光子路线无共识，适合“起飞期”。",
+      "C": "Intel Heracles（ISSCC 2026，Intel 3 工艺）对7种核心 FHE 运算较24核 Xeon 快1074-5547倍；GPU CKKS 自举从22.1ms(Cheddar)降至7.5-12.8ms；Llama3-8B 加密推理134s。进步显著但仍比明文慢数千倍，属“强存在性证明、缩放尚不明”。",
+      "E": "OpenFHE、Concrete、Lattigo 等开源库成熟，GPU 可用；但专用 ASIC 不可获得，硬件研究依赖仿真，构成一个主要瓶颈。",
+      "R": "DARPA DPRIVE（Intel、Duality、Niobium 等）；Zama 2025年成为首个 FHE 独角兽（累计>1.5亿美元）；Niobium 2300万美元、Optalysys 3100万美元；Apple 已在系统服务中使用同态加密（background knowledge）。",
+      "H": "自举加速、非线性层近似、FHE 编译器与调度、算法-硬件协同设计均为学术小组可推进的根本性问题，不需巨额算力。",
+      "X": "隐私计算、隐私 AI 推理、医疗/金融数据协作、区块链机密计算；影响若干相邻领域，但难成通用底座。",
+      "P": "相对明文开销仍达10³-10⁴倍、与 TEE/MPC 竞争、ASIC 商业化前景不确定、需求端尚未验证，扣6分。"
+    },
+    "inflection_event": "尚未出现明确的“GPT-3时刻”；最接近的是2026年2月 Intel Heracles 在 ISSCC 公布可工作的 FHE 加速芯片（千倍级加速）。若未来出现可交互速度（<1s/token）的完整加密 LLM 推理服务，则构成真正拐点。",
+    "key_evidence": [
+      {
+        "claim": "Intel Heracles FHE 加速器（Intel 3，197mm²，1.2GHz，176W，HBM）在7种核心 FHE 运算上较24核 Sapphire Rapids Xeon 快1074-5547倍",
+        "source": "https://spectrum.ieee.org/fhe-intel",
+        "date": "2026-02"
+      },
+      {
+        "claim": "Zama 完成5700万美元 B 轮，累计融资>1.5亿美元，估值>10亿美元，成为首个 FHE 独角兽",
+        "source": "https://www.theblock.co/post/359659/zama-raises-57m-in-series-b-to-bring-end-to-end-encryption-to-public-blockchains",
+        "date": "2025-06"
+      },
+      {
+        "claim": "Niobium 获2300万美元以上融资推进第二代 FHE 硬件；其 DARPA DPRIVE SoC 早期结果趋向较软件10,000倍加速",
+        "source": "https://thequantuminsider.com/2025/12/03/niobium-23m-fhe-funding/",
+        "date": "2025-12"
+      },
+      {
+        "claim": "Optalysys 获3100万美元 A 轮（含英国国家安全战略投资基金），用光子芯片加速 FHE",
+        "source": "https://www.optica-opn.org/home/industry/2026/february/optalysys_raises_us_$31_million_to_push_photonics_computing_toward_cloud_infrastructure/",
+        "date": "2026-02"
+      },
+      {
+        "claim": "多 GPU 加密大模型推理：BERT-Base 8秒、Llama3-8B 134秒；GPU CKKS 自举 Cheddar 22.1ms→Theodosian 12.8ms→<10ms",
+        "source": "https://www.alphaxiv.org/abs/2512.11269",
+        "date": "2025-12"
+      },
+      {
+        "claim": "DARPA DPRIVE 项目旨在设计 FHE 硬件加速器，使 FHE 计算速度接近明文",
+        "source": "https://www.darpa.mil/program/data-protection-in-virtual-environments",
+        "date": "2021-03"
+      }
+    ],
+    "open_problems": [
+      "将自举与密钥切换开销再降1-2个数量级的算法-体系结构协同设计（内存带宽瓶颈、数据复用）",
+      "Transformer 非线性层（Softmax/LayerNorm/GELU）的高精度低深度同态计算与方案混合（CKKS+TFHE）",
+      "自动化 FHE 编译器：参数选择、噪声管理、bootstrapping 放置与多后端（GPU/ASIC/光子）代码生成"
+    ],
+    "entry_points": [
+      "基于 OpenFHE/Phantom 等开源 GPU 库，针对加密 Transformer 推理做内核与调度优化，在 MLSys/HPCA/USENIX Security 发表",
+      "以周期级仿真器复现 F1/CraterLake/SHARP 等加速器，探索近存计算或 chiplet 化 FHE 架构，避开流片成本"
+    ]
+  },
+  {
+    "id": "pqc_migration",
+    "name_zh": "后量子密码迁移工程",
+    "name_en": "Post-Quantum Cryptography Migration Engineering",
+    "domain": "量子/密码/网络/理论",
+    "scores": {
+      "G": 3.5,
+      "S": 2.5,
+      "C": 2,
+      "E": 5,
+      "R": 5,
+      "H": 2.5,
+      "X": 2.5,
+      "P": 4
+    },
+    "rationale": {
+      "G": "部署侧增长迅猛：Cloudflare 观测到人类浏览器 TLS 流量中混合 ML-KEM 占比 >60%（2024初为个位数，background knowledge）；研究论文增长无精确数据，侧信道/迁移类论文持续增加，估计30-60%/年。",
+      "S": "FIPS 203/204/205 已于2024-08定稿，X25519MLKEM768 混合方案成为事实共识，迁移已进入主流工程阶段而非起飞期。",
+      "C": "本身不产生新能力，而是替换；能力拐点在于标准定稿与大规模部署可行（2024-2025），属增量型。",
+      "E": "标准、开源实现（liboqs、OpenSSL 3.5、BoringSSL）、浏览器与 CDN 支持全部可得。",
+      "R": "美国 OMB 估算联邦迁移成本约71亿美元（2025-2035）；NSA CNSA 2.0 要求2027年起新采购合规；欧盟路线图要求2030年前关键基础设施完成；全部大型科技公司参与。",
+      "H": "侧信道/故障攻击（KyberSlash 后续功耗攻击30秒恢复密钥）、密码敏捷性、PQ 签名尺寸对协议的影响、迁移自动化工具仍有学术空间，但多为工程问题。",
+      "X": "触及所有安全通信系统，但作为“替换件”外溢有限，不会开辟新研究范式。",
+      "P": "研究新颖性有限、量子威胁时间线不确定（但2025-2026资源估计骤降反而增强紧迫性）、格密码潜在密码分析风险；整体风险低，扣4分。"
+    },
+    "inflection_event": "2024年8月 NIST 发布 FIPS 203/204/205 正式标准，叠加2025年5月 Gidney 将 RSA-2048 破解资源降至<100万比特、2026年 Google/Caltech 等论文继续压缩 ECC 破解资源，使迁移从“规划”变为“截止日期驱动”的工程。",
+    "key_evidence": [
+      {
+        "claim": "Cloudflare：超过60%（另一口径约70%）的人类/浏览器 TLS 流量已使用混合 X25519MLKEM768；但仅约15%的源站支持；目标2029年全面后量子安全",
+        "source": "https://blog.cloudflare.com/post-quantum-visibility/",
+        "date": "2026-03"
+      },
+      {
+        "claim": "NIST 于2025-03-11选定 HQC 作为基于编码的第五个 PQC 标准算法；IR 8547 规定 RSA/ECDSA 2030年弃用、2035年禁用",
+        "source": "https://utimaco.com/news/blog-posts/pqc-news-nist-announces-hqc-fifth-algorithm-be-standardized",
+        "date": "2025-03"
+      },
+      {
+        "claim": "OMB 报告估算联邦政府优先系统 PQC 迁移成本约71亿美元（2025-2035）",
+        "source": "https://thequantuminsider.com/2024/08/12/white-house-report-u-s-federal-agencies-brace-for-7-1-billion-post-quantum-cryptography-migration",
+        "date": "2024-08"
+      },
+      {
+        "claim": "欧盟协调路线图：2026年底前各成员国启动，2030年前高风险系统完成，2035年尽可能全面完成",
+        "source": "https://pqshield.com/eu-pqc-workstream-publishes-a-coordinated-implementation-roadmap-for-the-transition-to-post-quantum-cryptography/",
+        "date": "2025-06"
+      },
+      {
+        "claim": "KyberSlash 时序漏洞影响包括参考实现在内的多个 ML-KEM 实现；后续功耗分析在打补丁实现上30秒恢复密钥",
+        "source": "https://tches.iacr.org/index.php/TCHES/article/view/12046",
+        "date": "2025-01"
+      },
+      {
+        "claim": "2026年3-6月多篇论文（Google 关于 secp256k1 的资源估计、Caltech/Oratomic 约1万原子比特运行 Shor）将破解所需资源再降一个数量级",
+        "source": "https://thequantuminsider.com/2026/03/31/q-day-just-got-closer-three-papers-in-three-months-are-rewriting-the-quantum-threat-timeline/",
+        "date": "2026-03"
+      }
+    ],
+    "open_problems": [
+      "大规模、异构系统中的自动化密码资产发现（cryptographic inventory）与可验证的密码敏捷性架构",
+      "ML-KEM/ML-DSA/FN-DSA 在嵌入式与硬件上的低成本侧信道与故障防护、形式化验证的常数时间实现",
+      "大尺寸 PQ 签名/证书对 TLS、DNSSEC、物联网及区块链协议性能的影响与协议重设计（如 KEMTLS、Merkle Tree Certificates）"
+    ],
+    "entry_points": [
+      "利用 liboqs/OpenSSL 3.5 搭建测量平台，做互联网规模 PQC 部署测量或协议性能评估（IMC/NDSS 类工作）",
+      "在 Cortex-M4/FPGA 上对 ML-KEM/ML-DSA 实现做侧信道与故障攻击/防护研究（CHES/TCHES）"
+    ]
+  },
+  {
+    "id": "leo_satellite_networking",
+    "name_zh": "低轨卫星互联网与空天地一体化网络",
+    "name_en": "LEO Satellite Networking & Space-Air-Ground Integrated Networks",
+    "domain": "量子/密码/网络/理论",
+    "scores": {
+      "G": 3,
+      "S": 3.5,
+      "C": 3.5,
+      "E": 2.5,
+      "R": 5,
+      "H": 3,
+      "X": 2.5,
+      "P": 6
+    },
+    "rationale": {
+      "G": "未找到精确论文计数；LEO-NET 研讨会自2023年起已办到第4届（SIGCOMM 2026），Starlink 测量论文与仿真器（Hypatia、StarryNet 等）持续增长，估计30-60%/年。",
+      "S": "已有专门研讨会和 SIGCOMM/NSDI/MobiCom 会议场次，但路由、拥塞控制、星间链路等无共识方案；对 CS 网络界而言处于起飞到建立之间。",
+      "C": "Starlink 在轨超1万颗（2026-04）、用户超800万，直连手机（direct-to-cell）商用化，属部署层面的质变；但网络算法层面的“新能力”较少，多为工程规模化。",
+      "E": "卫星系统封闭、内部数据不可得，学界只能靠用户终端测量与仿真；这是主要瓶颈。",
+      "R": "SpaceX 以约170-200亿美元收购 EchoStar 频谱用于直连手机；Amazon Leo（Kuiper）规模部署；中国千帆、国网星座国家级投入；3GPP NTN 标准化。",
+      "H": "开放问题多（星间路由、移动性管理、TCP 适配、空间计算），但数据与实验设施被企业垄断，学术空间受限。",
+      "X": "影响移动通信、边缘计算与遥感，但对整个 CS 外溢有限。",
+      "P": "单一主体依赖（SpaceX 占绝对主导）、频谱/监管与空间碎片等物理限制、学术难以获得系统访问，扣6分。"
+    },
+    "inflection_event": "2020-2022年 Starlink 规模化商用为部署拐点；2025年9月 SpaceX 收购 EchoStar 频谱（约170亿美元）及直连手机商用，标志卫星直接融入蜂窝网络的“第二拐点”，下一代直连手机卫星测试计划于2026年底开始。",
+    "key_evidence": [
+      {
+        "claim": "SpaceX 与 EchoStar 达成约170亿美元（后增至约200亿美元）AWS-4/H-block 频谱交易，用于 Starlink Direct to Cell",
+        "source": "https://techcrunch.com/2025/09/08/spacex-strikes-17b-deal-to-buy-echostars-spectrum-for-starlinks-direct-to-phone-service/",
+        "date": "2025-09"
+      },
+      {
+        "claim": "Starlink 截至2026年4月在轨超10,300颗卫星，获批约15,000颗；Amazon Leo 已发射239颗（计划3,236颗）；国网星座近200颗、千帆超100颗",
+        "source": "https://datatracker.ietf.org/meeting/126/materials/slides-126-space-york-beyond-starlink-understanding-the-coming-waves-of-leo-satellite-deployments-00",
+        "date": "2026-04"
+      },
+      {
+        "claim": "SpaceX 全球用户超过800万",
+        "source": "background knowledge（检索摘要提及，原始出处未核实）",
+        "date": "2025-11"
+      },
+      {
+        "claim": "第4届 LEO-NET 研讨会在 SIGCOMM 2026 举办，主题含星座设计、LEO 路由、传输与拥塞控制、直连终端与多轨道协同",
+        "source": "https://conferences.sigcomm.org/sigcomm/2026/workshops/leo-net/",
+        "date": "2026-08"
+      },
+      {
+        "claim": "迄今最大规模 Starlink 延迟研究覆盖13个国家2,400多名用户",
+        "source": "https://arxiv.org/pdf/2306.07469",
+        "date": "2023-06"
+      },
+      {
+        "claim": "3GPP Rel-17 引入 NTN，Rel-18 增强，支撑大众市场手机直连卫星",
+        "source": "background knowledge",
+        "date": "2025-10"
+      }
+    ],
+    "open_problems": [
+      "大规模动态拓扑下的星间路由、流量工程与跨星座/跨地面网络的统一控制面",
+      "直连手机（D2D/NTN）场景下的链路预算受限传输、移动性与切换管理",
+      "在轨计算（space edge computing）与卫星网络的安全、韧性和可测量性"
+    ],
+    "entry_points": [
+      "利用 Starlink 用户终端与公开工具（如 LEOScope、Hypatia、StarryNet）开展测量和仿真研究，投稿 LEO-NET/IMC",
+      "与运营商或3GPP NTN 产业链合作研究直连手机的传输协议与切换算法，或基于开源 5G 栈（OpenAirInterface NTN 分支）做原型"
+    ]
+  },
+  {
+    "id": "learning_augmented_algos",
+    "name_zh": "学习增强算法 / 带预测的算法（含LLM驱动的算法发现）",
+    "name_en": "Learning-Augmented Algorithms & LLM-Driven Algorithm Discovery",
+    "domain": "量子/密码/网络/理论",
+    "scores": {
+      "G": 4,
+      "S": 4.5,
+      "C": 3.5,
+      "E": 4,
+      "R": 3.5,
+      "H": 4.5,
+      "X": 4,
+      "P": 6
+    },
+    "rationale": {
+      "G": "“带预测的算法”自2018年起稳定增长（论文列表早期已超100篇，现数百篇，精确数未知）；2025年 AlphaEvolve 后 LLM 演化搜索框架一年内涌现 OpenEvolve、ShinkaEvolve、CodeEvolve、GigaEvo、LoongFlow、ThetaEvolve 及多个基准，增速>60%/年。",
+      "S": "经典“带预测的算法”已有一致性/鲁棒性框架（偏成熟，SIGMETRICS LATA、STOC 2026 ML for Algorithms 研讨会）；而 LLM 驱动算法发现处于急速起飞、无共识范式阶段，整体接近目标窗口。",
+      "C": "FunSearch（2023-12）改进 cap set 下界；AlphaEvolve（2025-05）在67个问题中多数复现最优、部分改进，如11维接吻数592→593、4×4复矩阵乘法48次乘法（background knowledge）；Tao 等基于其输出发表新结果。但改进幅度小、领域窄，缩放规律未明。",
+      "E": "OpenEvolve/ShinkaEvolve 等开源，LLM API 可得；大规模演化搜索的 API/算力成本是限制但非致命。",
+      "R": "Google DeepMind（AlphaEvolve）、Sakana AI、OpenAI/各大实验室的 AI-for-math 投入；但专门面向算法设计的资金规模有限。",
+      "H": "如何为 LLM 生成算法提供可证明保证、评测方法论、预测误差模型、与复杂性理论（硬度归约 gadget 搜索）结合，大量问题适合理论小组。",
+      "X": "外溢到组合数学、TCS、系统优化（调度、编译器、数据中心）、科学计算，可能成为“算法设计的通用工具”。",
+      "P": "评测可能高估进展（2026-09 预印本《Evolution or Illusion?》质疑 LLM 演化搜索评测）、AlphaEvolve 的接吻数结果被人类反超、改进多为边际，并可能被通用 AI-for-math 吸收，扣6分。"
+    },
+    "inflection_event": "2025年5月 DeepMind AlphaEvolve 以 LLM+自动评估的演化搜索改进多个数学/算法开放问题的已知界（接吻数、矩阵乘法、有限域 Kakeya），并于2025-11与 Tao 等合作系统化报告67个问题——LLM 成为算法发现工具的“GPT-3时刻”雏形。",
+    "key_evidence": [
+      {
+        "claim": "Georgiev、Tao、Gómez-Serrano、Wagner 用 AlphaEvolve 处理分析、组合、几何、数论67个问题，多数复现最优解并在若干问题上改进（如有限域 Kakeya 界）",
+        "source": "https://alphaxiv.org/overview/2511.02864v1",
+        "date": "2025-11"
+      },
+      {
+        "claim": "AlphaEvolve 将11维接吻数下界从592提高到593；FunSearch 曾改进 cap set 下界",
+        "source": "https://www.popsci.com/science/human-outsmarts-ai-kissing-problem-math",
+        "date": "2025-05"
+      },
+      {
+        "claim": "开源复刻/改进框架 OpenEvolve、ShinkaEvolve（样本效率高数个量级，改进圆填充结果）、CodeEvolve、GigaEvo、ThetaEvolve 等快速出现",
+        "source": "https://sakana.ai/shinka-evolve/",
+        "date": "2025-09"
+      },
+      {
+        "claim": "STOC 2026 举办 Machine Learning for Algorithms 研讨会；SIGMETRICS 2025/2026 连续举办学习增强算法研讨会 LATA；TAAP 2025 专门研讨会",
+        "source": "https://www.mit.edu/~vakilian/stoc26-workshop.html",
+        "date": "2026-06"
+      },
+      {
+        "claim": "预印本《Evolution or Illusion? Rethinking Evaluation in LLM Evolutionary Search》质疑现有评测方式",
+        "source": "https://arxiv.org/pdf/2609.19799",
+        "date": "2026-09"
+      },
+      {
+        "claim": "Google 用 AlphaEvolve 搜索组合构造改进 MAX-4-CUT 等不可近似性结果与 Ramanujan 图相关界，属 TCS 应用",
+        "source": "background knowledge",
+        "date": "2025-09"
+      }
+    ],
+    "open_problems": [
+      "为 LLM/演化搜索发现的算法与构造提供可验证的正确性与最坏情况保证（与形式化证明助手结合）",
+      "建立防止过拟合与评测泄漏的算法发现基准与方法论，刻画搜索预算与改进幅度的缩放关系",
+      "统一“带预测的算法”理论（一致性-鲁棒性权衡、预测误差度量）与 LLM 作为预测器/设计者的新范式"
+    ],
+    "entry_points": [
+      "用 OpenEvolve/ShinkaEvolve 在组合优化、在线算法或硬度归约 gadget 等具有自动评估器的问题上做定向攻关，小算力即可产出可发表结果",
+      "在经典学习增强算法框架下研究以 LLM 输出为预测的在线/近似算法，给出一致性-鲁棒性理论保证（SODA/ICALP/NeurIPS）"
+    ]
+  },
+  {
+    "id": "llm_theory",
+    "name_zh": "Transformer/大模型理论",
+    "name_en": "Theory of Transformers & Large Language Models",
+    "domain": "量子/密码/网络/理论",
+    "scores": {
+      "G": 4,
+      "S": 3.5,
+      "C": 2.5,
+      "E": 5,
+      "R": 3,
+      "H": 5,
+      "X": 3.5,
+      "P": 5
+    },
+    "rationale": {
+      "G": "无精确计数；自 Garg et al.(2022) ICL 线性函数实验与 Merrill-Sabharwal CoT 表达力结果后，ICL 理论、CoT 理论、电路复杂度表达力论文在 ICML/NeurIPS/COLT 快速增长，估计60-100%/年。",
+      "S": "已有专门研讨会（NeurIPS 2025 “What Can('t) Transformers Do?”）、Simons 研究所 2024-25 LLM 专题年、ICML 2026 主题报告；部分共识结果（TC⁰ 上界、多项式步 CoT=P）已形成，但“为何能泛化/缩放律从何来”无共识范式。",
+      "C": "作为理论领域，已有精确刻画（Merrill & Sabharwal ICLR 2024：多项式步 CoT 的 decoder 恰好识别 P），但对实践的预测与指导能力仍有限，未出现理论版“GPT-3时刻”。",
+      "E": "主要需要数学与小模型实验，算力门槛低，工具完全可得。",
+      "R": "DARPA AIQ（为生成式 AI 提供数学保证）、Simons/IVADO、NSF 资助；工业界投入以可解释性为主，理论资金中等。",
+      "H": "大量根本性开放问题（ICL 样本复杂度、缩放律来源、CoT/推理时计算理论、长度泛化），非常适合学术小组。",
+      "X": "可指导架构设计、推理时计算、可解释性与安全保证，并与复杂性理论、统计物理交叉。",
+      "P": "理论-实践差距大、玩具模型结论脆弱、易被经验进展超越或架构更替（如状态空间模型）削弱，扣5分。"
+    },
+    "inflection_event": "尚无单一“GPT-3时刻”；候选为2023-2024年 CoT 表达力的精确复杂性刻画（Merrill & Sabharwal，ICLR 2024）与 ICL≈隐式梯度下降/贝叶斯推断系列结果。若出现能定量预测缩放律或推理时计算收益的理论，将构成真正拐点。",
+    "key_evidence": [
+      {
+        "claim": "Merrill & Sabharwal：线性步 CoT 使 decoder 停留在上下文相关语言内，多项式步 CoT 恰好识别 P，是首个 Transformer 类与标准复杂性类的精确对应",
+        "source": "https://proceedings.iclr.cc/paper_files/paper/2024/hash/1f59721c106ea80f613299039112f651-Abstract-Conference.html",
+        "date": "2024-05"
+      },
+      {
+        "claim": "Garg et al.：从零训练的 Transformer 可在上下文中学习线性函数，性能接近最小二乘，并可学稀疏线性、决策树、两层网络",
+        "source": "https://arxiv.org/pdf/2208.01066",
+        "date": "2022-08"
+      },
+      {
+        "claim": "Simons 研究所举办2024-2025学年 LLM 与 Transformer 专题年（与 IVADO、DARPA 合作）",
+        "source": "https://simons.berkeley.edu/programs/special-year-large-language-models-transformers-part-2",
+        "date": "2025-01"
+      },
+      {
+        "claim": "DARPA AIQ 项目征集为生成式 AI 能力提供数学保证的理论与评测研究，ICML 2026 设主题报告",
+        "source": "https://www.darpa.mil/research/programs/aiq-artificial-intelligence-quantified",
+        "date": "2024-05"
+      },
+      {
+        "claim": "NeurIPS 2025 研讨会 “What Can('t) Transformers Do?” 聚焦 Transformer 能力与极限",
+        "source": "background knowledge（检索摘要提及）",
+        "date": "2025-11"
+      },
+      {
+        "claim": "ICL 的样本复杂度、预训练任务多样性与上下文长度要求等问题仍未解决（线性注意力可解模型的渐近理论）",
+        "source": "https://math.mcmaster.ca/events/deep-learning-theory-seminar-mary-i-letey-asymptotic-theory-of-in-context-learning-by-linear-attention/",
+        "date": "2025-11"
+      }
+    ],
+    "open_problems": [
+      "缩放律的第一性原理解释及其对数据、架构、推理时计算的定量预测",
+      "推理时计算/CoT/强化学习后训练的表达力与可学习性理论（何时 CoT 可被梯度下降学到、长度泛化）",
+      "上下文学习的样本复杂度与预训练分布条件，以及从玩具模型到真实 LLM 的可迁移性"
+    ],
+    "entry_points": [
+      "在可解析模型（线性注意力、随机特征、简化 Transformer）中研究 ICL/CoT 动力学，并以小规模实验验证，面向 COLT/ICML 理论轨道",
+      "从电路复杂度/形式语言角度研究新架构（SSM、带循环的 Transformer、推理时计算）的表达力上下界，与 FLaNN 等社区对接"
+    ]
+  }
+]

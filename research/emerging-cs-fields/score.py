@@ -19,20 +19,31 @@ import statistics
 HERE = os.path.dirname(os.path.abspath(__file__))
 
 DIMS = ["G", "S", "C", "E", "R", "H", "X"]
-WEIGHTS = {"G": 0.20, "S": 0.15, "C": 0.20, "E": 0.10, "R": 0.10, "H": 0.10, "X": 0.15}
+# S (stage) is not in the weighted sum: it enters as a multiplicative timing factor,
+# so an important-but-already-mainstream field cannot score high on substance alone.
+BASE_DIMS = ["G", "C", "E", "R", "H", "X"]
+WEIGHTS = {"G": 0.25, "C": 0.25, "E": 0.10, "R": 0.10, "H": 0.10, "X": 0.20}
 DIM_NAMES = {
     "G": "增长动量", "S": "阶段窗口", "C": "能力拐点", "E": "使能条件",
     "R": "资源注入", "H": "学术空间", "X": "外溢平台性", "P": "风险扣分",
 }
 # Sub-indices: 势 = is it taking off now; 质 = will it matter / can you work on it.
-MOMENTUM = ["G", "S", "C"]
+MOMENTUM = ["G", "C"]
 SUBSTANCE = ["E", "R", "H", "X"]
 # Dirichlet concentration for weight perturbation; 40 gives roughly ±0.05 on each weight.
 CONCENTRATION = 40
 
 
+def stage_factor(stage):
+    return 0.5 + 0.1 * stage
+
+
+def base_score(s, weights=WEIGHTS):
+    return 20 * sum(weights[d] * s[d] for d in BASE_DIMS)
+
+
 def emergence_score(s, weights=WEIGHTS):
-    return 20 * sum(weights[d] * s[d] for d in DIMS) - s.get("P", 0)
+    return base_score(s, weights) * stage_factor(s["S"]) - s.get("P", 0)
 
 
 def sub_index(s, dims):
@@ -67,10 +78,10 @@ def dirichlet(rng, alphas):
 
 def sensitivity(fields, samples, seed):
     rng = random.Random(seed)
-    alphas = [WEIGHTS[d] * CONCENTRATION for d in DIMS]
+    alphas = [WEIGHTS[d] * CONCENTRATION for d in BASE_DIMS]
     ranks = {f["id"]: [] for f in fields}
     for _ in range(samples):
-        w = dict(zip(DIMS, dirichlet(rng, alphas)))
+        w = dict(zip(BASE_DIMS, dirichlet(rng, alphas)))
         ordered = sorted(fields, key=lambda f: -emergence_score(f["scores"], w))
         for i, f in enumerate(ordered, 1):
             ranks[f["id"]].append(i)
@@ -87,11 +98,11 @@ def sensitivity(fields, samples, seed):
 
 
 def tier(score):
-    if score >= 80:
+    if score >= 75:
         return "A 强烈关注"
-    if score >= 72:
+    if score >= 68:
         return "B 值得投入"
-    if score >= 64:
+    if score >= 60:
         return "C 观察"
     return "D 暂缓/已主流"
 
@@ -155,21 +166,21 @@ def main():
     lines = [
         "# 评分结果（由 score.py 自动生成，勿手改）",
         "",
-        f"权重：{', '.join(f'{DIM_NAMES[d]} {d}={WEIGHTS[d]:.2f}' for d in DIMS)}；"
-        "总分 = 20 × Σ(w·s) − P。",
+        f"权重：{', '.join(f'{DIM_NAMES[d]} {d}={WEIGHTS[d]:.2f}' for d in BASE_DIMS)}；"
+        "总分 = 20 × Σ(w·s) × (0.5 + 0.1·S) − P。",
         f"敏感性：Dirichlet(浓度 {CONCENTRATION}) 随机扰动权重 {args.samples} 次，"
         "报告排名中位数、10–90% 分位区间与进入前 10 的概率。",
         "",
         "## 候选领域排名",
         "",
-        "| # | 领域 | 方向 | 总分 | 势(G,S,C) | 质(E,R,H,X) | 分项 | 排名区间 | P(前10) | 档位 |",
-        "|---|---|---|---|---|---|---|---|---|---|",
+        "| # | 领域 | 方向 | 总分 | 势(G,C) | 时机系数(S) | 质(E,R,H,X) | 分项 | 排名区间 | P(前10) | 档位 |",
+        "|---|---|---|---|---|---|---|---|---|---|---|",
     ]
     for i, f in enumerate(fields, 1):
         s = sens[f["id"]]
         lines.append(
             f"| {i} | {f['name_zh']}<br><sub>{f['name_en']}</sub> | {f['domain']} | "
-            f"**{f['score']}** | {f['momentum']} | {f['substance']} | "
+            f"**{f['score']}** | {f['momentum']} | ×{stage_factor(f['scores']['S']):.2f} | {f['substance']} | "
             f"`{fmt_scores(f['scores'])}` | {s['rank_p10']}–{s['rank_p90']} | "
             f"{s['p_top10']:.0%} | {f['tier']} |"
         )
