@@ -1,0 +1,211 @@
+[
+  {
+    "id": "vla_robot_fm",
+    "name_zh": "机器人基础模型 / 视觉-语言-动作模型(VLA)",
+    "name_en": "Robot Foundation Models / Vision-Language-Action Models",
+    "domain": "具身/空间/生命科学交叉",
+    "scores": {"G": 5, "S": 4.5, "C": 4, "E": 3.5, "R": 5, "H": 4, "X": 4, "P": 4},
+    "rationale": {
+      "G": "对1228篇cs.RO VLA论文的统计显示发文量同比约5倍，为机器人最快子方向（次快的操作/抓取仅1.6倍）；ICLR 2026 VLA投稿从个位数增至164篇（约18倍）。",
+      "S": "ICLR 2026投稿约164篇，仍仅占总投稿约1%量级；专门综述、benchmark（LIBERO、SimplerEnv、RoboArena等）和workshop正在形成，动作表示（离散token/flow/扩散）、是否引入世界模型与RL后训练尚无共识范式；但热度上升极快，扣0.5。",
+      "C": "π0.5在未见过的家庭中完成长时程清理任务、Gemini Robotics/GR00T N1展示跨本体泛化，是强存在性证明；但成功率与可靠性仍远未达到“GPT-3式”普适能力，数据规模化曲线尚不清晰。",
+      "E": "开源模型（openpi/π0、OpenVLA、SmolVLA、GR00T N1）、LeRobot工具链、Open X-Embodiment数据和低成本机械臂齐备；真实机器人数据规模与可复现的真实世界评测是主要瓶颈。",
+      "R": "Physical Intelligence 2025-11 B轮6亿美元（估值56亿），2026年传出约10亿美元新一轮；Skild AI融资14亿美元估值140亿；Google DeepMind、NVIDIA、Tesla、Figure均有大型项目，2025年机器人融资超100亿美元。",
+      "H": "跨本体迁移、数据配方、动作tokenization、RL后训练、评测方法学等大量基础问题可用开源VLA+小规模真实数据研究；但预训练前沿仍被工业数据垄断。",
+      "X": "有望成为“物理AI”的通用底座，重塑机器人学、具身智能、世界模型与多模态大模型研究；对CS之外（制造、物流）亦有外溢。",
+      "P": "估值与真实部署能力差距大、真实世界评测难复现（demo挑选）；有被视频世界模型/通用多模态模型吸收的可能。扣4分。"
+    },
+    "inflection_event": "候选“GPT-3时刻”：2024-10 π0与2025-04 π0.5（开放世界家庭任务泛化）、2025-03 Gemini Robotics与GR00T N1；真正的拐点将是某个VLA在大规模未见环境中以>90%可靠性完成长时程任务并呈现清晰的数据规模化定律（尚未发生）。",
+    "key_evidence": [
+      {"claim": "对2023-02至2026-06的1228篇cs.RO VLA论文分析：VLA发文量同比增长5倍，是机器人最快增长子领域，而机器人整体增长127%", "source": "https://arxiv.org/html/2512.11362v1", "date": "2026-06"},
+      {"claim": "ICLR 2026 VLA相关投稿从上一年个位数增至164篇（约18倍）；机器人/VLA相关录用约210篇，2025年不足100篇", "source": "https://eu.36kr.com/en/p/3532732628769664", "date": "2025-10"},
+      {"claim": "Physical Intelligence 2025-11完成6亿美元B轮（CapitalG领投，估值56亿美元），2026-03传洽谈10亿美元新一轮，目标估值约110亿", "source": "https://www.aicerts.ai/news/physical-intelligence-secures-massive-robotics-war-chest/", "date": "2026-03"},
+      {"claim": "Skild AI融资14亿美元，估值超140亿美元（SoftBank领投，NVentures参与），打造“全本体大脑”", "source": "https://fintool.com/news/skild-ai-14-billion-valuation-robotics", "date": "2026-01"},
+      {"claim": "2025年机器人行业融资超过103亿美元，由人形机器人和跨硬件基础模型驱动", "source": "https://landbase.com/blog/fastest-growing-robotics-companies", "date": "2026-02"},
+      {"claim": "π0(2024-10)开源于2025-02，π0.5(2025-04)面向开放世界泛化；Gemini Robotics(2025-03)、GR00T N1(2025-03)、RT-2(2023-07)、Open X-Embodiment(2023-10)构成主线", "source": "background knowledge", "date": "2025-04"}
+    ],
+    "open_problems": [
+      "机器人数据的规模化定律与数据配方：仿真、人类视频、遥操作数据如何混合，是否存在类似LLM的可预测scaling曲线",
+      "动作表示与推理：离散token、flow matching、扩散头与世界模型/潜在动作的统一，以及长时程任务中的推理与记忆",
+      "可复现的真实世界评测与RL后训练：如何低成本、统计可信地评估泛化与可靠性，并用在线RL提升成功率"
+    ],
+    "entry_points": [
+      "基于openpi/OpenVLA/SmolVLA和LeRobot在低成本机械臂（如SO-100/ALOHA）上做微调、数据效率和失败模式分析研究",
+      "聚焦评测与方法学：构建分布外泛化benchmark、真实-仿真相关性研究，或研究VLA的RL后训练与安全约束"
+    ]
+  },
+  {
+    "id": "humanoid_wbc",
+    "name_zh": "人形机器人全身控制与sim2real",
+    "name_en": "Humanoid Whole-Body Control and Sim-to-Real",
+    "domain": "具身/空间/生命科学交叉",
+    "scores": {"G": 4, "S": 3.5, "C": 4, "E": 4.5, "R": 4.5, "H": 4, "X": 2.5, "P": 5},
+    "rationale": {
+      "G": "2025年密集涌现BeyondMimic、GMT、ASAP、HumanPlus/OmniH2O后续、LangWBC、CLONE等工作，2026年继续有OmniXtreme、AnyBody等；未找到精确论文计数，按定性证据+Unitree出货（2025年>5500台，70%以上营收来自科研教育）估计约60-100%/年。",
+      "S": "已形成共识范式：大规模并行仿真PPO（IsaacLab/MuJoCo）+域随机化+人体动作重定向的运动跟踪；RSS/CoRL已有专门workshop，进入“已建立方法”阶段而非早期起飞。",
+      "C": "2025年单一通用跟踪策略零样本迁移到真机完成侧手翻、旋转跳、冲刺等（BeyondMimic、GMT），是强存在性证明；但能力仍局限于运动技能，接触丰富的全身移动操作尚未突破。",
+      "E": "Unitree G1等平价人形平台大规模普及、IsaacLab/MuJoCo Playground开源、AMASS等人体动作数据可用；硬件可靠性仍是约束。",
+      "R": "Figure C轮10亿美元估值390亿美元；Tesla Optimus、NVIDIA GR00T、Boston Dynamics、中国大量政府与产业资本投入；但WBC本身更多由学术+创业团队推进。",
+      "H": "移动操作、接触与力控、安全与鲁棒性、与VLA的层级接口等问题在学术算力下可做（单卡GPU+一台G1即可）。",
+      "X": "主要外溢到机器人学与计算机动画/角色控制，对更广CS影响有限。",
+      "P": "人形机器人估值泡沫明显，demo与实际部署差距大；硬件耐久性与安全监管是物理约束；运动跟踪可能被统一的VLA/层级系统吸收。扣5分。"
+    },
+    "inflection_event": "拐点已于2024-2025年间发生：大规模并行RL+运动跟踪让人形机器人零样本sim2real完成高动态技能（2025-06 GMT、2025-08 BeyondMimic）；下一个“GPT-3时刻”应是统一全身控制器在真实环境中完成通用接触丰富的移动操作。",
+    "key_evidence": [
+      {"claim": "BeyondMimic实现跳跃旋转、冲刺、侧手翻等高质量动作跟踪，并用引导扩散在测试时组合任务", "source": "https://arxiv.org/abs/2508.08241v2", "date": "2025-08"},
+      {"claim": "GMT（UCSD/SFU）用自适应采样+运动MoE训练单一统一策略，在Unitree G1上稳健复现多样动作", "source": "https://arxiv.org/abs/2506.14770v2", "date": "2025-06"},
+      {"claim": "Unitree 2025年人形机器人出货超5500台；截至2025Q3超70%人形营收来自科研与教育客户", "source": "https://en.jiemian.com/article/13924474.html", "date": "2026-01"},
+      {"claim": "Figure完成10亿美元C轮，投后估值390亿美元", "source": "https://landbase.com/blog/fastest-growing-robotics-companies", "date": "2025-09"},
+      {"claim": "RSS 2025设有全身控制与双臂操作workshop；CLONE全身遥操作发表于CoRL 2025", "source": "https://arxiv.org/pdf/2602.23843", "date": "2026-02"},
+      {"claim": "2026年持续出现通用高动态控制（OmniXtreme）与任意关键点引导全身控制（AnyBody）等工作", "source": "https://arxiv.org/pdf/2606.29209", "date": "2026-06"}
+    ],
+    "open_problems": [
+      "接触丰富的全身移动操作：在保持平衡的同时进行力控交互与搬运",
+      "从运动跟踪到语言/视觉条件的通用控制器，以及与上层VLA的接口设计",
+      "sim2real的系统性理论与安全性：执行器建模、跌倒恢复、长期可靠性保证"
+    ],
+    "entry_points": [
+      "采购Unitree G1等平价平台，基于开源BeyondMimic/GMT/IsaacLab代码复现并扩展到移动操作或新技能",
+      "研究动作数据侧：人体视频到机器人动作的重定向、物理可行性过滤和数据集构建"
+    ]
+  },
+  {
+    "id": "spatial_3d_fm",
+    "name_zh": "空间智能 / 3D基础模型（前馈式三维重建）",
+    "name_en": "Spatial Intelligence / 3D Foundation Models (Feed-forward 3D Reconstruction)",
+    "domain": "具身/空间/生命科学交叉",
+    "scores": {"G": 4.5, "S": 4, "C": 4, "E": 4.5, "R": 4, "H": 4.5, "X": 4, "P": 3},
+    "rationale": {
+      "G": "DUSt3R(CVPR 2024)不到一年被引>200、后续计数548+，衍生MASt3R、MUSt3R、CUT3R、π3、VGGT、MapAnything、Depth Anything 3等；VGGT获CVPR 2025最佳论文，VGGT-Ω成为CVPR 2026最佳论文候选；未找到精确论文计数，按定性估计>80%/年。",
+      "S": "以pointmap/前馈Transformer为核心的范式正在快速形成，专题综述与workshop涌现，仍是CVPR中较小份额；但VGGT类架构已开始成为共识，略高于“首个workshop”阶段，给4。",
+      "C": "从需要标定和迭代优化的SfM/MVS转为秒级前馈重建（VGGT<1秒处理数百张视图）是质的变化；VGGT-Ω用15倍监督数据与1800万自监督视频扩展，显示初步scaling趋势，但精度在部分场景仍需BA后处理。",
+      "E": "开源权重（DUSt3R/VGGT/MapAnything）、大规模多视图数据集、COLMAP伪标签与适中训练算力均可获得。",
+      "R": "Meta、Google DeepMind、NVIDIA、NAVER Labs投入；World Labs 2026-02获10亿美元融资（估值约50亿，累计12.3亿），Autodesk出资2亿美元。",
+      "H": "动态场景、度量尺度、长序列/大场景、语义与物理属性、与生成模型统一等问题大量开放，学术算力可训练中等规模模型。",
+      "X": "可成为机器人、自动驾驶、AR/VR、世界模型、VLM空间推理的通用几何底座。",
+      "P": "“空间智能”品牌把生成式世界与几何重建混为一谈存在炒作；有被视频生成/世界模型吸收的风险。扣3分。"
+    },
+    "inflection_event": "2023-12 DUSt3R首次证明无需标定的前馈双视图三维重建可行，2025-03 VGGT（CVPR 2025最佳论文）实现秒级多视图前馈重建并超越优化式方法，是该领域的“GPT-3时刻”；2026 VGGT-Ω显示数据规模化趋势。",
+    "key_evidence": [
+      {"claim": "VGGT获CVPR 2025最佳论文，前馈推断相机参数、点图、深度和3D轨迹，1秒内完成重建并超越需几何优化后处理的方法", "source": "https://openaccess.thecvf.com/content/CVPR2025/html/Wang_VGGT_Visual_Geometry_Grounded_Transformer_CVPR_2025_paper.html", "date": "2025-06"},
+      {"claim": "VGGT-Ω为CVPR 2026 oral与最佳论文候选，使用15倍监督数据和1800万自监督视频扩展", "source": "https://learnopencv.com/vggt-vs-vggt-%cf%89-vggt-omega-a-complete-guide-to-feed-forward-3d-reconstruction/", "date": "2026-06"},
+      {"claim": "DUSt3R被548篇论文引用，Meta、Google DeepMind、NVIDIA均有衍生研究", "source": "https://www.naverlabs.com/en/storyDetail/328", "date": "2025-06"},
+      {"claim": "MapAnything（Meta/CMU）用单一前馈模型统一SfM、MVS、单目深度、相机定位等任务", "source": "https://arxiv.org/abs/2509.13414v3", "date": "2025-09"},
+      {"claim": "World Labs 2026-02宣布10亿美元融资（NVIDIA、AMD、Autodesk等），估值约50亿美元；首个产品Marble于2025-11发布", "source": "https://www.crowdfundinsider.com/2026/02/262836-ai-firm-world-labs-raises-1-billion-at-5-billion-valuation/", "date": "2026-02"}
+    ],
+    "open_problems": [
+      "动态与非刚性场景的前馈4D重建，以及长视频/城市级场景的可扩展记忆机制",
+      "几何基础模型的scaling规律：自监督视频数据能否替代昂贵的3D真值",
+      "几何表征与语义、物理属性及生成式世界模型的统一，并服务于机器人与VLM空间推理"
+    ],
+    "entry_points": [
+      "在开源VGGT/MASt3R/MapAnything上做微调与蒸馏，研究轻量化、动态场景或特定领域（医疗、遥感）适配",
+      "构建评测：针对度量精度、鲁棒性、空间推理的benchmark，或将前馈3D特征接入VLA/VLM做下游验证"
+    ]
+  },
+  {
+    "id": "dynamic_gs",
+    "name_zh": "3D/4D高斯泼溅与神经渲染",
+    "name_en": "3D/4D Gaussian Splatting and Neural Rendering",
+    "domain": "具身/空间/生命科学交叉",
+    "scores": {"G": 2, "S": 1.5, "C": 3, "E": 5, "R": 3.5, "H": 2.5, "X": 3, "P": 5},
+    "rationale": {
+      "G": "RadianceFields.com收录3333篇辐射场论文，2026年至今至少749篇（约每天4篇），总量高但未找到加速证据；按定性判断增速已放缓至约10-30%/年。",
+      "S": "3DGS已是CVPR 2025头部研究主题之一；Khronos 2026-02发布glTF高斯泼溅扩展RC、OpenUSD 26.03原生支持3DGS，进入标准化/商品化阶段，已过峰值。",
+      "C": "2023年3DGS实现实时高质量辐射场渲染是真实拐点，但当前4DGS、前馈GS等多为增量改进，没有新的质变能力。",
+      "E": "开源实现（gsplat、nerfstudio等）、数据集、消费级GPU、行业标准格式全部可得。",
+      "R": "NVIDIA、Niantic、Autodesk、Apple/Meta等产品化投入，Cesium、Babylon.js、PlayCanvas已支持；但缺乏前沿实验室把它作为核心战略。",
+      "H": "论文高度拥挤、问题多为工程化；剩余开放问题（动态、可编辑性、压缩）正被前馈3D模型与视频世界模型分流。",
+      "X": "影响图形学、AR/VR、数字孪生、机器人仿真等若干相邻领域。",
+      "P": "已过峰值、增量论文泛滥；可能被前馈3D基础模型与视频生成/世界模型替代或吸收。扣5分。"
+    },
+    "inflection_event": "拐点已于2023-08（SIGGRAPH 2023 3D Gaussian Splatting）发生，实时辐射场渲染；2026年glTF/OpenUSD标准化标志着从研究热点走向商品化，当前不再处于“2021年LLM”阶段。",
+    "key_evidence": [
+      {"claim": "RadianceFields.com收录3333篇辐射场研究论文，其中2026年至少749篇，约每天4篇", "source": "https://radiancefields.com/gaussian-splatting-statistics", "date": "2026-09"},
+      {"claim": "3DGS是CVPR 2025头部研究主题之一", "source": "https://www.paperdigest.org/report/data/cvpr-2025-topics.html", "date": "2025-06"},
+      {"claim": "Khronos 2026-02-03发布KHR_gaussian_splatting glTF扩展候选版，目标2026Q2正式批准；Cesium、Babylon.js、PlayCanvas已支持", "source": "https://www.khronos.org/news/press/gltf-gaussian-splatting-press-release", "date": "2026-02"},
+      {"claim": "OpenUSD 26.03加入原生3D高斯泼溅schema与参考渲染器", "source": "https://www.cgchannel.com/tag/usd-26-03", "date": "2026-03"},
+      {"claim": "原作者Kerbl发表《The Impact and Outlook of 3D Gaussian Splatting》回顾性综述，标志领域进入总结期", "source": "https://arxiv.org/pdf/2510.26694", "date": "2025-10"}
+    ],
+    "open_problems": [
+      "前馈式、可泛化的4D高斯表示，与VGGT类几何基础模型的统一",
+      "可编辑、可物理仿真的高斯场景，用于机器人仿真与数字孪生",
+      "大规模场景的流式压缩、LOD与跨平台实时渲染标准化"
+    ],
+    "entry_points": [
+      "将3DGS作为工具而非研究对象：用于机器人real2sim数据生成或具身仿真场景构建",
+      "研究前馈GS与3D基础模型/视频生成模型的结合，避开拥挤的逐场景优化增量改进赛道"
+    ]
+  },
+  {
+    "id": "virtual_cell",
+    "name_zh": "虚拟细胞 / 单细胞基础模型",
+    "name_en": "Virtual Cell / Single-Cell Foundation Models",
+    "domain": "具身/空间/生命科学交叉",
+    "scores": {"G": 4, "S": 4.5, "C": 2, "E": 3, "R": 4, "H": 5, "X": 3.5, "P": 5},
+    "rationale": {
+      "G": "Arc虚拟细胞挑战赛2025年吸引5000+注册者、114国、1200+提交队伍，2026年第二届已启动；scGPT、Geneformer、scFoundation、State、TranscriptFormer等模型密集发布；未找到精确论文计数，估计60-100%/年。",
+      "S": "处于典型起飞期：首届挑战赛、benchmark（PertEval-scFM等）刚形成，评测指标本身仍有争议，无共识范式，在ML顶会中份额很小。",
+      "C": "能力拐点尚未出现：Nature Methods(2025-08)显示5个基础模型+2个深度模型在扰动预测上均未超过简单线性基线；挑战赛冠军也承认纯AI方法未稳定超越统计基线。",
+      "E": "CELLxGENE、Tahoe-100M、Billion Cells Project等观测数据丰富，但跨细胞类型的高质量扰动数据稀缺，评测指标（MAE/PDS/DES）可被操纵，是主要瓶颈。",
+      "R": "CZI建设1万GPU集群并与NVIDIA扩大合作、Arc Institute、Xaira（>10亿美元）、Altos Labs、BioMap等投入；前沿LLM实验室参与有限。",
+      "H": "表示学习、因果/扰动泛化、评测方法学、数据设计等基础问题大量开放，学术算力即可开展。",
+      "X": "主要重塑计算生物学与药物发现，对通用CS外溢有限。",
+      "P": "“虚拟细胞”叙事与实测结果差距显著，挑战赛出现指标被操纵与排行榜崩塌；扣5分。"
+    },
+    "inflection_event": "尚未发生。候选“GPT-3时刻”：某模型在未见细胞类型/未见扰动上零样本预测转录组响应并稳定、显著超越线性基线（Arc 2026虚拟细胞挑战即以此为目标）；2025-06 Arc发布State与首届挑战赛是社区形成标志而非能力拐点。",
+    "key_evidence": [
+      {"claim": "Nature Methods：5个单细胞基础模型和2个深度学习模型在单/双基因扰动预测上均未超越刻意简单的线性基线", "source": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12328236/", "date": "2025-08"},
+      {"claim": "Arc虚拟细胞挑战（Arc/NVIDIA/10x/Ultima）吸引5000+注册者、1200+提交队伍，NeurIPS 2025公布结果，BioMap总冠军、Altos Labs获通用奖", "source": "https://www.genengnews.com/topics/artificial-intelligence/neurips-2025-altos-labs-wins-generalist-prize-at-arcs-virtual-cell-challenge", "date": "2025-12"},
+      {"claim": "挑战赛MAE指标设计导致排行榜可被数据变换操纵，PDS榜首方法TransPert使用经典统计而非大模型", "source": "https://gmdbioinformatics.substack.com/p/arc-virtual-cell-challenge-has-the", "date": "2025-12"},
+      {"claim": "CZI建设1万GPU集群、推进十亿细胞项目，并于2025-10与NVIDIA扩大虚拟细胞模型合作", "source": "https://www.rdworldonline.com/czi-and-nvidia-expand-virtual-cell-push-with-open-models-and-benchmarks/", "date": "2025-10"},
+      {"claim": "Arc 2026虚拟细胞挑战聚焦模型从未见过的细胞上下文中的扰动响应预测（零样本）", "source": "https://arcinstitute.org/news/virtual-cell-challenge-2026", "date": "2026-06"},
+      {"claim": "Arc发布基线模型STATE（State Transition + State Embedding两部分）", "source": "https://huggingface.co/blog/virtual-cell-challenge", "date": "2025-06"}
+    ],
+    "open_problems": [
+      "如何在未见细胞类型和未见扰动上实现可泛化的因果预测，而不仅是拟合平均表达",
+      "构建不可被操纵、与生物学意义一致的评测指标与基线体系",
+      "多模态整合（转录组、蛋白组、成像、空间组学）与主动实验设计以弥补扰动数据稀缺"
+    ],
+    "entry_points": [
+      "参加Arc 2026虚拟细胞挑战，系统性对比基础模型与强线性/统计基线，发表严谨的评测与消融研究",
+      "利用Tahoe-100M、Replogle Perturb-seq等公开数据研究表示质量与扰动预测的关系，或开发主动学习式实验设计方法"
+    ]
+  },
+  {
+    "id": "neural_fm_bci",
+    "name_zh": "神经数据基础模型与脑机接口解码",
+    "name_en": "Neural Data Foundation Models and BCI Decoding",
+    "domain": "具身/空间/生命科学交叉",
+    "scores": {"G": 4, "S": 4.5, "C": 3.5, "E": 2.5, "R": 4, "H": 4.5, "X": 3, "P": 5},
+    "rationale": {
+      "G": "POYO(2023)→POYO+、NDT3、NEDS(约3万神经元/74 session)、OmniMouse(1500亿神经token，ICLR 2026)规模持续扩大；NeurIPS 2025首设“脑与身体基础模型”workshop和EEG Foundation Challenge；未找到精确论文计数，定性估计60-100%/年。",
+      "S": "首批专门workshop、挑战赛和benchmark刚形成；分词方式、跨被试对齐等无共识范式；在ML顶会中份额很小，符合起飞期特征。",
+      "C": "语音神经假体是明确拐点：2025-06 Nature报道约30ms延迟实时语音合成，125k词表词准确率达97.5%；但其驱动力主要是解码器与植入技术而非通用基础模型，神经基础模型的scaling收益仍有限，EEG基础模型常不优于简单模型。",
+      "E": "侵入式数据稀缺且受伦理/隐私限制，记录设备与协议异构；DANDI、IBL等开放数据与EEG benchmark正在出现，但关键数据规模远不及其他模态。",
+      "R": "Neuralink 2025年E轮6.5亿美元（估值约90亿）；OpenAI参投Merge Labs约2.5亿美元种子轮；Synchron D轮2亿美元；BRAIN Initiative等政府资助。",
+      "H": "跨被试/跨设备泛化、神经tokenization、多模态神经-行为建模、闭环自适应解码等基础问题可在公开数据和学术算力上研究。",
+      "X": "主要影响神经科学、医疗设备与人机交互；对通用CS外溢中等。",
+      "P": "临床样本量极小（Neuralink约26名受试者），监管与手术是硬性物理限制；Musk/Altman带来的炒作与EEG基础模型可复现性问题。扣5分。"
+    },
+    "inflection_event": "解码侧拐点：2024-08 NEJM ALS语音BCI（~97%准确率）与2025-06 Nature实时语音合成神经假体；基础模型侧候选“GPT-3时刻”：跨被试、跨设备零样本解码的神经基础模型显示清晰scaling定律（OmniMouse 2026在1500亿神经token上的scaling研究为早期迹象）。",
+    "key_evidence": [
+      {"claim": "Nature报道实时语音合成神经假体，延迟约30ms，可调语调甚至唱歌", "source": "https://ideas.repec.org/a/nat/nature/v644y2025i8075d10.1038_s41586-025-09127-3.html", "date": "2025-06"},
+      {"claim": "OmniMouse：在1500亿神经token上研究多模态多任务脑模型的scaling性质（ICLR 2026）", "source": "https://arxiv.org/pdf/2604.18827", "date": "2026-04"},
+      {"claim": "NEDS在约3万神经元、74个session上进行多任务编解码，对比POYO+与NDT2，显示数据规模提升下游性能", "source": "https://arxiv.org/html/2504.08201v1", "date": "2025-04"},
+      {"claim": "NeurIPS 2025举办“Foundation Models for the Brain and Body”workshop；EEG基础模型benchmark显示简单模型在临床分布偏移下仍有竞争力", "source": "https://neurips.cc/virtual/2025/workshop/109571", "date": "2025-12"},
+      {"claim": "Neuralink 2025年E轮融资6.5亿美元，估值约90亿美元；2026年受试者达26人", "source": "https://news.bloombergtax.com/private-equity/neuralink-raises-650-million-in-late-stage-funding-round", "date": "2025-06"},
+      {"claim": "OpenAI参投Sam Altman联合创立的BCI公司Merge Labs约2.5亿美元种子轮，估值约8.5亿美元", "source": "https://techinformed.com/openai-backs-merge-labs-in-250m-seed-round-led-by-sam-altman/", "date": "2026-01"},
+      {"claim": "Synchron完成2亿美元D轮融资", "source": "https://app.dealroom.co/news/feed/synchron-raises-200m-for-bci-tech", "date": "2025-11"}
+    ],
+    "open_problems": [
+      "跨被试、跨脑区、跨记录设备的神经表征对齐与零样本迁移",
+      "神经数据的scaling定律：更多神经元/会话/物种能否带来可预测增益，tokenization如何设计",
+      "长期植入下的非平稳性与闭环自适应解码，以及非侵入式（EEG/MEG）基础模型的真实增益验证"
+    ],
+    "entry_points": [
+      "利用DANDI、IBL、NLB（Neural Latents Benchmark）和EEG Foundation Challenge等公开数据，在POYO/NDT开源代码上做跨会话迁移与scaling研究",
+      "与临床BCI团队合作，研究语言模型先验在语音/文本解码中的作用，或开发严格的EEG基础模型评测协议"
+    ]
+  }
+]

@@ -1,0 +1,247 @@
+[
+  {
+    "id": "world_models",
+    "name_zh": "世界模型 / 可交互视频生成",
+    "name_en": "World Models & Interactive Video Generation",
+    "domain": "AI-模型与方法",
+    "scores": {"G": 5, "S": 4.5, "C": 4, "E": 3, "R": 5, "H": 4, "X": 4, "P": 5},
+    "rationale": {
+      "G": "未找到精确论文计数；但ICLR 2025首届World Models workshop超1500人参会，ICLR 2026办第2届，NeurIPS 2026同时出现'World Models in Physical AI'与'Continual World Models'等多个专门workshop，2025-2026一年内由1个分裂为多个，定性判断>100%/年。",
+      "S": "专门workshop/基准刚成形，范式未统一（JEPA式表征预测 vs 生成式视频 vs 3D/空间生成三派并立），在顶会中仍为小份额；但热度已接近主流边缘，故4.5而非5。",
+      "C": "Genie 3（2025-08）实现720p/24fps实时可交互、数分钟一致性、约1分钟视觉记忆，是质变的存在性证明；V-JEPA 2用62小时机器人数据做零样本规划。Genie 1→2→3有规模化趋势，但物理正确性与可控性仍缺定量scaling law，给4。",
+      "E": "NVIDIA Cosmos、V-JEPA 2、Matrix-Game等开放权重可用；但训练需大规模视频+动作标注数据与巨量算力，评测标准缺失，是一个主要瓶颈。",
+      "R": "AMI Labs（LeCun）2026年种子轮10.3亿美元；World Labs（李飞飞）2026-02融资10亿美元、估值50亿；DeepMind、NVIDIA、Meta均有旗舰项目，远超>$1B门槛。",
+      "H": "长时一致性/记忆、动作条件化、物理一致性评测、用世界模型训练智能体的sim-to-real等问题大量开放；大模型训练偏工业，但评测、小规模机理与下游规划学术可做。",
+      "X": "可成为机器人、自动驾驶、游戏/内容生成、智能体训练环境乃至科学模拟的通用底座。",
+      "P": "概念边界模糊（'world model'被泛化营销）、炒作与可靠性差距大、物理正确性难验证、训练高度依赖少数大厂算力。"
+    },
+    "inflection_event": "2025年8月DeepMind发布Genie 3：首个通用实时可交互世界模型（文本→可游玩3D世界，720p/24fps，数分钟一致）；2026年1月以Project Genie向用户开放，标志从'视频生成'跨入'可交互模拟器'。",
+    "key_evidence": [
+      {"claim": "Genie 3 实时生成可交互环境，720p/24fps，数分钟一致性，视觉记忆可回溯约1分钟", "source": "https://techcrunch.com/2025/08/05/deepmind-reveals-genie-3-a-world-model-that-could-be-the-key-to-reaching-agi", "date": "2025-08"},
+      {"claim": "Project Genie（基于Genie 3）于2026-01-29通过Google Labs向美国AI Ultra用户开放", "source": "https://dataconomy.com/2026/01/30/google-launches-project-genie-create-interactive-worlds-with-ai/", "date": "2026-01"},
+      {"claim": "V-JEPA 2 自监督视频世界模型，仅用62小时Droid机器人数据微调即可零样本规划抓取/放置", "source": "https://arxiv.org/pdf/2506.09985", "date": "2025-06"},
+      {"claim": "LeCun创立AMI Labs，种子轮10.3亿美元（估值35亿美元），聚焦JEPA世界模型", "source": "https://futurumgroup.com/insights/yann-lecuns-ami-raises-1bn-seed-round-is-the-world-model-era-finally-here", "date": "2026-03"},
+      {"claim": "World Labs 融资10亿美元、估值50亿美元，累计融资12.3亿美元；首个产品Marble于2025-11发布", "source": "https://www.crowdfundinsider.com/2026/02/262836-ai-firm-world-labs-raises-1-billion-at-5-billion-valuation/", "date": "2026-02"},
+      {"claim": "ICLR 2025首届World Models workshop超1500名参与者，2026年办第2届；NeurIPS 2026另有'World Models in Physical AI'与'Continual World Models' workshop", "source": "https://iclr.cc/virtual/2026/workshop/10000799", "date": "2026-04"},
+      {"claim": "NVIDIA Cosmos世界基础模型扩展至机器人控制（Cosmos Policy）、自动驾驶与工业视觉", "source": "https://metavert.io/world-models-for-robotics", "date": "2026-01"}
+    ],
+    "open_problems": [
+      "如何在分钟到小时尺度上保持空间/物体一致性与长期记忆，而不是靠上下文窗口硬撑",
+      "如何定量评测世界模型的物理正确性与可控性（而非视觉质量），并证明其对下游智能体/机器人策略有增益",
+      "生成式像素预测 vs JEPA式潜空间预测哪条路线更可扩展，动作标签稀缺时如何从无标注视频学习可控动态（latent action）"
+    ],
+    "entry_points": [
+      "基于开放权重（Cosmos、V-JEPA 2、Matrix-Game等）做世界模型评测基准：物理一致性、反事实动作响应、长时记忆探针",
+      "在小规模可控领域（Atari/Procgen/MineRL、桌面机械臂）研究潜动作学习与基于世界模型的规划，验证'想象训练'对策略的增益"
+    ]
+  },
+  {
+    "id": "diffusion_lm",
+    "name_zh": "扩散语言模型 / 非自回归LLM",
+    "name_en": "Diffusion Language Models (non-autoregressive LLMs)",
+    "domain": "AI-模型与方法",
+    "scores": {"G": 4.5, "S": 5, "C": 3, "E": 4, "R": 3.5, "H": 5, "X": 3, "P": 4},
+    "rationale": {
+      "G": "未找到arXiv精确月度计数；定性证据：2025年LLaDA/Dream/Mercury后出现综述（2025-08、2026-06）、开源框架dLLM（2026-02）、ACL 2026 demo、NeurIPS 2026首个专门workshop，2025-12已扩展至100B（LLaDA2.0），判断增长约80-100%+/年。",
+      "S": "首个专门workshop在2026年出现，顶会份额小，范式未收敛（masked离散扩散、block diffusion、AR转扩散、连续扩散并存），正处起飞窗口。",
+      "C": "Mercury 2（2026-02）1009 tok/s、端到端1.7s，质量对标Haiku/GPT-5 mini级；LLaDA 8B≈LLaMA3 8B；LLaDA2.0达100B。核心是速度/双向性优势而非质变新能力，前沿质量仍落后AR，给3。",
+      "E": "LLaDA、Dream、LLaDA2.0等开放权重，开源训练框架dLLM，可由AR模型转换降低训练成本；推理引擎/KV缓存生态尚不成熟。",
+      "R": "Inception 2025-11融资5000万美元（Menlo、NVentures、M12等）；Google Gemini Diffusion；蚂蚁/inclusionAI LLaDA2.0；属1-2家大厂+创业公司级，未到>$1B。",
+      "H": "采样调度、长度控制、KV缓存、扩散模型上的RL与推理、scaling law、理论（离散扩散ELBO）等大量问题，8B以下可用学术算力研究。",
+      "X": "可重塑推理服务（低延迟）、代码编辑/填空、统一多模态生成；若质量追平则影响面更广，但目前属'更快的LLM'。",
+      "P": "可能被AR侧推测解码/多token预测等加速技术抵消；前沿质量差距；商业主导者单一（Inception）。"
+    },
+    "inflection_event": "2025年2月Inception发布Mercury（首个商用规模dLLM，>1000 tok/s）与同期LLaDA 8B追平LLaMA3 8B；2025年5月Google I/O展示Gemini Diffusion（1000-2000 tok/s）；真正的'GPT-3时刻'将是扩散模型在前沿质量上追平AR且保持5-10x速度优势（尚未发生）。",
+    "key_evidence": [
+      {"claim": "Mercury Coder 在H100上>1000 tok/s，Mini版HumanEval 88.0%、MBPP 77.1%，约为速度优化AR模型的5倍", "source": "https://www.inceptionlabs.ai/introducing-mercury", "date": "2025-02"},
+      {"claim": "Google I/O 2025演示Gemini Diffusion，约1000-2000 tok/s", "source": "https://www.web3aiblog.com/blog/diffusion-llms-explained-mercury-gemini-diffusion-2026", "date": "2025-05"},
+      {"claim": "Mercury 2：首个推理型dLLM，Blackwell上1009 tok/s、端到端1.7s（对比Claude 4.5 Haiku 89 tok/s）", "source": "https://www.businesswire.com/news/home/20260224034496/en", "date": "2026-02"},
+      {"claim": "Inception 融资5000万美元，Menlo领投，NVentures、M12、Snowflake、Databricks参投", "source": "https://www.businesswire.com/news/home/20251106570339/en/Inception-Raises-$50M-to-Power-Diffusion-LLMs-Increasing-LLM-Speed-and-Efficiency-by-up-to-10X-and-Unlocking-Real-Time-Accessible-AI-Applications", "date": "2025-11"},
+      {"claim": "LLaDA2.0 通过AR→扩散转换把dLLM扩展到100B总参数（MoE），此前多数dLLM≤8B", "source": "https://arxiv.org/abs/2512.15745v2", "date": "2025-12"},
+      {"claim": "NeurIPS 2026 设立'Diffusion Language Models: Foundations, Efficiency, and Reasoning' workshop", "source": "https://neurips.cc/virtual/2026/workshop/137483", "date": "2026-09"},
+      {"claim": "开源框架 dLLM: Simple Diffusion Language Modeling 标准化dLLM训练/评测流水线", "source": "https://arxiv.org/html/2602.22661", "date": "2026-02"}
+    ],
+    "open_problems": [
+      "扩散LM的scaling law与AR是否同斜率：在相同算力下能否在前沿规模上追平AR的质量与推理能力",
+      "可变长度生成、KV缓存与高效并行采样（步数-质量权衡）的系统级方案",
+      "如何在扩散LM上做RL/可验证奖励训练与长链推理，利用其双向、可修改性优势（如反转诅咒、自我修订）"
+    ],
+    "entry_points": [
+      "基于LLaDA/Dream等8B开放权重研究采样策略、重掩码与自我纠错，学术算力即可产出顶会工作",
+      "研究扩散LM上的RL（如GRPO变体）或AR→扩散低成本转换方法，并建立速度-质量公平对比基准"
+    ]
+  },
+  {
+    "id": "continual_ttt",
+    "name_zh": "持续学习与测试时训练 / 测试时记忆",
+    "name_en": "Continual Learning & Test-Time Training / Test-Time Memory",
+    "domain": "AI-模型与方法",
+    "scores": {"G": 4.5, "S": 5, "C": 3, "E": 3.5, "R": 4, "H": 5, "X": 4.5, "P": 5},
+    "rationale": {
+      "G": "未找到精确计数；定性：2025-2026出现Titans、Nested Learning/HOPE、SEAL、TTT-E2E、CL-Bench（2026-06）等密集成果，NeurIPS 2026出现'Continual World Models' workshop，arXiv 2026年多篇'LLM持续学习'综述/基准，估计60-100%+/年。",
+      "S": "被普遍视为'缺失的关键能力'（Sutskever 2025-11访谈、Dwarkesh），但无共识范式（测试时梯度更新、神经记忆模块、自生成数据微调、嵌套优化并存），顶会份额小，处起飞前沿。",
+      "C": "TTT-E2E在128K上下文以全注意力精度、2.7x速度，并随上下文长度像全注意力一样scale；SEAL在一项拼图任务上0%→72.5%；HOPE困惑度优于Transformer。均为窄域存在性证明，尚无'部署后持续变强'的质变演示，给3。",
+      "E": "开放基座模型、学术可训练的小规模设置充足；但缺乏公认的持续学习评测（CL-Bench刚出现）与长期部署数据，是主要瓶颈。",
+      "R": "Google Research（Titans/Nested Learning）、NVIDIA+Stanford（TTT-E2E）、SSI明确押注持续学习；多家前沿实验室公开表态，但专项资金额度不明。",
+      "H": "灾难性遗忘、更新规则的元学习、记忆与权重的分工、评测协议、安全性等基础问题开放，且大多可在1-3B规模用学术算力研究。",
+      "X": "若突破，将成为所有智能体/个性化/科学发现系统的通用底座（模型部署后从经验中学习）。",
+      "P": "尚无GPT-3式突破，存在被长上下文+检索+RL后训练'够用替代'的风险；评测不统一导致结果难比较；部署时权重更新带来安全/对齐风险。"
+    },
+    "inflection_event": "尚未发生的'GPT-3时刻'：一个前沿规模模型在部署中通过测试时权重更新持续积累技能并显著超越冻结权重版本。先兆事件：2024-12 Google Titans、2025-06 MIT SEAL、2025-11 Google Nested Learning/HOPE、2025-12 TTT-E2E（Stanford/NVIDIA）。",
+    "key_evidence": [
+      {"claim": "Google提出Nested Learning范式与HOPE架构（Titans的自修改变体，含连续记忆系统CMS），语言建模困惑度优于Transformer与现代循环模型", "source": "https://research.google/blog/introducing-nested-learning-a-new-ml-paradigm-for-continual-learning", "date": "2025-11"},
+      {"claim": "MIT SEAL用RL训练LLM生成'self-edit'来更新自身权重，一项拼图任务成功率0%→72.5%", "source": "https://news.mit.edu/2025/teaching-large-language-models-to-absorb-new-knowledge-1112", "date": "2025-11"},
+      {"claim": "TTT-E2E：滑窗Transformer在测试时用next-token预测更新权重，128K上下文达到全注意力精度且快2.7x；3B/164B tokens下随上下文长度的scaling与全注意力一致，而Mamba 2/Gated DeltaNet不然", "source": "https://arxiv.org/html/2512.23675v1", "date": "2025-12"},
+      {"claim": "Sutskever（SSI）在2025-11访谈中称'缺失的要素是部署后能从经验中持续改进的学习者'", "source": "https://bretkerr.substack.com/p/the-sentence-that-survived", "date": "2025-11"},
+      {"claim": "CL-Bench：基于专家验证任务评测前沿AI系统能否通过序列经验改进", "source": "https://arxiv.org/pdf/2606.05661", "date": "2026-06"},
+      {"claim": "NeurIPS 2026 设立'Continual World Models' workshop，聚焦训练后持续更新的模型", "source": "https://neurips.cc/virtual/2026/workshop/137499", "date": "2026-09"}
+    ],
+    "open_problems": [
+      "如何在不发生灾难性遗忘与对齐漂移的前提下，让LLM在部署中安全地更新权重",
+      "测试时记忆（快权重/神经记忆）与慢权重、外部检索之间的最优分工与理论刻画",
+      "缺乏标准化、可防作弊的持续学习评测协议（时间序列任务流、知识更新、技能积累）"
+    ],
+    "entry_points": [
+      "在1B级开放模型上复现并对比TTT层、Titans记忆、SEAL式自编辑在同一任务流上的遗忘-可塑性曲线，构建统一基准",
+      "研究测试时更新的元学习初始化与更新规则（learned optimizer），或面向智能体的'经验→权重'蒸馏方案"
+    ]
+  },
+  {
+    "id": "efficient_arch",
+    "name_zh": "后Transformer架构：SSM/线性注意力/混合架构",
+    "name_en": "Post-Transformer Architectures: SSMs, Linear Attention & Hybrids",
+    "domain": "AI-模型与方法",
+    "scores": {"G": 3, "S": 3, "C": 3.5, "E": 5, "R": 4, "H": 4, "X": 3.5, "P": 3},
+    "rationale": {
+      "G": "Mamba（2023-12）后已持续两年多高产出，2025-2026仍有Mamba-3（ICLR 2026 oral）、Kimi Delta Attention等，但增速已从爆发期回落，估计30-60%/年（未找到精确计数）。",
+      "S": "已形成共识设计（约3:1线性注意力/全注意力混合，Gated DeltaNet为主流线性层），Qwen3-Next/Qwen3.5、Kimi Linear、Nemotron-H等生产级采用，属'已建立方向'而非起飞窗口。",
+      "C": "Qwen3.5（2026-02）397B-A17B全系采用Gated DeltaNet混合，原生262K上下文；证明混合架构可在前沿规模不损质量地降低长上下文成本，但属效率提升而非质变能力。",
+      "E": "开源内核（fla、mamba）、开放权重混合模型、学术可训练规模充足，几乎无瓶颈。",
+      "R": "阿里Qwen、月之暗面、NVIDIA、AI21、MiniMax、Together/Cartesia等投入；多家大厂+创业公司。",
+      "H": "状态追踪表达力理论、检索/复制能力缺陷、硬件感知内核、最佳混合比例等仍可用学术算力研究。",
+      "X": "影响推理成本、长上下文智能体、端侧模型，以及基因组/时序等长序列科学任务。",
+      "P": "正被主流吸收为'工程默认选项'，独立研究空间被压缩；纯线性模型在检索类任务上的质量缺陷仍在。"
+    },
+    "inflection_event": "2023-12 Mamba提出选择性SSM；真正的产业拐点为2025-09 Qwen3-Next与2026-02 Qwen3.5将Gated DeltaNet 3:1混合架构用于前沿规模开放模型全系（0.8B-397B），标志后Transformer混合架构进入主流生产。",
+    "key_evidence": [
+      {"claim": "Qwen3-Next 采用Gated DeltaNet与Gated Attention 3:1混合，支撑原生262K上下文", "source": "https://magazine.sebastianraschka.com/p/beyond-standard-llms", "date": "2025-11"},
+      {"claim": "Kimi Linear（2025-10）以通道级门控的Kimi Delta Attention改进Gated DeltaNet，提升长上下文推理", "source": "https://magazine.sebastianraschka.com/p/beyond-standard-llms", "date": "2025-10"},
+      {"claim": "Qwen3.5（2026-02-16）全系8个模型（0.8B至397B-A17B）采用Gated DeltaNet混合+MoE，262K原生上下文", "source": "https://medium.com/@mlabonne/qwen3-5-nobody-agrees-on-attention-anymore-4709e1bd014b", "date": "2026-02"},
+      {"claim": "Mamba-3（ICLR 2026 oral）：复数状态更新与MIMO，1.5B规模较Gated DeltaNet平均下游+1.8点，半数状态维度达到Mamba-2困惑度", "source": "https://arxiv.org/abs/2603.15569", "date": "2026-03"},
+      {"claim": "NVIDIA Nemotron-H、AI21 Jamba 等Mamba-Transformer混合模型已开放（背景知识）", "source": "background knowledge", "date": "2025-04"}
+    ],
+    "open_problems": [
+      "固定大小状态的表达力极限：状态追踪、精确检索/复制任务上的理论与实证界限",
+      "最优混合比例与层放置的原则性方法，以及与MoE、稀疏注意力的联合设计",
+      "长上下文推理（RL长链思维）场景下线性层与全注意力的真实质量-成本权衡"
+    ],
+    "entry_points": [
+      "基于flash-linear-attention等开源内核，在≤1.5B规模做新的线性递归/delta规则变体与合成任务（MQAR、状态追踪）分析",
+      "研究混合模型在长链推理与智能体任务中的失效模式，提出可证明的表达力改进或蒸馏转换（Transformer→混合）方法"
+    ]
+  },
+  {
+    "id": "reasoning_rl",
+    "name_zh": "推理时计算与可验证奖励强化学习",
+    "name_en": "Test-Time Compute & RL with Verifiable Rewards (RLVR)",
+    "domain": "AI-模型与方法",
+    "scores": {"G": 3.5, "S": 1.5, "C": 5, "E": 5, "R": 5, "H": 3, "X": 5, "P": 5},
+    "rationale": {
+      "G": "2025年爆发后基数已极大，ICLR 2026（19,809投稿）中'Reinforcement Learning'为第二高频关键词（796+404次），仍在增长但份额增速放缓。",
+      "S": "已完全主流化：Raschka称'2025年LLM开发本质上被RLVR+GRPO主导'；是ICLR 2026头部关键词，所有前沿模型标配，早已过了'2021年LLM'的窗口。",
+      "C": "o1（2024-09）与DeepSeek-R1（2025-01）是明确的'GPT-3时刻'：推理时计算成为新的scaling轴，并有清晰的训练/推理算力scaling曲线。",
+      "E": "开放推理模型（R1、Qwen系列）、verl/OpenRLHF等框架、GRPO等简单算法、数学/代码验证器全部可用。",
+      "R": "所有前沿实验室与大厂核心投入，资金远超$1B。",
+      "H": "RL是否真正扩展能力边界、非可验证领域的奖励、长程信用分配等仍开放，但前沿进展高度依赖工业级算力。",
+      "X": "已外溢到代码、数学、智能体、科学推理等几乎所有LLM应用。",
+      "P": "已被主流LLM训练完全吸收（作为独立'新兴领域'的价值低），奖励作弊、评测污染与'RL仅锐化分布'争议。"
+    },
+    "inflection_event": "2024年9月OpenAI o1首次展示推理时计算scaling；2025年1月DeepSeek-R1开放权重并公开用纯RL（GRPO+可验证奖励）复现，引发全领域跟进——已发生且已主流化。",
+    "key_evidence": [
+      {"claim": "DeepSeek-R1 以开放权重达到与o1可比的推理性能，并公开RL训练配方", "source": "https://www.deeplearning.ai/the-batch/deepseek-r1-a-transparent-challenger-to-openai-o1", "date": "2025-01"},
+      {"claim": "2025年LLM开发本质上由使用RLVR与GRPO的推理模型主导", "source": "https://magazine.sebastianraschka.com/p/state-of-llms-2025", "date": "2025-12"},
+      {"claim": "ICLR 2026 共19,809投稿，'Reinforcement Learning'为第二高频关键词（796次，另小写404次），仅次于LLM", "source": "https://papercopilot.com/venue-overview/iclr-2026-venue-overview/", "date": "2026-01"},
+      {"claim": "OpenAI o1 展示随训练RL算力与推理时思考算力增加性能平滑提升（背景知识）", "source": "background knowledge", "date": "2024-09"},
+      {"claim": "LLM相关arXiv论文从2021年91篇增至2025年33,569篇，占2025年arXiv约11.89%，RL子主题作为'次级浪潮'同步上升", "source": "https://arxiv.org/pdf/2606.12828", "date": "2026-06"}
+    ],
+    "open_problems": [
+      "RLVR是扩展了模型能力边界还是仅锐化已有分布（pass@k争议），以及如何真正发现新策略",
+      "非可验证领域（开放式写作、科研、长程智能体任务）的可靠奖励信号与过程监督",
+      "推理效率：过度思考、自适应计算分配与长链推理的压缩"
+    ],
+    "entry_points": [
+      "在1.5-7B开放推理模型上用verl等框架做机理研究（探索、熵坍塌、数据选择），算力需求可控",
+      "转向奖励设计与评测：为非数学/代码领域构建可验证环境与rubric奖励，或研究奖励作弊检测"
+    ]
+  },
+  {
+    "id": "computer_use_agents",
+    "name_zh": "GUI/计算机使用智能体",
+    "name_en": "GUI / Computer-Use Agents",
+    "domain": "AI-模型与方法",
+    "scores": {"G": 4.5, "S": 4, "C": 4.5, "E": 4, "R": 5, "H": 3.5, "X": 4, "P": 5},
+    "rationale": {
+      "G": "OSWorld从12.24%（2024-04）到72.6%（2025-12）仅20个月；一项综述统计的336篇GUI智能体论文主要集中于2024年后；NeurIPS 2025仅CUA相关就有约45篇；整体智能体论文一年近三倍。估计>80%/年。",
+      "S": "专门基准（OSWorld、WindowsAgentArena、AndroidWorld等）与综述密集形成，但方法正趋于收敛（原生VLM智能体+多轮RL+数据飞轮），且前沿模型均已内置，正从起飞期迈向成熟，给4。",
+      "C": "GPT-5.4在OSWorld-Verified 75.0%、Claude Opus 4.6 72.7%，超过人类平均72.4%；Claude Sonnet 4.0→4.5从42.2%到61.4%，scaling趋势清晰；但真实世界可靠性与效率仍远逊人类。",
+      "E": "开放模型UI-TARS-2、开放基准与环境可用；但大规模并行虚拟机RL环境、轨迹数据和评测成本仍高。",
+      "R": "OpenAI（Operator/ChatGPT agent）、Anthropic、Google（Mariner）、字节、微软均在产品线投入，多家创业公司（Simular等）。",
+      "H": "安全性（提示注入）、长程可靠性、效率、grounding仍开放；但训练前沿CUA需重度工业环境与算力，学术多做基准/分析。",
+      "X": "影响软件自动化、RPA、测试、无障碍、科研工具操作等多个相邻领域。",
+      "P": "基准分数≠真实可靠性（72%仍意味大量失败、效率远低于人）；提示注入等安全风险；可能被API/MCP工具调用路线部分替代；结果高度依赖闭源前沿模型。"
+    },
+    "inflection_event": "2024年10月Anthropic发布Claude computer use（首个前沿模型通用屏幕操作）与2025年1月OpenAI Operator；2025年12月至2026年初智能体在OSWorld-Verified上首次超过人类平均水平（72.4%）。",
+    "key_evidence": [
+      {"claim": "OSWorld 上智能体成功率从12.24%（2024-04）提升到72.6%（2025-12），用时20个月", "source": "https://www.buildmvpfast.com/blog/osworld-benchmark-ai-agents-passed-human-baseline-2026", "date": "2026-03"},
+      {"claim": "GPT-5.4 在OSWorld-Verified得分75.0%，超过人类平均72.4%", "source": "https://signalmesh.beehiiv.com/p/ai-crossed-the-human-line", "date": "2026-03"},
+      {"claim": "Claude Sonnet 4.5 OSWorld 61.4%（Sonnet 4.0为42.2%）；Opus 4.6达72.7%", "source": "https://www.longtermwiki.com/wiki/osworld", "date": "2026-02"},
+      {"claim": "UI-TARS-2 开源：OSWorld 47.5、WindowsAgentArena 50.6、AndroidWorld 73.3，采用数据飞轮+多轮RL", "source": "https://arxiv.org/abs/2509.02544v1", "date": "2025-09"},
+      {"claim": "一项综述审阅2018-01至2026-04共336篇GUI智能体论文，领域自2024年起急剧扩张", "source": "https://www.alphaxiv.org/abs/2608.09278.md", "date": "2026-08"},
+      {"claim": "NeurIPS 2025 约45篇计算机使用智能体论文（基准、安全、grounding等）", "source": "https://cua.ai/blog/neurips-2025-cua-papers", "date": "2025-12"}
+    ],
+    "open_problems": [
+      "长程任务的可靠性与效率：从'能完成'到'稳定、快速、可恢复地完成'，以及基准之外的真实工作流评测",
+      "提示注入、越权操作等安全问题与可验证的权限/沙箱机制",
+      "可扩展的GUI环境与奖励构建（自动任务生成、结果验证器）以支撑大规模在线RL"
+    ],
+    "entry_points": [
+      "构建垂直领域（科研软件、企业应用、移动端）的可复现GUI基准与自动验证器，或研究CUA的安全攻击与防御",
+      "基于UI-TARS/Qwen-VL等开放模型研究视觉grounding、小模型高效动作执行或GUI+API混合调用策略"
+    ]
+  },
+  {
+    "id": "llm_multiagent_selfimprove",
+    "name_zh": "自我改进与自博弈（LLM引导的进化搜索/开放式学习）",
+    "name_en": "Self-Improvement & Self-Play (LLM-guided Evolutionary Search, Open-Endedness)",
+    "domain": "AI-模型与方法",
+    "scores": {"G": 4.5, "S": 4.5, "C": 4, "E": 4, "R": 4.5, "H": 5, "X": 5, "P": 6},
+    "rationale": {
+      "G": "2025年AlphaEvolve、Darwin Gödel Machine、Absolute Zero、SEAL等集中出现，并迅速有开源复现（OpenEvolve、ShinkaEvolve，背景知识）；2026年出现专门公司。未找到精确论文计数，定性判断60-100%+/年。",
+      "S": "无共识范式（进化搜索、自博弈课程、自奖励、自修改代码智能体并存），顶会份额小、处于起飞期；但已有大额资本与概念热度，给4.5。",
+      "C": "AlphaEvolve在50+数学开放问题中约20%找到优于已知的新构造，4x4复矩阵乘法48次乘法（56年来首次改进），并部署于Google数据中心调度与训练内核；DGM把SWE-bench从20%提升到50%；AZR零外部数据达到SOTA。强存在性证明，但仅限有自动评估器的领域，scaling规律不清，给4。",
+      "E": "前沿LLM API与开源模型、开源进化框架可用；关键瓶颈是可靠的自动评估器与API调用成本。",
+      "R": "DeepMind（AlphaEvolve）、Sakana（DGM）、Recursive Superintelligence 2026-05融资6.5亿美元（估值46.5亿，GV/NVIDIA/AMD参投）；接近但未明确达到多家前沿实验室+>$1B。",
+      "H": "评估器设计、开放式探索的理论、防止奖励作弊、自改进的收敛/安全性等基础问题大量开放，用API级算力即可做出成果。",
+      "X": "可成为算法设计、数学、科学发现、AI研究自动化的通用方法，外溢面极广。",
+      "P": "'递归自我改进/超级智能'叙事炒作严重；收益受限于可验证评估器，开放域效果未证；结果依赖闭源前沿模型且算力成本高、复现性一般；存在安全与失控担忧。"
+    },
+    "inflection_event": "2025年5月DeepMind发布AlphaEvolve：LLM引导的进化代码搜索在数学（4x4复矩阵乘法48次）与生产系统中产生超越人类的新结果；同月Darwin Gödel Machine与Absolute Zero展示自修改智能体与零数据自博弈推理。下一个拐点将是闭环自动化AI研究产生可复现的模型级改进。",
+    "key_evidence": [
+      {"claim": "AlphaEvolve在50+数学开放问题中约75%复现最佳已知构造、约20%找到更优新构造；4x4复矩阵乘法用48次标量乘法（56年来首次改进）", "source": "https://spectrum.ieee.org/amp/deepmind-alphaevolve-2672018683", "date": "2025-05"},
+      {"claim": "AlphaEvolve已部署优化Google数据中心调度与LLM训练内核", "source": "https://towardsdatascience.com/googles-alphaevolve-is-evolving-new-algorithms-and-it-could-be-a-game-changer/", "date": "2025-05"},
+      {"claim": "Darwin Gödel Machine 自修改编码智能体把SWE-bench从20.0%提升至50.0%，Polyglot从14.2%到30.7%（ICLR 2026）", "source": "https://sakana.ai/dgm/", "date": "2025-05"},
+      {"claim": "Absolute Zero Reasoner 完全不用外部数据，自提任务+代码执行器验证，在代码/数学推理达到零设置SOTA（NeurIPS 2025）", "source": "https://neurips.cc/virtual/2025/poster/116121", "date": "2025-05"},
+      {"claim": "Recursive Superintelligence（Socher、Rocktäschel、Clune、田渊栋等）融资6.5亿美元，估值46.5亿美元，GV/Greycroft领投、NVIDIA与AMD参投", "source": "https://thenextweb.com/news/recursive-superintelligence-self-improving-ai-funding", "date": "2026-05"},
+      {"claim": "AlphaEvolve在数学问题上的大规模应用论文（Terence Tao等合作）", "source": "https://www.alphaxiv.org/abs/2511.02864v1", "date": "2025-11"}
+    ],
+    "open_problems": [
+      "没有可靠自动评估器的开放领域如何自我改进（评估器本身的学习与防奖励作弊）",
+      "开放式探索的多样性/新颖性度量与长期不停滞（open-endedness）的理论与机制",
+      "自我改进循环的收敛性、可控性与安全边界：如何证明改进是真实且不引入有害行为"
+    ],
+    "entry_points": [
+      "用OpenEvolve/ShinkaEvolve等开源框架+开放模型，攻克组合数学、编译器优化、调度等有精确评估器的具体问题",
+      "研究自博弈课程生成（提出者-求解者）与自我奖励的失效模式，或为AI研究自动化构建小规模可复现基准"
+    ]
+  }
+]
