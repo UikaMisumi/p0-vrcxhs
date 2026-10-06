@@ -347,11 +347,11 @@
     "scores": {
       "G": 4,
       "S": 4.5,
-      "C": 3.5,
+      "C": 3,
       "E": 4,
       "R": 3.5,
       "H": 4.5,
-      "X": 4,
+      "X": 3.5,
       "P": 6
     },
     "rationale": {
@@ -405,6 +405,20 @@
     "entry_points": [
       "用 OpenEvolve/ShinkaEvolve 在组合优化、在线算法或硬度归约 gadget 等具有自动评估器的问题上做定向攻关，小算力即可产出可发表结果",
       "在经典学习增强算法框架下研究以 LLM 输出为预测的在线/近似算法，给出一致性-鲁棒性理论保证（SODA/ICALP/NeurIPS）"
+    ],
+    "calibration": [
+      {
+        "dim": "C",
+        "from": 3.5,
+        "to": 3,
+        "reason": "AlphaEvolve 的证据已计入“自我改进与进化搜索”和“AI 科学家”，此处只按理论侧（带预测的算法）计分，避免三重计分"
+      },
+      {
+        "dim": "X",
+        "from": 4,
+        "to": 3.5,
+        "reason": "同上，去除与 AlphaEvolve 相关的重复外溢"
+      }
     ]
   },
   {

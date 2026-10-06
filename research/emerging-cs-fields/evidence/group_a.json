@@ -4,7 +4,16 @@
     "name_zh": "世界模型 / 可交互视频生成",
     "name_en": "World Models & Interactive Video Generation",
     "domain": "AI-模型与方法",
-    "scores": {"G": 5, "S": 4.5, "C": 4, "E": 3, "R": 5, "H": 4, "X": 4, "P": 5},
+    "scores": {
+      "G": 5,
+      "S": 4.5,
+      "C": 4,
+      "E": 3,
+      "R": 5,
+      "H": 4,
+      "X": 4,
+      "P": 5
+    },
     "rationale": {
       "G": "未找到精确论文计数；但ICLR 2025首届World Models workshop超1500人参会，ICLR 2026办第2届，NeurIPS 2026同时出现'World Models in Physical AI'与'Continual World Models'等多个专门workshop，2025-2026一年内由1个分裂为多个，定性判断>100%/年。",
       "S": "专门workshop/基准刚成形，范式未统一（JEPA式表征预测 vs 生成式视频 vs 3D/空间生成三派并立），在顶会中仍为小份额；但热度已接近主流边缘，故4.5而非5。",
@@ -17,13 +26,41 @@
     },
     "inflection_event": "2025年8月DeepMind发布Genie 3：首个通用实时可交互世界模型（文本→可游玩3D世界，720p/24fps，数分钟一致）；2026年1月以Project Genie向用户开放，标志从'视频生成'跨入'可交互模拟器'。",
     "key_evidence": [
-      {"claim": "Genie 3 实时生成可交互环境，720p/24fps，数分钟一致性，视觉记忆可回溯约1分钟", "source": "https://techcrunch.com/2025/08/05/deepmind-reveals-genie-3-a-world-model-that-could-be-the-key-to-reaching-agi", "date": "2025-08"},
-      {"claim": "Project Genie（基于Genie 3）于2026-01-29通过Google Labs向美国AI Ultra用户开放", "source": "https://dataconomy.com/2026/01/30/google-launches-project-genie-create-interactive-worlds-with-ai/", "date": "2026-01"},
-      {"claim": "V-JEPA 2 自监督视频世界模型，仅用62小时Droid机器人数据微调即可零样本规划抓取/放置", "source": "https://arxiv.org/pdf/2506.09985", "date": "2025-06"},
-      {"claim": "LeCun创立AMI Labs，种子轮10.3亿美元（估值35亿美元），聚焦JEPA世界模型", "source": "https://futurumgroup.com/insights/yann-lecuns-ami-raises-1bn-seed-round-is-the-world-model-era-finally-here", "date": "2026-03"},
-      {"claim": "World Labs 融资10亿美元、估值50亿美元，累计融资12.3亿美元；首个产品Marble于2025-11发布", "source": "https://www.crowdfundinsider.com/2026/02/262836-ai-firm-world-labs-raises-1-billion-at-5-billion-valuation/", "date": "2026-02"},
-      {"claim": "ICLR 2025首届World Models workshop超1500名参与者，2026年办第2届；NeurIPS 2026另有'World Models in Physical AI'与'Continual World Models' workshop", "source": "https://iclr.cc/virtual/2026/workshop/10000799", "date": "2026-04"},
-      {"claim": "NVIDIA Cosmos世界基础模型扩展至机器人控制（Cosmos Policy）、自动驾驶与工业视觉", "source": "https://metavert.io/world-models-for-robotics", "date": "2026-01"}
+      {
+        "claim": "Genie 3 实时生成可交互环境，720p/24fps，数分钟一致性，视觉记忆可回溯约1分钟",
+        "source": "https://techcrunch.com/2025/08/05/deepmind-reveals-genie-3-a-world-model-that-could-be-the-key-to-reaching-agi",
+        "date": "2025-08"
+      },
+      {
+        "claim": "Project Genie（基于Genie 3）于2026-01-29通过Google Labs向美国AI Ultra用户开放",
+        "source": "https://dataconomy.com/2026/01/30/google-launches-project-genie-create-interactive-worlds-with-ai/",
+        "date": "2026-01"
+      },
+      {
+        "claim": "V-JEPA 2 自监督视频世界模型，仅用62小时Droid机器人数据微调即可零样本规划抓取/放置",
+        "source": "https://arxiv.org/pdf/2506.09985",
+        "date": "2025-06"
+      },
+      {
+        "claim": "LeCun创立AMI Labs，种子轮10.3亿美元（估值35亿美元），聚焦JEPA世界模型",
+        "source": "https://futurumgroup.com/insights/yann-lecuns-ami-raises-1bn-seed-round-is-the-world-model-era-finally-here",
+        "date": "2026-03"
+      },
+      {
+        "claim": "World Labs 融资10亿美元、估值50亿美元，累计融资12.3亿美元；首个产品Marble于2025-11发布",
+        "source": "https://www.crowdfundinsider.com/2026/02/262836-ai-firm-world-labs-raises-1-billion-at-5-billion-valuation/",
+        "date": "2026-02"
+      },
+      {
+        "claim": "ICLR 2025首届World Models workshop超1500名参与者，2026年办第2届；NeurIPS 2026另有'World Models in Physical AI'与'Continual World Models' workshop",
+        "source": "https://iclr.cc/virtual/2026/workshop/10000799",
+        "date": "2026-04"
+      },
+      {
+        "claim": "NVIDIA Cosmos世界基础模型扩展至机器人控制（Cosmos Policy）、自动驾驶与工业视觉",
+        "source": "https://metavert.io/world-models-for-robotics",
+        "date": "2026-01"
+      }
     ],
     "open_problems": [
       "如何在分钟到小时尺度上保持空间/物体一致性与长期记忆，而不是靠上下文窗口硬撑",
@@ -40,7 +77,16 @@
     "name_zh": "扩散语言模型 / 非自回归LLM",
     "name_en": "Diffusion Language Models (non-autoregressive LLMs)",
     "domain": "AI-模型与方法",
-    "scores": {"G": 4.5, "S": 5, "C": 3, "E": 4, "R": 3.5, "H": 5, "X": 3, "P": 4},
+    "scores": {
+      "G": 4.5,
+      "S": 5,
+      "C": 3,
+      "E": 4,
+      "R": 3.5,
+      "H": 5,
+      "X": 3,
+      "P": 4
+    },
     "rationale": {
       "G": "未找到arXiv精确月度计数；定性证据：2025年LLaDA/Dream/Mercury后出现综述（2025-08、2026-06）、开源框架dLLM（2026-02）、ACL 2026 demo、NeurIPS 2026首个专门workshop，2025-12已扩展至100B（LLaDA2.0），判断增长约80-100%+/年。",
       "S": "首个专门workshop在2026年出现，顶会份额小，范式未收敛（masked离散扩散、block diffusion、AR转扩散、连续扩散并存），正处起飞窗口。",
@@ -53,13 +99,41 @@
     },
     "inflection_event": "2025年2月Inception发布Mercury（首个商用规模dLLM，>1000 tok/s）与同期LLaDA 8B追平LLaMA3 8B；2025年5月Google I/O展示Gemini Diffusion（1000-2000 tok/s）；真正的'GPT-3时刻'将是扩散模型在前沿质量上追平AR且保持5-10x速度优势（尚未发生）。",
     "key_evidence": [
-      {"claim": "Mercury Coder 在H100上>1000 tok/s，Mini版HumanEval 88.0%、MBPP 77.1%，约为速度优化AR模型的5倍", "source": "https://www.inceptionlabs.ai/introducing-mercury", "date": "2025-02"},
-      {"claim": "Google I/O 2025演示Gemini Diffusion，约1000-2000 tok/s", "source": "https://www.web3aiblog.com/blog/diffusion-llms-explained-mercury-gemini-diffusion-2026", "date": "2025-05"},
-      {"claim": "Mercury 2：首个推理型dLLM，Blackwell上1009 tok/s、端到端1.7s（对比Claude 4.5 Haiku 89 tok/s）", "source": "https://www.businesswire.com/news/home/20260224034496/en", "date": "2026-02"},
-      {"claim": "Inception 融资5000万美元，Menlo领投，NVentures、M12、Snowflake、Databricks参投", "source": "https://www.businesswire.com/news/home/20251106570339/en/Inception-Raises-$50M-to-Power-Diffusion-LLMs-Increasing-LLM-Speed-and-Efficiency-by-up-to-10X-and-Unlocking-Real-Time-Accessible-AI-Applications", "date": "2025-11"},
-      {"claim": "LLaDA2.0 通过AR→扩散转换把dLLM扩展到100B总参数（MoE），此前多数dLLM≤8B", "source": "https://arxiv.org/abs/2512.15745v2", "date": "2025-12"},
-      {"claim": "NeurIPS 2026 设立'Diffusion Language Models: Foundations, Efficiency, and Reasoning' workshop", "source": "https://neurips.cc/virtual/2026/workshop/137483", "date": "2026-09"},
-      {"claim": "开源框架 dLLM: Simple Diffusion Language Modeling 标准化dLLM训练/评测流水线", "source": "https://arxiv.org/html/2602.22661", "date": "2026-02"}
+      {
+        "claim": "Mercury Coder 在H100上>1000 tok/s，Mini版HumanEval 88.0%、MBPP 77.1%，约为速度优化AR模型的5倍",
+        "source": "https://www.inceptionlabs.ai/introducing-mercury",
+        "date": "2025-02"
+      },
+      {
+        "claim": "Google I/O 2025演示Gemini Diffusion，约1000-2000 tok/s",
+        "source": "https://www.web3aiblog.com/blog/diffusion-llms-explained-mercury-gemini-diffusion-2026",
+        "date": "2025-05"
+      },
+      {
+        "claim": "Mercury 2：首个推理型dLLM，Blackwell上1009 tok/s、端到端1.7s（对比Claude 4.5 Haiku 89 tok/s）",
+        "source": "https://www.businesswire.com/news/home/20260224034496/en",
+        "date": "2026-02"
+      },
+      {
+        "claim": "Inception 融资5000万美元，Menlo领投，NVentures、M12、Snowflake、Databricks参投",
+        "source": "https://www.businesswire.com/news/home/20251106570339/en/Inception-Raises-$50M-to-Power-Diffusion-LLMs-Increasing-LLM-Speed-and-Efficiency-by-up-to-10X-and-Unlocking-Real-Time-Accessible-AI-Applications",
+        "date": "2025-11"
+      },
+      {
+        "claim": "LLaDA2.0 通过AR→扩散转换把dLLM扩展到100B总参数（MoE），此前多数dLLM≤8B",
+        "source": "https://arxiv.org/abs/2512.15745v2",
+        "date": "2025-12"
+      },
+      {
+        "claim": "NeurIPS 2026 设立'Diffusion Language Models: Foundations, Efficiency, and Reasoning' workshop",
+        "source": "https://neurips.cc/virtual/2026/workshop/137483",
+        "date": "2026-09"
+      },
+      {
+        "claim": "开源框架 dLLM: Simple Diffusion Language Modeling 标准化dLLM训练/评测流水线",
+        "source": "https://arxiv.org/html/2602.22661",
+        "date": "2026-02"
+      }
     ],
     "open_problems": [
       "扩散LM的scaling law与AR是否同斜率：在相同算力下能否在前沿规模上追平AR的质量与推理能力",
@@ -76,7 +150,16 @@
     "name_zh": "持续学习与测试时训练 / 测试时记忆",
     "name_en": "Continual Learning & Test-Time Training / Test-Time Memory",
     "domain": "AI-模型与方法",
-    "scores": {"G": 4.5, "S": 5, "C": 3, "E": 3.5, "R": 4, "H": 5, "X": 4.5, "P": 5},
+    "scores": {
+      "G": 4.5,
+      "S": 5,
+      "C": 3,
+      "E": 3.5,
+      "R": 4,
+      "H": 5,
+      "X": 4.5,
+      "P": 5
+    },
     "rationale": {
       "G": "未找到精确计数；定性：2025-2026出现Titans、Nested Learning/HOPE、SEAL、TTT-E2E、CL-Bench（2026-06）等密集成果，NeurIPS 2026出现'Continual World Models' workshop，arXiv 2026年多篇'LLM持续学习'综述/基准，估计60-100%+/年。",
       "S": "被普遍视为'缺失的关键能力'（Sutskever 2025-11访谈、Dwarkesh），但无共识范式（测试时梯度更新、神经记忆模块、自生成数据微调、嵌套优化并存），顶会份额小，处起飞前沿。",
@@ -89,12 +172,36 @@
     },
     "inflection_event": "尚未发生的'GPT-3时刻'：一个前沿规模模型在部署中通过测试时权重更新持续积累技能并显著超越冻结权重版本。先兆事件：2024-12 Google Titans、2025-06 MIT SEAL、2025-11 Google Nested Learning/HOPE、2025-12 TTT-E2E（Stanford/NVIDIA）。",
     "key_evidence": [
-      {"claim": "Google提出Nested Learning范式与HOPE架构（Titans的自修改变体，含连续记忆系统CMS），语言建模困惑度优于Transformer与现代循环模型", "source": "https://research.google/blog/introducing-nested-learning-a-new-ml-paradigm-for-continual-learning", "date": "2025-11"},
-      {"claim": "MIT SEAL用RL训练LLM生成'self-edit'来更新自身权重，一项拼图任务成功率0%→72.5%", "source": "https://news.mit.edu/2025/teaching-large-language-models-to-absorb-new-knowledge-1112", "date": "2025-11"},
-      {"claim": "TTT-E2E：滑窗Transformer在测试时用next-token预测更新权重，128K上下文达到全注意力精度且快2.7x；3B/164B tokens下随上下文长度的scaling与全注意力一致，而Mamba 2/Gated DeltaNet不然", "source": "https://arxiv.org/html/2512.23675v1", "date": "2025-12"},
-      {"claim": "Sutskever（SSI）在2025-11访谈中称'缺失的要素是部署后能从经验中持续改进的学习者'", "source": "https://bretkerr.substack.com/p/the-sentence-that-survived", "date": "2025-11"},
-      {"claim": "CL-Bench：基于专家验证任务评测前沿AI系统能否通过序列经验改进", "source": "https://arxiv.org/pdf/2606.05661", "date": "2026-06"},
-      {"claim": "NeurIPS 2026 设立'Continual World Models' workshop，聚焦训练后持续更新的模型", "source": "https://neurips.cc/virtual/2026/workshop/137499", "date": "2026-09"}
+      {
+        "claim": "Google提出Nested Learning范式与HOPE架构（Titans的自修改变体，含连续记忆系统CMS），语言建模困惑度优于Transformer与现代循环模型",
+        "source": "https://research.google/blog/introducing-nested-learning-a-new-ml-paradigm-for-continual-learning",
+        "date": "2025-11"
+      },
+      {
+        "claim": "MIT SEAL用RL训练LLM生成'self-edit'来更新自身权重，一项拼图任务成功率0%→72.5%",
+        "source": "https://news.mit.edu/2025/teaching-large-language-models-to-absorb-new-knowledge-1112",
+        "date": "2025-11"
+      },
+      {
+        "claim": "TTT-E2E：滑窗Transformer在测试时用next-token预测更新权重，128K上下文达到全注意力精度且快2.7x；3B/164B tokens下随上下文长度的scaling与全注意力一致，而Mamba 2/Gated DeltaNet不然",
+        "source": "https://arxiv.org/html/2512.23675v1",
+        "date": "2025-12"
+      },
+      {
+        "claim": "Sutskever（SSI）在2025-11访谈中称'缺失的要素是部署后能从经验中持续改进的学习者'",
+        "source": "https://bretkerr.substack.com/p/the-sentence-that-survived",
+        "date": "2025-11"
+      },
+      {
+        "claim": "CL-Bench：基于专家验证任务评测前沿AI系统能否通过序列经验改进",
+        "source": "https://arxiv.org/pdf/2606.05661",
+        "date": "2026-06"
+      },
+      {
+        "claim": "NeurIPS 2026 设立'Continual World Models' workshop，聚焦训练后持续更新的模型",
+        "source": "https://neurips.cc/virtual/2026/workshop/137499",
+        "date": "2026-09"
+      }
     ],
     "open_problems": [
       "如何在不发生灾难性遗忘与对齐漂移的前提下，让LLM在部署中安全地更新权重",
@@ -111,7 +218,16 @@
     "name_zh": "后Transformer架构：SSM/线性注意力/混合架构",
     "name_en": "Post-Transformer Architectures: SSMs, Linear Attention & Hybrids",
     "domain": "AI-模型与方法",
-    "scores": {"G": 3, "S": 3, "C": 3.5, "E": 5, "R": 4, "H": 4, "X": 3.5, "P": 3},
+    "scores": {
+      "G": 3,
+      "S": 3,
+      "C": 3.5,
+      "E": 5,
+      "R": 4,
+      "H": 4,
+      "X": 3.5,
+      "P": 3
+    },
     "rationale": {
       "G": "Mamba（2023-12）后已持续两年多高产出，2025-2026仍有Mamba-3（ICLR 2026 oral）、Kimi Delta Attention等，但增速已从爆发期回落，估计30-60%/年（未找到精确计数）。",
       "S": "已形成共识设计（约3:1线性注意力/全注意力混合，Gated DeltaNet为主流线性层），Qwen3-Next/Qwen3.5、Kimi Linear、Nemotron-H等生产级采用，属'已建立方向'而非起飞窗口。",
@@ -124,11 +240,31 @@
     },
     "inflection_event": "2023-12 Mamba提出选择性SSM；真正的产业拐点为2025-09 Qwen3-Next与2026-02 Qwen3.5将Gated DeltaNet 3:1混合架构用于前沿规模开放模型全系（0.8B-397B），标志后Transformer混合架构进入主流生产。",
     "key_evidence": [
-      {"claim": "Qwen3-Next 采用Gated DeltaNet与Gated Attention 3:1混合，支撑原生262K上下文", "source": "https://magazine.sebastianraschka.com/p/beyond-standard-llms", "date": "2025-11"},
-      {"claim": "Kimi Linear（2025-10）以通道级门控的Kimi Delta Attention改进Gated DeltaNet，提升长上下文推理", "source": "https://magazine.sebastianraschka.com/p/beyond-standard-llms", "date": "2025-10"},
-      {"claim": "Qwen3.5（2026-02-16）全系8个模型（0.8B至397B-A17B）采用Gated DeltaNet混合+MoE，262K原生上下文", "source": "https://medium.com/@mlabonne/qwen3-5-nobody-agrees-on-attention-anymore-4709e1bd014b", "date": "2026-02"},
-      {"claim": "Mamba-3（ICLR 2026 oral）：复数状态更新与MIMO，1.5B规模较Gated DeltaNet平均下游+1.8点，半数状态维度达到Mamba-2困惑度", "source": "https://arxiv.org/abs/2603.15569", "date": "2026-03"},
-      {"claim": "NVIDIA Nemotron-H、AI21 Jamba 等Mamba-Transformer混合模型已开放（背景知识）", "source": "background knowledge", "date": "2025-04"}
+      {
+        "claim": "Qwen3-Next 采用Gated DeltaNet与Gated Attention 3:1混合，支撑原生262K上下文",
+        "source": "https://magazine.sebastianraschka.com/p/beyond-standard-llms",
+        "date": "2025-11"
+      },
+      {
+        "claim": "Kimi Linear（2025-10）以通道级门控的Kimi Delta Attention改进Gated DeltaNet，提升长上下文推理",
+        "source": "https://magazine.sebastianraschka.com/p/beyond-standard-llms",
+        "date": "2025-10"
+      },
+      {
+        "claim": "Qwen3.5（2026-02-16）全系8个模型（0.8B至397B-A17B）采用Gated DeltaNet混合+MoE，262K原生上下文",
+        "source": "https://medium.com/@mlabonne/qwen3-5-nobody-agrees-on-attention-anymore-4709e1bd014b",
+        "date": "2026-02"
+      },
+      {
+        "claim": "Mamba-3（ICLR 2026 oral）：复数状态更新与MIMO，1.5B规模较Gated DeltaNet平均下游+1.8点，半数状态维度达到Mamba-2困惑度",
+        "source": "https://arxiv.org/abs/2603.15569",
+        "date": "2026-03"
+      },
+      {
+        "claim": "NVIDIA Nemotron-H、AI21 Jamba 等Mamba-Transformer混合模型已开放（背景知识）",
+        "source": "background knowledge",
+        "date": "2025-04"
+      }
     ],
     "open_problems": [
       "固定大小状态的表达力极限：状态追踪、精确检索/复制任务上的理论与实证界限",
@@ -145,7 +281,16 @@
     "name_zh": "推理时计算与可验证奖励强化学习",
     "name_en": "Test-Time Compute & RL with Verifiable Rewards (RLVR)",
     "domain": "AI-模型与方法",
-    "scores": {"G": 3.5, "S": 1.5, "C": 5, "E": 5, "R": 5, "H": 3, "X": 5, "P": 5},
+    "scores": {
+      "G": 3.5,
+      "S": 1.5,
+      "C": 5,
+      "E": 5,
+      "R": 5,
+      "H": 3,
+      "X": 5,
+      "P": 5
+    },
     "rationale": {
       "G": "2025年爆发后基数已极大，ICLR 2026（19,809投稿）中'Reinforcement Learning'为第二高频关键词（796+404次），仍在增长但份额增速放缓。",
       "S": "已完全主流化：Raschka称'2025年LLM开发本质上被RLVR+GRPO主导'；是ICLR 2026头部关键词，所有前沿模型标配，早已过了'2021年LLM'的窗口。",
@@ -158,11 +303,31 @@
     },
     "inflection_event": "2024年9月OpenAI o1首次展示推理时计算scaling；2025年1月DeepSeek-R1开放权重并公开用纯RL（GRPO+可验证奖励）复现，引发全领域跟进——已发生且已主流化。",
     "key_evidence": [
-      {"claim": "DeepSeek-R1 以开放权重达到与o1可比的推理性能，并公开RL训练配方", "source": "https://www.deeplearning.ai/the-batch/deepseek-r1-a-transparent-challenger-to-openai-o1", "date": "2025-01"},
-      {"claim": "2025年LLM开发本质上由使用RLVR与GRPO的推理模型主导", "source": "https://magazine.sebastianraschka.com/p/state-of-llms-2025", "date": "2025-12"},
-      {"claim": "ICLR 2026 共19,809投稿，'Reinforcement Learning'为第二高频关键词（796次，另小写404次），仅次于LLM", "source": "https://papercopilot.com/venue-overview/iclr-2026-venue-overview/", "date": "2026-01"},
-      {"claim": "OpenAI o1 展示随训练RL算力与推理时思考算力增加性能平滑提升（背景知识）", "source": "background knowledge", "date": "2024-09"},
-      {"claim": "LLM相关arXiv论文从2021年91篇增至2025年33,569篇，占2025年arXiv约11.89%，RL子主题作为'次级浪潮'同步上升", "source": "https://arxiv.org/pdf/2606.12828", "date": "2026-06"}
+      {
+        "claim": "DeepSeek-R1 以开放权重达到与o1可比的推理性能，并公开RL训练配方",
+        "source": "https://www.deeplearning.ai/the-batch/deepseek-r1-a-transparent-challenger-to-openai-o1",
+        "date": "2025-01"
+      },
+      {
+        "claim": "2025年LLM开发本质上由使用RLVR与GRPO的推理模型主导",
+        "source": "https://magazine.sebastianraschka.com/p/state-of-llms-2025",
+        "date": "2025-12"
+      },
+      {
+        "claim": "ICLR 2026 共19,809投稿，'Reinforcement Learning'为第二高频关键词（796次，另小写404次），仅次于LLM",
+        "source": "https://papercopilot.com/venue-overview/iclr-2026-venue-overview/",
+        "date": "2026-01"
+      },
+      {
+        "claim": "OpenAI o1 展示随训练RL算力与推理时思考算力增加性能平滑提升（背景知识）",
+        "source": "background knowledge",
+        "date": "2024-09"
+      },
+      {
+        "claim": "LLM相关arXiv论文从2021年91篇增至2025年33,569篇，占2025年arXiv约11.89%，RL子主题作为'次级浪潮'同步上升",
+        "source": "https://arxiv.org/pdf/2606.12828",
+        "date": "2026-06"
+      }
     ],
     "open_problems": [
       "RLVR是扩展了模型能力边界还是仅锐化已有分布（pass@k争议），以及如何真正发现新策略",
@@ -179,7 +344,16 @@
     "name_zh": "GUI/计算机使用智能体",
     "name_en": "GUI / Computer-Use Agents",
     "domain": "AI-模型与方法",
-    "scores": {"G": 4.5, "S": 4, "C": 4.5, "E": 4, "R": 5, "H": 3.5, "X": 4, "P": 5},
+    "scores": {
+      "G": 4.5,
+      "S": 3.5,
+      "C": 4.5,
+      "E": 4,
+      "R": 5,
+      "H": 3.5,
+      "X": 4,
+      "P": 5
+    },
     "rationale": {
       "G": "OSWorld从12.24%（2024-04）到72.6%（2025-12）仅20个月；一项综述统计的336篇GUI智能体论文主要集中于2024年后；NeurIPS 2025仅CUA相关就有约45篇；整体智能体论文一年近三倍。估计>80%/年。",
       "S": "专门基准（OSWorld、WindowsAgentArena、AndroidWorld等）与综述密集形成，但方法正趋于收敛（原生VLM智能体+多轮RL+数据飞轮），且前沿模型均已内置，正从起飞期迈向成熟，给4。",
@@ -192,12 +366,36 @@
     },
     "inflection_event": "2024年10月Anthropic发布Claude computer use（首个前沿模型通用屏幕操作）与2025年1月OpenAI Operator；2025年12月至2026年初智能体在OSWorld-Verified上首次超过人类平均水平（72.4%）。",
     "key_evidence": [
-      {"claim": "OSWorld 上智能体成功率从12.24%（2024-04）提升到72.6%（2025-12），用时20个月", "source": "https://www.buildmvpfast.com/blog/osworld-benchmark-ai-agents-passed-human-baseline-2026", "date": "2026-03"},
-      {"claim": "GPT-5.4 在OSWorld-Verified得分75.0%，超过人类平均72.4%", "source": "https://signalmesh.beehiiv.com/p/ai-crossed-the-human-line", "date": "2026-03"},
-      {"claim": "Claude Sonnet 4.5 OSWorld 61.4%（Sonnet 4.0为42.2%）；Opus 4.6达72.7%", "source": "https://www.longtermwiki.com/wiki/osworld", "date": "2026-02"},
-      {"claim": "UI-TARS-2 开源：OSWorld 47.5、WindowsAgentArena 50.6、AndroidWorld 73.3，采用数据飞轮+多轮RL", "source": "https://arxiv.org/abs/2509.02544v1", "date": "2025-09"},
-      {"claim": "一项综述审阅2018-01至2026-04共336篇GUI智能体论文，领域自2024年起急剧扩张", "source": "https://www.alphaxiv.org/abs/2608.09278.md", "date": "2026-08"},
-      {"claim": "NeurIPS 2025 约45篇计算机使用智能体论文（基准、安全、grounding等）", "source": "https://cua.ai/blog/neurips-2025-cua-papers", "date": "2025-12"}
+      {
+        "claim": "OSWorld 上智能体成功率从12.24%（2024-04）提升到72.6%（2025-12），用时20个月",
+        "source": "https://www.buildmvpfast.com/blog/osworld-benchmark-ai-agents-passed-human-baseline-2026",
+        "date": "2026-03"
+      },
+      {
+        "claim": "GPT-5.4 在OSWorld-Verified得分75.0%，超过人类平均72.4%",
+        "source": "https://signalmesh.beehiiv.com/p/ai-crossed-the-human-line",
+        "date": "2026-03"
+      },
+      {
+        "claim": "Claude Sonnet 4.5 OSWorld 61.4%（Sonnet 4.0为42.2%）；Opus 4.6达72.7%",
+        "source": "https://www.longtermwiki.com/wiki/osworld",
+        "date": "2026-02"
+      },
+      {
+        "claim": "UI-TARS-2 开源：OSWorld 47.5、WindowsAgentArena 50.6、AndroidWorld 73.3，采用数据飞轮+多轮RL",
+        "source": "https://arxiv.org/abs/2509.02544v1",
+        "date": "2025-09"
+      },
+      {
+        "claim": "一项综述审阅2018-01至2026-04共336篇GUI智能体论文，领域自2024年起急剧扩张",
+        "source": "https://www.alphaxiv.org/abs/2608.09278.md",
+        "date": "2026-08"
+      },
+      {
+        "claim": "NeurIPS 2025 约45篇计算机使用智能体论文（基准、安全、grounding等）",
+        "source": "https://cua.ai/blog/neurips-2025-cua-papers",
+        "date": "2025-12"
+      }
     ],
     "open_problems": [
       "长程任务的可靠性与效率：从'能完成'到'稳定、快速、可恢复地完成'，以及基准之外的真实工作流评测",
@@ -207,6 +405,14 @@
     "entry_points": [
       "构建垂直领域（科研软件、企业应用、移动端）的可复现GUI基准与自动验证器，或研究CUA的安全攻击与防御",
       "基于UI-TARS/Qwen-VL等开放模型研究视觉grounding、小模型高效动作执行或GUI+API混合调用策略"
+    ],
+    "calibration": [
+      {
+        "dim": "S",
+        "from": 4,
+        "to": 3.5,
+        "reason": "OSWorld-Verified 已超过人类基线，基准趋于饱和，各前沿实验室均已产品化"
+      }
     ]
   },
   {
@@ -214,7 +420,16 @@
     "name_zh": "自我改进与自博弈（LLM引导的进化搜索/开放式学习）",
     "name_en": "Self-Improvement & Self-Play (LLM-guided Evolutionary Search, Open-Endedness)",
     "domain": "AI-模型与方法",
-    "scores": {"G": 4.5, "S": 4.5, "C": 4, "E": 4, "R": 4.5, "H": 5, "X": 5, "P": 6},
+    "scores": {
+      "G": 4.5,
+      "S": 4.5,
+      "C": 4,
+      "E": 4,
+      "R": 4.5,
+      "H": 5,
+      "X": 5,
+      "P": 6
+    },
     "rationale": {
       "G": "2025年AlphaEvolve、Darwin Gödel Machine、Absolute Zero、SEAL等集中出现，并迅速有开源复现（OpenEvolve、ShinkaEvolve，背景知识）；2026年出现专门公司。未找到精确论文计数，定性判断60-100%+/年。",
       "S": "无共识范式（进化搜索、自博弈课程、自奖励、自修改代码智能体并存），顶会份额小、处于起飞期；但已有大额资本与概念热度，给4.5。",
@@ -227,12 +442,36 @@
     },
     "inflection_event": "2025年5月DeepMind发布AlphaEvolve：LLM引导的进化代码搜索在数学（4x4复矩阵乘法48次）与生产系统中产生超越人类的新结果；同月Darwin Gödel Machine与Absolute Zero展示自修改智能体与零数据自博弈推理。下一个拐点将是闭环自动化AI研究产生可复现的模型级改进。",
     "key_evidence": [
-      {"claim": "AlphaEvolve在50+数学开放问题中约75%复现最佳已知构造、约20%找到更优新构造；4x4复矩阵乘法用48次标量乘法（56年来首次改进）", "source": "https://spectrum.ieee.org/amp/deepmind-alphaevolve-2672018683", "date": "2025-05"},
-      {"claim": "AlphaEvolve已部署优化Google数据中心调度与LLM训练内核", "source": "https://towardsdatascience.com/googles-alphaevolve-is-evolving-new-algorithms-and-it-could-be-a-game-changer/", "date": "2025-05"},
-      {"claim": "Darwin Gödel Machine 自修改编码智能体把SWE-bench从20.0%提升至50.0%，Polyglot从14.2%到30.7%（ICLR 2026）", "source": "https://sakana.ai/dgm/", "date": "2025-05"},
-      {"claim": "Absolute Zero Reasoner 完全不用外部数据，自提任务+代码执行器验证，在代码/数学推理达到零设置SOTA（NeurIPS 2025）", "source": "https://neurips.cc/virtual/2025/poster/116121", "date": "2025-05"},
-      {"claim": "Recursive Superintelligence（Socher、Rocktäschel、Clune、田渊栋等）融资6.5亿美元，估值46.5亿美元，GV/Greycroft领投、NVIDIA与AMD参投", "source": "https://thenextweb.com/news/recursive-superintelligence-self-improving-ai-funding", "date": "2026-05"},
-      {"claim": "AlphaEvolve在数学问题上的大规模应用论文（Terence Tao等合作）", "source": "https://www.alphaxiv.org/abs/2511.02864v1", "date": "2025-11"}
+      {
+        "claim": "AlphaEvolve在50+数学开放问题中约75%复现最佳已知构造、约20%找到更优新构造；4x4复矩阵乘法用48次标量乘法（56年来首次改进）",
+        "source": "https://spectrum.ieee.org/amp/deepmind-alphaevolve-2672018683",
+        "date": "2025-05"
+      },
+      {
+        "claim": "AlphaEvolve已部署优化Google数据中心调度与LLM训练内核",
+        "source": "https://towardsdatascience.com/googles-alphaevolve-is-evolving-new-algorithms-and-it-could-be-a-game-changer/",
+        "date": "2025-05"
+      },
+      {
+        "claim": "Darwin Gödel Machine 自修改编码智能体把SWE-bench从20.0%提升至50.0%，Polyglot从14.2%到30.7%（ICLR 2026）",
+        "source": "https://sakana.ai/dgm/",
+        "date": "2025-05"
+      },
+      {
+        "claim": "Absolute Zero Reasoner 完全不用外部数据，自提任务+代码执行器验证，在代码/数学推理达到零设置SOTA（NeurIPS 2025）",
+        "source": "https://neurips.cc/virtual/2025/poster/116121",
+        "date": "2025-05"
+      },
+      {
+        "claim": "Recursive Superintelligence（Socher、Rocktäschel、Clune、田渊栋等）融资6.5亿美元，估值46.5亿美元，GV/Greycroft领投、NVIDIA与AMD参投",
+        "source": "https://thenextweb.com/news/recursive-superintelligence-self-improving-ai-funding",
+        "date": "2026-05"
+      },
+      {
+        "claim": "AlphaEvolve在数学问题上的大规模应用论文（Terence Tao等合作）",
+        "source": "https://www.alphaxiv.org/abs/2511.02864v1",
+        "date": "2025-11"
+      }
     ],
     "open_problems": [
       "没有可靠自动评估器的开放领域如何自我改进（评估器本身的学习与防奖励作弊）",

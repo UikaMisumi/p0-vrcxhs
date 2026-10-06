@@ -4,7 +4,16 @@
     "name_zh": "大模型推理/服务系统",
     "name_en": "LLM Serving Systems",
     "domain": "系统与硬件",
-    "scores": {"G": 4, "S": 2, "C": 4, "E": 5, "R": 5, "H": 3, "X": 3, "P": 4},
+    "scores": {
+      "G": 4,
+      "S": 2,
+      "C": 4,
+      "E": 5,
+      "R": 5,
+      "H": 3,
+      "X": 3,
+      "P": 4
+    },
     "rationale": {
       "G": "论文与开源仍在快速增长（vLLM 已部署在 40 万+ GPU 上；2026 年仍有大量 arXiv 服务类论文），但已从爆发期转入高基数增长期，估计年增长 60-100%。",
       "S": "已经主流化：2024 年系统类顶会 LLM 相关论文占比约 10%；PD 分离在 vLLM/SGLang/TensorRT-LLM/Dynamo 中均已产品化，已形成共识范式（PagedAttention、连续批处理、PD 分离、KV 缓存池）。",
@@ -17,12 +26,36 @@
     },
     "inflection_event": "2023 年 9 月 vLLM/PagedAttention（SOSP'23）让 LLM 服务吞吐提升数倍并迅速成为事实标准；2024 年 DistServe（OSDI'24）提出 PD 分离，到 2026 年已被全部主流框架采用。也就是说，这个领域的“GPT-3 时刻”已经过去。",
     "key_evidence": [
-      {"claim": "2026 年 PD 分离已被 vLLM、SGLang、TensorRT-LLM 全面支持，NVIDIA Dynamo 于 2026 年 3 月 GA", "source": "https://rdp.in/gpu-mart/knowledge-base/disaggregated-inference-prefill-decode-2026/", "date": "2026-06"},
-      {"claim": "SGLang 在 GB200 NVL72 上，分离式解码吞吐是非分离基线的 2.7 倍；多 GPU vLLM 部署稳定获得 2-3 倍吞吐", "source": "https://rdp.in/gpu-mart/knowledge-base/disaggregated-inference-prefill-decode-2026/", "date": "2026-06"},
-      {"claim": "vLLM 创始团队成立 Inferact，种子轮 1.5 亿美元、估值 8 亿美元；vLLM 运行在 40 万+ GPU 上", "source": "https://techcrunch.com/2026/01/22/inference-startup-inferact-lands-150m-to-commercialize-vllm/", "date": "2026-01"},
-      {"claim": "SGLang 商业化实体 RadixArk 估值 4 亿美元，由 Accel 领投", "source": "https://diyhaven858.wasmer.app/?p=6419", "date": "2026-01"},
-      {"claim": "系统领域（OSDI 等）的 LLM 论文占比到 2024 年升至约 10%", "source": "https://arxiv.org/pdf/2504.08619", "date": "2025-04"},
-      {"claim": "DistServe（OSDI'24）与 Mooncake（FAST'25）奠定了 PD 分离和 KV 缓存中心架构", "source": "https://usenix.org/biblio-14637", "date": "2024-07"}
+      {
+        "claim": "2026 年 PD 分离已被 vLLM、SGLang、TensorRT-LLM 全面支持，NVIDIA Dynamo 于 2026 年 3 月 GA",
+        "source": "https://rdp.in/gpu-mart/knowledge-base/disaggregated-inference-prefill-decode-2026/",
+        "date": "2026-06"
+      },
+      {
+        "claim": "SGLang 在 GB200 NVL72 上，分离式解码吞吐是非分离基线的 2.7 倍；多 GPU vLLM 部署稳定获得 2-3 倍吞吐",
+        "source": "https://rdp.in/gpu-mart/knowledge-base/disaggregated-inference-prefill-decode-2026/",
+        "date": "2026-06"
+      },
+      {
+        "claim": "vLLM 创始团队成立 Inferact，种子轮 1.5 亿美元、估值 8 亿美元；vLLM 运行在 40 万+ GPU 上",
+        "source": "https://techcrunch.com/2026/01/22/inference-startup-inferact-lands-150m-to-commercialize-vllm/",
+        "date": "2026-01"
+      },
+      {
+        "claim": "SGLang 商业化实体 RadixArk 估值 4 亿美元，由 Accel 领投",
+        "source": "https://diyhaven858.wasmer.app/?p=6419",
+        "date": "2026-01"
+      },
+      {
+        "claim": "系统领域（OSDI 等）的 LLM 论文占比到 2024 年升至约 10%",
+        "source": "https://arxiv.org/pdf/2504.08619",
+        "date": "2025-04"
+      },
+      {
+        "claim": "DistServe（OSDI'24）与 Mooncake（FAST'25）奠定了 PD 分离和 KV 缓存中心架构",
+        "source": "https://usenix.org/biblio-14637",
+        "date": "2024-07"
+      }
     ],
     "open_problems": [
       "超长上下文与智能体多轮会话下的 KV 缓存分层存储、迁移与淘汰策略（GPU-CPU-SSD-远端池）",
@@ -39,7 +72,16 @@
     "name_zh": "智能体系统基础设施",
     "name_en": "Agent Systems Infrastructure",
     "domain": "系统与硬件",
-    "scores": {"G": 5, "S": 5, "C": 4, "E": 4, "R": 5, "H": 4, "X": 5, "P": 5},
+    "scores": {
+      "G": 5,
+      "S": 4,
+      "C": 4,
+      "E": 4,
+      "R": 5,
+      "H": 4,
+      "X": 4.5,
+      "P": 5
+    },
     "rationale": {
       "G": "MCP 公共注册表从 2025 年 Q1 末约 1,200 个服务器增至 2026 年 4 月 9,400+（约 8 倍）；PulseMCP 在 2026 年 7 月收录 20,115 个。智能体负载刻画类论文从 2025 年开始出现。增速远超 100%/年。",
       "S": "首届 ACM CAIS（AI 与智能体系统会议）于 2026 年 5 月召开，MLSys 2026 已把 agentic AI 列为热点，但在 OSDI/SOSP 中占比仍小。运行时、调度、隔离、状态管理都还没有共识范式，正处于“2021 年的 LLM”阶段。",
@@ -52,13 +94,41 @@
     },
     "inflection_event": "2024 年 11 月 Anthropic 发布 MCP，2025 年编码智能体（Claude Code、Codex 等）进入大规模生产，让“智能体工作负载”变成数据中心的一类新负载。2026 年 5 月首届 ACM CAIS 会议召开，标志着这个系统社区开始成形。",
     "key_evidence": [
-      {"claim": "MCP 公共注册表从 2025 年 Q1 末约 1,200 个服务器增至 2026 年 4 月中旬 9,400+", "source": "https://getknit.dev/blog/the-guide-to-the-mcp-ecosystem", "date": "2026-04"},
-      {"claim": "PulseMCP 在 2026 年 7 月收录 20,115 个 MCP 服务器", "source": "https://tooldirectory.ai/blog/state-of-mcp-servers-2026", "date": "2026-07"},
-      {"claim": "首届 ACM Conference on AI and Agentic Systems（CAIS）于 2026 年 5 月 27-29 日在圣何塞召开，Matei Zaharia 等担任主席，含 5 个联合研讨会", "source": "https://www.twosigma.com/articles/acm-cais-2026-what-to-watch-at-the-inaugural-conference-on-ai-agentic-systems/", "date": "2026-05"},
-      {"claim": "CPU 视角的智能体负载刻画：工具处理最高占总延迟 90.6%，大批量时 CPU 动态能耗最高占 44%", "source": "https://arxiv.org/abs/2511.00739", "date": "2025-11"},
-      {"claim": "2026 年工具调用刻画：GAIA 最高 28.7% 时间花在 WebFetch/WebSearch 等工具上", "source": "https://www.alphaxiv.org/abs/2605.26297", "date": "2026-05"},
-      {"claim": "MLSys 2026 的热门主题包括缓存管理、推测解码、RAG 和 agentic AI", "source": "https://www.capitalone.com/tech/ai/mlsys-2026-highlights/", "date": "2026-05"},
-      {"claim": "每个 MCP 服务器都会把整个工具目录注入上下文，4 个服务器的组合可消耗 1.2-2 万 token", "source": "https://getknit.dev/blog/the-guide-to-the-mcp-ecosystem", "date": "2026-04"}
+      {
+        "claim": "MCP 公共注册表从 2025 年 Q1 末约 1,200 个服务器增至 2026 年 4 月中旬 9,400+",
+        "source": "https://getknit.dev/blog/the-guide-to-the-mcp-ecosystem",
+        "date": "2026-04"
+      },
+      {
+        "claim": "PulseMCP 在 2026 年 7 月收录 20,115 个 MCP 服务器",
+        "source": "https://tooldirectory.ai/blog/state-of-mcp-servers-2026",
+        "date": "2026-07"
+      },
+      {
+        "claim": "首届 ACM Conference on AI and Agentic Systems（CAIS）于 2026 年 5 月 27-29 日在圣何塞召开，Matei Zaharia 等担任主席，含 5 个联合研讨会",
+        "source": "https://www.twosigma.com/articles/acm-cais-2026-what-to-watch-at-the-inaugural-conference-on-ai-agentic-systems/",
+        "date": "2026-05"
+      },
+      {
+        "claim": "CPU 视角的智能体负载刻画：工具处理最高占总延迟 90.6%，大批量时 CPU 动态能耗最高占 44%",
+        "source": "https://arxiv.org/abs/2511.00739",
+        "date": "2025-11"
+      },
+      {
+        "claim": "2026 年工具调用刻画：GAIA 最高 28.7% 时间花在 WebFetch/WebSearch 等工具上",
+        "source": "https://www.alphaxiv.org/abs/2605.26297",
+        "date": "2026-05"
+      },
+      {
+        "claim": "MLSys 2026 的热门主题包括缓存管理、推测解码、RAG 和 agentic AI",
+        "source": "https://www.capitalone.com/tech/ai/mlsys-2026-highlights/",
+        "date": "2026-05"
+      },
+      {
+        "claim": "每个 MCP 服务器都会把整个工具目录注入上下文，4 个服务器的组合可消耗 1.2-2 万 token",
+        "source": "https://getknit.dev/blog/the-guide-to-the-mcp-ecosystem",
+        "date": "2026-04"
+      }
     ],
     "open_problems": [
       "面向智能体的运行时/OS 抽象：长时运行任务的状态持久化、检查点、回滚和隔离沙箱",
@@ -68,6 +138,20 @@
     "entry_points": [
       "用开源模型 + SWE-bench/Terminal-Bench 搭建可复现的智能体负载基准，做系统级刻画（延迟分解、能耗、CPU/GPU 瓶颈）",
       "在 vLLM/SGLang 之上实现“智能体感知”的调度器或工具调用缓存，以单机/小集群验证收益"
+    ],
+    "calibration": [
+      {
+        "dim": "S",
+        "from": 5,
+        "to": 4,
+        "reason": "“智能体”已是 2026 年 AI 最热主题，MCP 生态已商业化，不再是小众起飞期；但系统顶会中的份额仍小，所以给 4 而非 3"
+      },
+      {
+        "dim": "X",
+        "from": 5,
+        "to": 4.5,
+        "reason": "与“GUI/计算机使用智能体”的外溢效应部分重叠，避免重复计分"
+      }
     ]
   },
   {
@@ -75,7 +159,16 @@
     "name_zh": "光计算与光互连",
     "name_en": "Optical Interconnect and Photonic Computing",
     "domain": "系统与硬件",
-    "scores": {"G": 4, "S": 4, "C": 3.5, "E": 2, "R": 5, "H": 3, "X": 3, "P": 5},
+    "scores": {
+      "G": 4,
+      "S": 4,
+      "C": 3.5,
+      "E": 2,
+      "R": 5,
+      "H": 3,
+      "X": 3,
+      "P": 5
+    },
     "rationale": {
       "G": "产业侧增长迅猛：Coherent 把 CPO 可服务市场上调至 150 亿美元，Ayar Labs 仅 2026 年就融资 6.5 亿美元。学术论文增速没有找到确切数字，估计 60-100%/年。",
       "S": "光互连在光学/通信社区已成熟，但在 CS 体系结构/系统社区（光交换拓扑、CPO 感知的集群设计）仍处早期；光计算仍以少数团队为主。",
@@ -88,12 +181,36 @@
     },
     "inflection_event": "光互连侧：2025 年 3 月 NVIDIA 发布 Spectrum-X/Quantum-X Photonics CPO 交换机，2026 年下半年开始出货；光计算侧：2025 年 4 月 Nature 同期发表 Lightmatter 多芯片光子处理器（可运行 ResNet/BERT）和 Lightelligence PACE。真正的“GPT-3 时刻”可能是 2027 年 scale-up CPO 进入 NVLink 级互连。",
     "key_evidence": [
-      {"claim": "NVIDIA Spectrum-X Photonics 交换机 2026 年下半年出货，总带宽 100Tb/s；NVIDIA 与 Coherent、Lumentum 签署供应协议并投资 40 亿美元", "source": "https://www.optics.org/news/nvidia-backs-lumentum-and-coherent-with-4bn-cash-investment", "date": "2026-03"},
-      {"claim": "Coherent 将 CPO SAM 上调至 150 亿美元；scale-out CPO 收入 2026 年下半年开始，scale-up CPO 2027 年下半年开始", "source": "https://futurumgroup.com/insights/coherents-23-billion-growth-opportunity-lifted-by-nvidias-optical-ambitions/", "date": "2026-05"},
-      {"claim": "Lightmatter 完成 4 亿美元 D 轮、估值 44 亿美元；2026 年 6 月加入 NVLink Fusion 生态", "source": "https://www.lightwaveonline.com/home/podcast/55397706/podcast-lightmatters-harris-on-electrical-bottlenecks-for-scaling-ai-with-optics", "date": "2026-06"},
-      {"claim": "Ayar Labs 再融资 1.5 亿美元，2026 年累计融资 6.5 亿美元", "source": "https://futurumgroup.com/?p=87854", "date": "2026-07"},
-      {"claim": "Lightmatter 在 Nature 发表多芯片光子处理器：4 个 128x128 光张量核，65.5 TOPS（ABFP16）、78W 电功率，ResNet/BERT 精度接近 FP32", "source": "https://physics.aps.org/articles/v18/84", "date": "2025-04"},
-      {"claim": "Lightelligence PACE 发表于 Nature：16,000+ 光子器件、64x64 矩阵、1GHz，延迟最多降低 500 倍", "source": "https://physicsworld.com/a/photonic-computer-chips-perform-as-well-as-purely-electronic-counterparts-say-researchers/", "date": "2025-04"}
+      {
+        "claim": "NVIDIA Spectrum-X Photonics 交换机 2026 年下半年出货，总带宽 100Tb/s；NVIDIA 与 Coherent、Lumentum 签署供应协议并投资 40 亿美元",
+        "source": "https://www.optics.org/news/nvidia-backs-lumentum-and-coherent-with-4bn-cash-investment",
+        "date": "2026-03"
+      },
+      {
+        "claim": "Coherent 将 CPO SAM 上调至 150 亿美元；scale-out CPO 收入 2026 年下半年开始，scale-up CPO 2027 年下半年开始",
+        "source": "https://futurumgroup.com/insights/coherents-23-billion-growth-opportunity-lifted-by-nvidias-optical-ambitions/",
+        "date": "2026-05"
+      },
+      {
+        "claim": "Lightmatter 完成 4 亿美元 D 轮、估值 44 亿美元；2026 年 6 月加入 NVLink Fusion 生态",
+        "source": "https://www.lightwaveonline.com/home/podcast/55397706/podcast-lightmatters-harris-on-electrical-bottlenecks-for-scaling-ai-with-optics",
+        "date": "2026-06"
+      },
+      {
+        "claim": "Ayar Labs 再融资 1.5 亿美元，2026 年累计融资 6.5 亿美元",
+        "source": "https://futurumgroup.com/?p=87854",
+        "date": "2026-07"
+      },
+      {
+        "claim": "Lightmatter 在 Nature 发表多芯片光子处理器：4 个 128x128 光张量核，65.5 TOPS（ABFP16）、78W 电功率，ResNet/BERT 精度接近 FP32",
+        "source": "https://physics.aps.org/articles/v18/84",
+        "date": "2025-04"
+      },
+      {
+        "claim": "Lightelligence PACE 发表于 Nature：16,000+ 光子器件、64x64 矩阵、1GHz，延迟最多降低 500 倍",
+        "source": "https://physicsworld.com/a/photonic-computer-chips-perform-as-well-as-purely-electronic-counterparts-say-researchers/",
+        "date": "2025-04"
+      }
     ],
     "open_problems": [
       "CPO/OCS 时代的 AI 集群拓扑与可重配置网络调度（拓扑随作业动态变化）",
@@ -110,7 +227,16 @@
     "name_zh": "存内/近存计算",
     "name_en": "Processing-in-Memory / Compute-in-Memory",
     "domain": "系统与硬件",
-    "scores": {"G": 3, "S": 3, "C": 3, "E": 2.5, "R": 3.5, "H": 4, "X": 3, "P": 5},
+    "scores": {
+      "G": 3,
+      "S": 3,
+      "C": 3,
+      "E": 2.5,
+      "R": 3.5,
+      "H": 4,
+      "X": 3,
+      "P": 5
+    },
     "rationale": {
       "G": "LLM 解码的内存墙让 PIM 再度升温（AttAcc、NeuPIMs、IANUS、PAPI、LoL-PIM、HPIM 等），但 PIM/CIM 本身已有十多年历史，增长估计 30-60%/年（未找到确切计数）。",
       "S": "在 ISCA/HPCA/MICRO/ISSCC 已有稳定的分会场；“NPU/GPU 做 GEMM + PIM 做 GEMV/注意力”的异构方案已成为共识。",
@@ -123,11 +249,31 @@
     },
     "inflection_event": "尚无明确的“GPT-3 时刻”。可能的拐点是 PIM 进入 HBM4/LPDDR6 标准、并在主流 LLM 推理服务器中商用（例如某云厂商用 PIM 服务 LLM 解码），预计不早于 2027 年；d-Matrix Corsair 2025 年量产、2025 年 11 月获 20 亿美元估值，是数字存内计算的早期信号。",
     "key_evidence": [
-      {"claim": "d-Matrix（数字存内计算 DIMC）2025 年 11 月完成 2.75 亿美元 C 轮，估值 20 亿美元，累计融资 4.5 亿美元", "source": "https://news.bgov.com/private-equity/microsoft-backed-d-matrix-hits-2-billion-value-as-qatar-invests", "date": "2025-11"},
-      {"claim": "EnCharge AI（普林斯顿衍生，模拟存内计算）获超 1 亿美元 B 轮，累计 1.44 亿美元，声称能效比数字方案高 20 倍", "source": "https://datacenterdynamics.com/en/news/encharge-ai-closes-oversubscribed-100m-series-b-funding-round-for-development-of-analog-in-memory-chips", "date": "2025-02"},
-      {"claim": "PIM 加速 LLM 推理的主要工作包括 NeuPIMs、IANUS、AttAcc、PAPI；业界共识是 NPU/GPU 做 GEMM、PIM 做访存受限的注意力", "source": "https://arxiv.org/pdf/2608.28048", "date": "2026-08"},
-      {"claim": "HPIM 将 FC 层放到 HBM 近 bank PIM，注意力放到 SRAM-PIM，以缓解解码阶段的带宽瓶颈", "source": "https://arxiv.org/pdf/2509.12993", "date": "2025-09"},
-      {"claim": "SK hynix GDDR6-AiM 针对特定计算声称 16 倍加速、数据搬运功耗降低 80%，已演示 LLM 应用", "source": "https://hothardware.com/news/sk-hynix-ai-accelerating-pim-memory", "date": "2022-02"}
+      {
+        "claim": "d-Matrix（数字存内计算 DIMC）2025 年 11 月完成 2.75 亿美元 C 轮，估值 20 亿美元，累计融资 4.5 亿美元",
+        "source": "https://news.bgov.com/private-equity/microsoft-backed-d-matrix-hits-2-billion-value-as-qatar-invests",
+        "date": "2025-11"
+      },
+      {
+        "claim": "EnCharge AI（普林斯顿衍生，模拟存内计算）获超 1 亿美元 B 轮，累计 1.44 亿美元，声称能效比数字方案高 20 倍",
+        "source": "https://datacenterdynamics.com/en/news/encharge-ai-closes-oversubscribed-100m-series-b-funding-round-for-development-of-analog-in-memory-chips",
+        "date": "2025-02"
+      },
+      {
+        "claim": "PIM 加速 LLM 推理的主要工作包括 NeuPIMs、IANUS、AttAcc、PAPI；业界共识是 NPU/GPU 做 GEMM、PIM 做访存受限的注意力",
+        "source": "https://arxiv.org/pdf/2608.28048",
+        "date": "2026-08"
+      },
+      {
+        "claim": "HPIM 将 FC 层放到 HBM 近 bank PIM，注意力放到 SRAM-PIM，以缓解解码阶段的带宽瓶颈",
+        "source": "https://arxiv.org/pdf/2509.12993",
+        "date": "2025-09"
+      },
+      {
+        "claim": "SK hynix GDDR6-AiM 针对特定计算声称 16 倍加速、数据搬运功耗降低 80%，已演示 LLM 应用",
+        "source": "https://hothardware.com/news/sk-hynix-ai-accelerating-pim-memory",
+        "date": "2022-02"
+      }
     ],
     "open_problems": [
       "PIM 的编程模型与编译栈：如何在 vLLM 这类服务系统中透明地把 GEMV/注意力卸载到 PIM",
@@ -144,7 +290,16 @@
     "name_zh": "大模型驱动的芯片设计/EDA",
     "name_en": "LLM-Driven Chip Design / EDA",
     "domain": "系统与硬件",
-    "scores": {"G": 5, "S": 5, "C": 3.5, "E": 3, "R": 4, "H": 4, "X": 2.5, "P": 4},
+    "scores": {
+      "G": 5,
+      "S": 5,
+      "C": 3.5,
+      "E": 3,
+      "R": 4,
+      "H": 4,
+      "X": 2.5,
+      "P": 4
+    },
     "rationale": {
       "G": "LLM 硬件设计/安全相关论文从 2023 年 21 篇增至 2024 年 86 篇（约 4 倍），2025 年预测 345 篇；Verilog 生成论文 6→29→64 篇（2023-2025）。年增速超过 100%。",
       "S": "已有专门的基准（VerilogEval v1/v2、RTLLM、CVDP、RealBench）和研讨会（如 IEEE LAD），但在 DAC/ICCAD 中占比仍小，从 RTL 生成、验证到物理设计的范式尚未统一。",
@@ -157,12 +312,36 @@
     },
     "inflection_event": "2023 年 ChipNeMo/VerilogEval 开启了这个方向；真正的“GPT-3 时刻”可能是 2025-2026 年智能体流程首次自主完成“规格→RTL→验证→GDS”的完整 CPU 设计（Agentrys 2026 年声明），并在工业基准 CVDP 上超过 90%。前提是这些结果能被独立复现。",
     "key_evidence": [
-      {"claim": "LLM 硬件设计与安全论文：2023 年 21 篇 → 2024 年 86 篇（4 倍），2025 年预测 345 篇", "source": "https://arxiv.org/pdf/2504.08854", "date": "2025-04"},
-      {"claim": "Verilog 代码生成论文：2023 年 6 篇、2024 年 29 篇、2025 年 64 篇；系统综述覆盖 102 篇", "source": "https://arxiv.org/pdf/2512.00020", "date": "2025-12"},
-      {"claim": "VerilogEval v2：GPT-4o 在 VerilogEval-Human 上 pass@1 为 57.1%；RealBench 首次面向真实 IP 级设计", "source": "https://arxiv.org/pdf/2408.11053", "date": "2024-08"},
-      {"claim": "ChipAgents 在 A/A1/A2 轮累计融资 1.34 亿美元（首轮之后 6 个月内）", "source": "https://siliconangle.com/2026/02/18/chipagents-secures-50m-funding-accelerate-agentic-chip-design/", "date": "2026-02"},
-      {"claim": "Agentrys 融资 2,450 万美元（MediaTek 领投预种子轮）；声称多智能体流程自主完成 32 位 CPU 从规格到签核 GDS，并在 NVIDIA CVDP 上超过 90%", "source": "https://pulse2.com/agentrys-raises-24-5-million-as-agentic-chip-design-platform-tops-90-on-nvidia-benchmark/amp/", "date": "2026-06"},
-      {"claim": "AlphaChip（2021 Nature）可复现性争议；Nature 于 2024 年 9 月发布 Addendum 支持原结论，Google 开源 Circuit Training", "source": "https://en.wikipedia.org/wiki/AlphaChip_(controversy)", "date": "2024-09"}
+      {
+        "claim": "LLM 硬件设计与安全论文：2023 年 21 篇 → 2024 年 86 篇（4 倍），2025 年预测 345 篇",
+        "source": "https://arxiv.org/pdf/2504.08854",
+        "date": "2025-04"
+      },
+      {
+        "claim": "Verilog 代码生成论文：2023 年 6 篇、2024 年 29 篇、2025 年 64 篇；系统综述覆盖 102 篇",
+        "source": "https://arxiv.org/pdf/2512.00020",
+        "date": "2025-12"
+      },
+      {
+        "claim": "VerilogEval v2：GPT-4o 在 VerilogEval-Human 上 pass@1 为 57.1%；RealBench 首次面向真实 IP 级设计",
+        "source": "https://arxiv.org/pdf/2408.11053",
+        "date": "2024-08"
+      },
+      {
+        "claim": "ChipAgents 在 A/A1/A2 轮累计融资 1.34 亿美元（首轮之后 6 个月内）",
+        "source": "https://siliconangle.com/2026/02/18/chipagents-secures-50m-funding-accelerate-agentic-chip-design/",
+        "date": "2026-02"
+      },
+      {
+        "claim": "Agentrys 融资 2,450 万美元（MediaTek 领投预种子轮）；声称多智能体流程自主完成 32 位 CPU 从规格到签核 GDS，并在 NVIDIA CVDP 上超过 90%",
+        "source": "https://pulse2.com/agentrys-raises-24-5-million-as-agentic-chip-design-platform-tops-90-on-nvidia-benchmark/amp/",
+        "date": "2026-06"
+      },
+      {
+        "claim": "AlphaChip（2021 Nature）可复现性争议；Nature 于 2024 年 9 月发布 Addendum 支持原结论，Google 开源 Circuit Training",
+        "source": "https://en.wikipedia.org/wiki/AlphaChip_(controversy)",
+        "date": "2024-09"
+      }
     ],
     "open_problems": [
       "IP/SoC 级的设计与验证：长规格理解、跨模块一致性、形式化验证与 LLM 的结合",
@@ -179,7 +358,16 @@
     "name_zh": "端侧/边缘大模型",
     "name_en": "On-Device / Edge LLMs",
     "domain": "系统与硬件",
-    "scores": {"G": 4, "S": 3, "C": 3, "E": 4, "R": 5, "H": 4, "X": 3, "P": 5},
+    "scores": {
+      "G": 4,
+      "S": 3,
+      "C": 3,
+      "E": 4,
+      "R": 5,
+      "H": 4,
+      "X": 3,
+      "P": 5
+    },
     "rationale": {
       "G": "端侧模型（MobileLLM、Gemma 3n、Qwen3 小模型）、框架（llama.cpp、ExecuTorch、MLC）和相关论文持续高速增长；小模型市场年复合增长约 36%（市场报告）。论文计数没有找到确切数字。",
       "S": "已在 MobiCom/MobiSys/MLSys 中形成稳定方向，量化、蒸馏、投机解码等共识方法已存在，且已进入 Apple/Google/Samsung 的产品，处于“既定方向”阶段。",
@@ -192,12 +380,36 @@
     },
     "inflection_event": "2024 年 6 月 Apple Intelligence 发布、2025 年 6 月 WWDC 开放约 3B 端侧模型的 Foundation Models 框架，让端侧 LLM 成为操作系统级能力。真正的“GPT-3 时刻”是端侧模型达到 GPT-4 级通用能力，且 NPU 内存带宽足以流畅运行（预计 2027-2029 年）。",
     "key_evidence": [
-      {"claim": "WWDC 2025 发布 Foundation Models 框架，开发者可调用约 3B 参数的端侧模型（支持引导生成、工具调用）", "source": "https://www.infoq.com/news/2025/07/apple-foundation-models-ios26", "date": "2025-07"},
-      {"claim": "苹果端侧模型采用 KV 缓存共享（内存减少 37.5%）和 2-bit 量化感知训练", "source": "https://pr-mlr-shield-prod.apple.com/research/apple-foundation-models-tech-report-2025", "date": "2025-07"},
-      {"claim": "苹果模型更新后仍落后于 OpenAI GPT-4o", "source": "https://www.neowin.net/news/apples-ai-models-still-trail-behind-openais-gpt-4o-despite-latest-update/", "date": "2025-07"},
-      {"claim": "移动端 LLM 分阶段分析：Prefill 阶段 CPU 甚至优于 NPU，NPU 在 Decode 阶段收益有限，调度开销和回退削弱了卸载收益", "source": "https://arxiv.org/pdf/2605.27435", "date": "2026-05"},
-      {"claim": "2.7B 模型在骁龙 8 Elite 上用 ExecuTorch（CPU）达到 20.97 tok/s", "source": "https://arxiv.org/pdf/2607.24585", "date": "2026-07"},
-      {"claim": "小模型市场 2024-2029 年预计增长 246.8 亿美元，年复合增长率 36.1%", "source": "https://www.technavio.com/report/small-language-model-slm-market-industry-analysis", "date": "2025-01"}
+      {
+        "claim": "WWDC 2025 发布 Foundation Models 框架，开发者可调用约 3B 参数的端侧模型（支持引导生成、工具调用）",
+        "source": "https://www.infoq.com/news/2025/07/apple-foundation-models-ios26",
+        "date": "2025-07"
+      },
+      {
+        "claim": "苹果端侧模型采用 KV 缓存共享（内存减少 37.5%）和 2-bit 量化感知训练",
+        "source": "https://pr-mlr-shield-prod.apple.com/research/apple-foundation-models-tech-report-2025",
+        "date": "2025-07"
+      },
+      {
+        "claim": "苹果模型更新后仍落后于 OpenAI GPT-4o",
+        "source": "https://www.neowin.net/news/apples-ai-models-still-trail-behind-openais-gpt-4o-despite-latest-update/",
+        "date": "2025-07"
+      },
+      {
+        "claim": "移动端 LLM 分阶段分析：Prefill 阶段 CPU 甚至优于 NPU，NPU 在 Decode 阶段收益有限，调度开销和回退削弱了卸载收益",
+        "source": "https://arxiv.org/pdf/2605.27435",
+        "date": "2026-05"
+      },
+      {
+        "claim": "2.7B 模型在骁龙 8 Elite 上用 ExecuTorch（CPU）达到 20.97 tok/s",
+        "source": "https://arxiv.org/pdf/2607.24585",
+        "date": "2026-07"
+      },
+      {
+        "claim": "小模型市场 2024-2029 年预计增长 246.8 亿美元，年复合增长率 36.1%",
+        "source": "https://www.technavio.com/report/small-language-model-slm-market-industry-analysis",
+        "date": "2025-01"
+      }
     ],
     "open_problems": [
       "NPU 上的高效 LLM 推理：解码阶段的带宽瓶颈、动态形状、异构 CPU/GPU/NPU 协同调度",
@@ -214,7 +426,16 @@
     "name_zh": "AI数据中心能效与电力感知计算",
     "name_en": "AI Datacenter Energy and Power-Aware Computing",
     "domain": "系统与硬件",
-    "scores": {"G": 4, "S": 4, "C": 2.5, "E": 3, "R": 5, "H": 4, "X": 3.5, "P": 4},
+    "scores": {
+      "G": 4,
+      "S": 4,
+      "C": 2.5,
+      "E": 3,
+      "R": 5,
+      "H": 4,
+      "X": 3.5,
+      "P": 4
+    },
     "rationale": {
       "G": "需求侧爆发：2025 年数据中心用电增长 17%（是全球总用电增速的 5 倍以上），IEA 预计 2030 年从约 485 TWh 增至约 945 TWh；EPRI DCFlex 汇集了 60+ 机构。学术论文增长没有确切数字，估计 60-100%/年。",
       "S": "HotCarbon 等研讨会已存在，但“电网交互/功率摆动/吉瓦级集群”的系统研究刚刚形成（2025 年 Microsoft/OpenAI/NVIDIA 功率稳定论文、Emerald AI 示范），尚无共识范式。",
@@ -227,12 +448,36 @@
     },
     "inflection_event": "2025 年 5 月 Emerald AI 在凤凰城用 256 块 GPU 完成首次 AI 负载电网响应示范（持续削减 25% 功率）；2025 年 8 月 Microsoft/OpenAI/NVIDIA 发表《Power Stabilization for AI Training Datacenters》，确认吉瓦级训练的功率摆动可能损伤电网。可能的“GPT-3 时刻”是 AI 数据中心作为可调度柔性负载被规模化接入电网市场（2026-2027 年）。",
     "key_evidence": [
-      {"claim": "2025 年数据中心用电增长 17%，是全球总用电增速（3%）的 5 倍以上；科技公司 AI 基建投入超过 4,000 亿美元，2026 年可能再增 75%", "source": "https://letsdatascience.com/news/ai-drives-surge-in-data-centre-electricity-demand-16cbe703", "date": "2026-04"},
-      {"claim": "IEA：全球数据中心用电从 2025 年约 485 TWh 增至 2030 年约 945 TWh，其中 AI 相关用电约增至 3 倍", "source": "https://datacentremagazine.com/data-centres/ai-boom-will-cause-data-centre-electricity-demand-to-double", "date": "2026-04"},
-      {"claim": "Emerald AI 于 2025 年 5 月 3 日在凤凰城 Oracle 数据中心用 256 块 NVIDIA GPU 进行电网压力事件示范，目标是持续削减 25% 功率；EPRI DCFlex 汇集 60+ 机构", "source": "https://introl.com/blog/data-centers-grid-stabilizers-flexible-power-nvidia-epri-2026", "date": "2025-07"},
-      {"claim": "Microsoft/OpenAI/NVIDIA：数万 GPU 同步训练产生的功率摆动可能与电网关键频率共振而损伤设备；全栈方案可让功率过冲降低 40%，但设置功率下限可能多耗 10% 以上能量", "source": "https://arxiv.org/html/2508.14318v1", "date": "2025-08"},
-      {"claim": "与 SMR 项目相关的购电协议从 2024 年底 25 GW 增至 45 GW", "source": "https://letsdatascience.com/news/ai-drives-surge-in-data-centre-electricity-demand-16cbe703", "date": "2026-04"},
-      {"claim": "微软发表 PowerSlider：利用 LLM 服务的相位不对称性应对需求响应", "source": "https://www.microsoft.com/en-us/research/group/azure-research-systems/publications/", "date": "2026-01"}
+      {
+        "claim": "2025 年数据中心用电增长 17%，是全球总用电增速（3%）的 5 倍以上；科技公司 AI 基建投入超过 4,000 亿美元，2026 年可能再增 75%",
+        "source": "https://letsdatascience.com/news/ai-drives-surge-in-data-centre-electricity-demand-16cbe703",
+        "date": "2026-04"
+      },
+      {
+        "claim": "IEA：全球数据中心用电从 2025 年约 485 TWh 增至 2030 年约 945 TWh，其中 AI 相关用电约增至 3 倍",
+        "source": "https://datacentremagazine.com/data-centres/ai-boom-will-cause-data-centre-electricity-demand-to-double",
+        "date": "2026-04"
+      },
+      {
+        "claim": "Emerald AI 于 2025 年 5 月 3 日在凤凰城 Oracle 数据中心用 256 块 NVIDIA GPU 进行电网压力事件示范，目标是持续削减 25% 功率；EPRI DCFlex 汇集 60+ 机构",
+        "source": "https://introl.com/blog/data-centers-grid-stabilizers-flexible-power-nvidia-epri-2026",
+        "date": "2025-07"
+      },
+      {
+        "claim": "Microsoft/OpenAI/NVIDIA：数万 GPU 同步训练产生的功率摆动可能与电网关键频率共振而损伤设备；全栈方案可让功率过冲降低 40%，但设置功率下限可能多耗 10% 以上能量",
+        "source": "https://arxiv.org/html/2508.14318v1",
+        "date": "2025-08"
+      },
+      {
+        "claim": "与 SMR 项目相关的购电协议从 2024 年底 25 GW 增至 45 GW",
+        "source": "https://letsdatascience.com/news/ai-drives-surge-in-data-centre-electricity-demand-16cbe703",
+        "date": "2026-04"
+      },
+      {
+        "claim": "微软发表 PowerSlider：利用 LLM 服务的相位不对称性应对需求响应",
+        "source": "https://www.microsoft.com/en-us/research/group/azure-research-systems/publications/",
+        "date": "2026-01"
+      }
     ],
     "open_problems": [
       "吉瓦级同步训练的功率摆动平滑：软件（调度、通信重叠）与硬件（储能、功率封顶）的协同设计及其能量代价",

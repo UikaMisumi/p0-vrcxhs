@@ -1,0 +1,1048 @@
+{
+  "weights": {
+    "G": 0.25,
+    "C": 0.25,
+    "E": 0.1,
+    "R": 0.1,
+    "H": 0.1,
+    "X": 0.2
+  },
+  "fields": [
+    {
+      "id": "vericoding",
+      "name_zh": "LLM驱动的形式化验证 / 可验证代码生成",
+      "name_en": "LLM-driven Formal Verification & Verified Code Generation (\"vericoding\": Verus/Dafny/Lean code with proofs)",
+      "domain": "AI-可信与推理",
+      "scores": {
+        "G": 4.5,
+        "S": 5,
+        "C": 4,
+        "E": 4,
+        "R": 3.5,
+        "H": 5,
+        "X": 4,
+        "P": 3
+      },
+      "score": 80.5,
+      "momentum": 85.0,
+      "substance": 82.0,
+      "tier": "A 强烈关注",
+      "sensitivity": {
+        "median_rank": 1.0,
+        "rank_p10": 1,
+        "rank_p90": 2,
+        "p_top10": 1.0
+      }
+    },
+    {
+      "id": "llm_multiagent_selfimprove",
+      "name_zh": "自我改进与自博弈（LLM引导的进化搜索/开放式学习）",
+      "name_en": "Self-Improvement & Self-Play (LLM-guided Evolutionary Search, Open-Endedness)",
+      "domain": "AI-模型与方法",
+      "scores": {
+        "G": 4.5,
+        "S": 4.5,
+        "C": 4,
+        "E": 4,
+        "R": 4.5,
+        "H": 5,
+        "X": 5,
+        "P": 6
+      },
+      "score": 79.0,
+      "momentum": 85.0,
+      "substance": 94.0,
+      "tier": "A 强烈关注",
+      "sensitivity": {
+        "median_rank": 2.0,
+        "rank_p10": 1,
+        "rank_p90": 4,
+        "p_top10": 1.0
+      }
+    },
+    {
+      "id": "ai_math_formal",
+      "name_zh": "AI数学与形式化定理证明",
+      "name_en": "AI for Mathematics & Formal Theorem Proving (Lean, AlphaProof, autoformalization, Seed-Prover, IMO gold, Erdős problems)",
+      "domain": "AI-可信与推理",
+      "scores": {
+        "G": 5,
+        "S": 4,
+        "C": 5,
+        "E": 4,
+        "R": 5,
+        "H": 3.5,
+        "X": 4,
+        "P": 3
+      },
+      "score": 78.9,
+      "momentum": 100.0,
+      "substance": 82.0,
+      "tier": "A 强烈关注",
+      "sensitivity": {
+        "median_rank": 3.0,
+        "rank_p10": 1,
+        "rank_p90": 5,
+        "p_top10": 1.0
+      }
+    },
+    {
+      "id": "vla_robot_fm",
+      "name_zh": "机器人基础模型 / 视觉-语言-动作模型(VLA)",
+      "name_en": "Robot Foundation Models / Vision-Language-Action Models",
+      "domain": "具身/空间/生命科学交叉",
+      "scores": {
+        "G": 5,
+        "S": 4.5,
+        "C": 4,
+        "E": 3.5,
+        "R": 5,
+        "H": 4,
+        "X": 4,
+        "P": 4
+      },
+      "score": 77.7,
+      "momentum": 90.0,
+      "substance": 82.0,
+      "tier": "A 强烈关注",
+      "sensitivity": {
+        "median_rank": 4.0,
+        "rank_p10": 3,
+        "rank_p90": 4,
+        "p_top10": 1.0
+      }
+    },
+    {
+      "id": "world_models",
+      "name_zh": "世界模型 / 可交互视频生成",
+      "name_en": "World Models & Interactive Video Generation",
+      "domain": "AI-模型与方法",
+      "scores": {
+        "G": 5,
+        "S": 4.5,
+        "C": 4,
+        "E": 3,
+        "R": 5,
+        "H": 4,
+        "X": 4,
+        "P": 5
+      },
+      "score": 75.8,
+      "momentum": 90.0,
+      "substance": 80.0,
+      "tier": "A 强烈关注",
+      "sensitivity": {
+        "median_rank": 5.0,
+        "rank_p10": 5,
+        "rank_p90": 7,
+        "p_top10": 1.0
+      }
+    },
+    {
+      "id": "continual_ttt",
+      "name_zh": "持续学习与测试时训练 / 测试时记忆",
+      "name_en": "Continual Learning & Test-Time Training / Test-Time Memory",
+      "domain": "AI-模型与方法",
+      "scores": {
+        "G": 4.5,
+        "S": 5,
+        "C": 3,
+        "E": 3.5,
+        "R": 4,
+        "H": 5,
+        "X": 4.5,
+        "P": 5
+      },
+      "score": 75.5,
+      "momentum": 75.0,
+      "substance": 86.0,
+      "tier": "A 强烈关注",
+      "sensitivity": {
+        "median_rank": 6.0,
+        "rank_p10": 3,
+        "rank_p90": 8,
+        "p_top10": 0.9974
+      }
+    },
+    {
+      "id": "agent_systems_infra",
+      "name_zh": "智能体系统基础设施",
+      "name_en": "Agent Systems Infrastructure",
+      "domain": "系统与硬件",
+      "scores": {
+        "G": 5,
+        "S": 4,
+        "C": 4,
+        "E": 4,
+        "R": 5,
+        "H": 4,
+        "X": 4.5,
+        "P": 5
+      },
+      "score": 75.1,
+      "momentum": 90.0,
+      "substance": 88.0,
+      "tier": "A 强烈关注",
+      "sensitivity": {
+        "median_rank": 6.0,
+        "rank_p10": 6,
+        "rank_p90": 7,
+        "p_top10": 1.0
+      }
+    },
+    {
+      "id": "spatial_3d_fm",
+      "name_zh": "空间智能 / 3D基础模型（前馈式三维重建）",
+      "name_en": "Spatial Intelligence / 3D Foundation Models (Feed-forward 3D Reconstruction)",
+      "domain": "具身/空间/生命科学交叉",
+      "scores": {
+        "G": 4.5,
+        "S": 4,
+        "C": 4,
+        "E": 4.5,
+        "R": 4,
+        "H": 4.5,
+        "X": 4,
+        "P": 3
+      },
+      "score": 73.0,
+      "momentum": 85.0,
+      "substance": 84.0,
+      "tier": "B 值得投入",
+      "sensitivity": {
+        "median_rank": 9.0,
+        "rank_p10": 7,
+        "rank_p90": 10,
+        "p_top10": 0.9444
+      }
+    },
+    {
+      "id": "ai_scientist",
+      "name_zh": "自动化科研 / AI科学家",
+      "name_en": "Automated Research / AI Scientist (AI Scientist, AlphaEvolve-style discovery, Co-Scientist, autonomous labs)",
+      "domain": "AI-可信与推理",
+      "scores": {
+        "G": 5,
+        "S": 4,
+        "C": 3.5,
+        "E": 3,
+        "R": 5,
+        "H": 4,
+        "X": 5,
+        "P": 6
+      },
+      "score": 71.9,
+      "momentum": 85.0,
+      "substance": 88.0,
+      "tier": "B 值得投入",
+      "sensitivity": {
+        "median_rank": 10.0,
+        "rank_p10": 8,
+        "rank_p90": 12,
+        "p_top10": 0.6472
+      }
+    },
+    {
+      "id": "qec_ftqc_stack",
+      "name_zh": "量子纠错与容错量子计算软件栈",
+      "name_en": "Quantum Error Correction & Fault-Tolerant Quantum Computing Stack",
+      "domain": "量子/密码/网络/理论",
+      "scores": {
+        "G": 4.5,
+        "S": 4.5,
+        "C": 4.5,
+        "E": 3,
+        "R": 5,
+        "H": 4,
+        "X": 3.5,
+        "P": 7
+      },
+      "score": 71.8,
+      "momentum": 90.0,
+      "substance": 76.0,
+      "tier": "B 值得投入",
+      "sensitivity": {
+        "median_rank": 10.0,
+        "rank_p10": 8,
+        "rank_p90": 12,
+        "p_top10": 0.6996
+      }
+    },
+    {
+      "id": "diffusion_lm",
+      "name_zh": "扩散语言模型 / 非自回归LLM",
+      "name_en": "Diffusion Language Models (non-autoregressive LLMs)",
+      "domain": "AI-模型与方法",
+      "scores": {
+        "G": 4.5,
+        "S": 5,
+        "C": 3,
+        "E": 4,
+        "R": 3.5,
+        "H": 5,
+        "X": 3,
+        "P": 4
+      },
+      "score": 70.5,
+      "momentum": 75.0,
+      "substance": 74.0,
+      "tier": "B 值得投入",
+      "sensitivity": {
+        "median_rank": 11.0,
+        "rank_p10": 9,
+        "rank_p90": 13,
+        "p_top10": 0.3448
+      }
+    },
+    {
+      "id": "llm_for_eda",
+      "name_zh": "大模型驱动的芯片设计/EDA",
+      "name_en": "LLM-Driven Chip Design / EDA",
+      "domain": "系统与硬件",
+      "scores": {
+        "G": 5,
+        "S": 5,
+        "C": 3.5,
+        "E": 3,
+        "R": 4,
+        "H": 4,
+        "X": 2.5,
+        "P": 4
+      },
+      "score": 70.5,
+      "momentum": 85.0,
+      "substance": 64.0,
+      "tier": "B 值得投入",
+      "sensitivity": {
+        "median_rank": 11.0,
+        "rank_p10": 9,
+        "rank_p90": 13,
+        "p_top10": 0.3352
+      }
+    },
+    {
+      "id": "computer_use_agents",
+      "name_zh": "GUI/计算机使用智能体",
+      "name_en": "GUI / Computer-Use Agents",
+      "domain": "AI-模型与方法",
+      "scores": {
+        "G": 4.5,
+        "S": 3.5,
+        "C": 4.5,
+        "E": 4,
+        "R": 5,
+        "H": 3.5,
+        "X": 4,
+        "P": 5
+      },
+      "score": 68.1,
+      "momentum": 90.0,
+      "substance": 82.0,
+      "tier": "B 值得投入",
+      "sensitivity": {
+        "median_rank": 13.0,
+        "rank_p10": 11,
+        "rank_p90": 14,
+        "p_top10": 0.0114
+      }
+    },
+    {
+      "id": "agent_security",
+      "name_zh": "智能体安全",
+      "name_en": "AI Agent Security (prompt-injection defenses, tool-use security, agent sandboxing, AgentDojo-style benchmarks)",
+      "domain": "AI-可信与推理",
+      "scores": {
+        "G": 5,
+        "S": 4,
+        "C": 3,
+        "E": 5,
+        "R": 5,
+        "H": 4,
+        "X": 3,
+        "P": 5
+      },
+      "score": 67.0,
+      "momentum": 80.0,
+      "substance": 80.0,
+      "tier": "C 观察",
+      "sensitivity": {
+        "median_rank": 14.0,
+        "rank_p10": 13,
+        "rank_p90": 14,
+        "p_top10": 0.02
+      }
+    },
+    {
+      "id": "ai_control_oversight",
+      "name_zh": "AI控制与可扩展监督",
+      "name_en": "AI Control & Scalable Oversight (control protocols, CoT monitoring, model organisms of misalignment, alignment auditing)",
+      "domain": "AI-可信与推理",
+      "scores": {
+        "G": 4,
+        "S": 5,
+        "C": 3,
+        "E": 4,
+        "R": 4,
+        "H": 4,
+        "X": 2.5,
+        "P": 4
+      },
+      "score": 65.0,
+      "momentum": 70.0,
+      "substance": 68.0,
+      "tier": "C 观察",
+      "sensitivity": {
+        "median_rank": 15.0,
+        "rank_p10": 15,
+        "rank_p90": 16,
+        "p_top10": 0.0
+      }
+    },
+    {
+      "id": "learning_augmented_algos",
+      "name_zh": "学习增强算法 / 带预测的算法（含LLM驱动的算法发现）",
+      "name_en": "Learning-Augmented Algorithms & LLM-Driven Algorithm Discovery",
+      "domain": "量子/密码/网络/理论",
+      "scores": {
+        "G": 4,
+        "S": 4.5,
+        "C": 3,
+        "E": 4,
+        "R": 3.5,
+        "H": 4.5,
+        "X": 3.5,
+        "P": 6
+      },
+      "score": 63.3,
+      "momentum": 70.0,
+      "substance": 76.0,
+      "tier": "C 观察",
+      "sensitivity": {
+        "median_rank": 16.0,
+        "rank_p10": 15,
+        "rank_p90": 17,
+        "p_top10": 0.0
+      }
+    },
+    {
+      "id": "neural_fm_bci",
+      "name_zh": "神经数据基础模型与脑机接口解码",
+      "name_en": "Neural Data Foundation Models and BCI Decoding",
+      "domain": "具身/空间/生命科学交叉",
+      "scores": {
+        "G": 4,
+        "S": 4.5,
+        "C": 3.5,
+        "E": 2.5,
+        "R": 4,
+        "H": 4.5,
+        "X": 3,
+        "P": 5
+      },
+      "score": 62.9,
+      "momentum": 75.0,
+      "substance": 68.0,
+      "tier": "C 观察",
+      "sensitivity": {
+        "median_rank": 17.0,
+        "rank_p10": 16,
+        "rank_p90": 18,
+        "p_top10": 0.0
+      }
+    },
+    {
+      "id": "mech_interp",
+      "name_zh": "机制可解释性",
+      "name_en": "Mechanistic Interpretability (SAEs, transcoders, attribution graphs / circuit tracing, model diffing)",
+      "domain": "AI-可信与推理",
+      "scores": {
+        "G": 4,
+        "S": 4,
+        "C": 3,
+        "E": 4,
+        "R": 4,
+        "H": 5,
+        "X": 3,
+        "P": 4
+      },
+      "score": 61.7,
+      "momentum": 70.0,
+      "substance": 76.0,
+      "tier": "C 观察",
+      "sensitivity": {
+        "median_rank": 18.0,
+        "rank_p10": 17,
+        "rank_p90": 19,
+        "p_top10": 0.0
+      }
+    },
+    {
+      "id": "humanoid_wbc",
+      "name_zh": "人形机器人全身控制与sim2real",
+      "name_en": "Humanoid Whole-Body Control and Sim-to-Real",
+      "domain": "具身/空间/生命科学交叉",
+      "scores": {
+        "G": 4,
+        "S": 3.5,
+        "C": 4,
+        "E": 4.5,
+        "R": 4.5,
+        "H": 4,
+        "X": 2.5,
+        "P": 5
+      },
+      "score": 59.6,
+      "momentum": 80.0,
+      "substance": 72.0,
+      "tier": "D 暂缓",
+      "sensitivity": {
+        "median_rank": 20.0,
+        "rank_p10": 18,
+        "rank_p90": 22,
+        "p_top10": 0.0
+      }
+    },
+    {
+      "id": "virtual_cell",
+      "name_zh": "虚拟细胞 / 单细胞基础模型",
+      "name_en": "Virtual Cell / Single-Cell Foundation Models",
+      "domain": "具身/空间/生命科学交叉",
+      "scores": {
+        "G": 4,
+        "S": 4.5,
+        "C": 2,
+        "E": 3,
+        "R": 4,
+        "H": 5,
+        "X": 3.5,
+        "P": 5
+      },
+      "score": 59.6,
+      "momentum": 60.0,
+      "substance": 76.0,
+      "tier": "D 暂缓",
+      "sensitivity": {
+        "median_rank": 20.0,
+        "rank_p10": 18,
+        "rank_p90": 22,
+        "p_top10": 0.0
+      }
+    },
+    {
+      "id": "ai_datacenter_energy",
+      "name_zh": "AI数据中心能效与电力感知计算",
+      "name_en": "AI Datacenter Energy and Power-Aware Computing",
+      "domain": "系统与硬件",
+      "scores": {
+        "G": 4,
+        "S": 4,
+        "C": 2.5,
+        "E": 3,
+        "R": 5,
+        "H": 4,
+        "X": 3.5,
+        "P": 4
+      },
+      "score": 59.5,
+      "momentum": 65.0,
+      "substance": 76.0,
+      "tier": "D 暂缓",
+      "sensitivity": {
+        "median_rank": 20.0,
+        "rank_p10": 19,
+        "rank_p90": 22,
+        "p_top10": 0.0
+      }
+    },
+    {
+      "id": "optical_interconnect_compute",
+      "name_zh": "光计算与光互连",
+      "name_en": "Optical Interconnect and Photonic Computing",
+      "domain": "系统与硬件",
+      "scores": {
+        "G": 4,
+        "S": 4,
+        "C": 3.5,
+        "E": 2,
+        "R": 5,
+        "H": 3,
+        "X": 3,
+        "P": 5
+      },
+      "score": 57.6,
+      "momentum": 75.0,
+      "substance": 64.0,
+      "tier": "D 暂缓",
+      "sensitivity": {
+        "median_rank": 22.0,
+        "rank_p10": 20,
+        "rank_p90": 25,
+        "p_top10": 0.0
+      }
+    },
+    {
+      "id": "llm_theory",
+      "name_zh": "Transformer/大模型理论",
+      "name_en": "Theory of Transformers & Large Language Models",
+      "domain": "量子/密码/网络/理论",
+      "scores": {
+        "G": 4,
+        "S": 3.5,
+        "C": 2.5,
+        "E": 5,
+        "R": 3,
+        "H": 5,
+        "X": 3.5,
+        "P": 5
+      },
+      "score": 56.6,
+      "momentum": 65.0,
+      "substance": 80.0,
+      "tier": "D 暂缓",
+      "sensitivity": {
+        "median_rank": 23.0,
+        "rank_p10": 21,
+        "rank_p90": 26,
+        "p_top10": 0.0
+      }
+    },
+    {
+      "id": "zk_proofs",
+      "name_zh": "零知识证明系统与zkVM",
+      "name_en": "Zero-Knowledge Proof Systems & zkVMs",
+      "domain": "量子/密码/网络/理论",
+      "scores": {
+        "G": 3.5,
+        "S": 3,
+        "C": 4,
+        "E": 4.5,
+        "R": 3.5,
+        "H": 4,
+        "X": 3.5,
+        "P": 5
+      },
+      "score": 55.4,
+      "momentum": 75.0,
+      "substance": 76.0,
+      "tier": "D 暂缓",
+      "sensitivity": {
+        "median_rank": 24.0,
+        "rank_p10": 23,
+        "rank_p90": 26,
+        "p_top10": 0.0
+      }
+    },
+    {
+      "id": "efficient_arch",
+      "name_zh": "后Transformer架构：SSM/线性注意力/混合架构",
+      "name_en": "Post-Transformer Architectures: SSMs, Linear Attention & Hybrids",
+      "domain": "AI-模型与方法",
+      "scores": {
+        "G": 3,
+        "S": 3,
+        "C": 3.5,
+        "E": 5,
+        "R": 4,
+        "H": 4,
+        "X": 3.5,
+        "P": 3
+      },
+      "score": 55.0,
+      "momentum": 65.0,
+      "substance": 80.0,
+      "tier": "D 暂缓",
+      "sensitivity": {
+        "median_rank": 25.0,
+        "rank_p10": 23,
+        "rank_p90": 26,
+        "p_top10": 0.0
+      }
+    },
+    {
+      "id": "fhe_acceleration",
+      "name_zh": "全同态加密及其硬件加速",
+      "name_en": "Fully Homomorphic Encryption & Hardware Acceleration",
+      "domain": "量子/密码/网络/理论",
+      "scores": {
+        "G": 3,
+        "S": 4,
+        "C": 3.5,
+        "E": 3,
+        "R": 3.5,
+        "H": 4.5,
+        "X": 3,
+        "P": 6
+      },
+      "score": 53.9,
+      "momentum": 65.0,
+      "substance": 68.0,
+      "tier": "D 暂缓",
+      "sensitivity": {
+        "median_rank": 26.0,
+        "rank_p10": 24,
+        "rank_p90": 28,
+        "p_top10": 0.0
+      }
+    },
+    {
+      "id": "on_device_llm",
+      "name_zh": "端侧/边缘大模型",
+      "name_en": "On-Device / Edge LLMs",
+      "domain": "系统与硬件",
+      "scores": {
+        "G": 4,
+        "S": 3,
+        "C": 3,
+        "E": 4,
+        "R": 5,
+        "H": 4,
+        "X": 3,
+        "P": 5
+      },
+      "score": 53.4,
+      "momentum": 70.0,
+      "substance": 76.0,
+      "tier": "D 暂缓",
+      "sensitivity": {
+        "median_rank": 27.0,
+        "rank_p10": 24,
+        "rank_p90": 28,
+        "p_top10": 0.0
+      }
+    },
+    {
+      "id": "reasoning_rl",
+      "name_zh": "推理时计算与可验证奖励强化学习",
+      "name_en": "Test-Time Compute & RL with Verifiable Rewards (RLVR)",
+      "domain": "AI-模型与方法",
+      "scores": {
+        "G": 3.5,
+        "S": 1.5,
+        "C": 5,
+        "E": 5,
+        "R": 5,
+        "H": 3,
+        "X": 5,
+        "P": 5
+      },
+      "score": 52.5,
+      "momentum": 85.0,
+      "substance": 92.0,
+      "tier": "D 暂缓",
+      "sensitivity": {
+        "median_rank": 28.0,
+        "rank_p10": 25,
+        "rank_p90": 29,
+        "p_top10": 0.0
+      }
+    },
+    {
+      "id": "llm_serving_systems",
+      "name_zh": "大模型推理/服务系统",
+      "name_en": "LLM Serving Systems",
+      "domain": "系统与硬件",
+      "scores": {
+        "G": 4,
+        "S": 2,
+        "C": 4,
+        "E": 5,
+        "R": 5,
+        "H": 3,
+        "X": 3,
+        "P": 4
+      },
+      "score": 50.6,
+      "momentum": 80.0,
+      "substance": 76.0,
+      "tier": "D 暂缓",
+      "sensitivity": {
+        "median_rank": 29.0,
+        "rank_p10": 28,
+        "rank_p90": 29,
+        "p_top10": 0.0
+      }
+    },
+    {
+      "id": "leo_satellite_networking",
+      "name_zh": "低轨卫星互联网与空天地一体化网络",
+      "name_en": "LEO Satellite Networking & Space-Air-Ground Integrated Networks",
+      "domain": "量子/密码/网络/理论",
+      "scores": {
+        "G": 3,
+        "S": 3.5,
+        "C": 3.5,
+        "E": 2.5,
+        "R": 5,
+        "H": 3,
+        "X": 2.5,
+        "P": 6
+      },
+      "score": 48.0,
+      "momentum": 65.0,
+      "substance": 62.0,
+      "tier": "D 暂缓",
+      "sensitivity": {
+        "median_rank": 30.0,
+        "rank_p10": 30,
+        "rank_p90": 30,
+        "p_top10": 0.0
+      }
+    },
+    {
+      "id": "pim_cim",
+      "name_zh": "存内/近存计算",
+      "name_en": "Processing-in-Memory / Compute-in-Memory",
+      "domain": "系统与硬件",
+      "scores": {
+        "G": 3,
+        "S": 3,
+        "C": 3,
+        "E": 2.5,
+        "R": 3.5,
+        "H": 4,
+        "X": 3,
+        "P": 5
+      },
+      "score": 44.6,
+      "momentum": 60.0,
+      "substance": 64.0,
+      "tier": "D 暂缓",
+      "sensitivity": {
+        "median_rank": 31.0,
+        "rank_p10": 31,
+        "rank_p90": 32,
+        "p_top10": 0.0
+      }
+    },
+    {
+      "id": "pqc_migration",
+      "name_zh": "后量子密码迁移工程",
+      "name_en": "Post-Quantum Cryptography Migration Engineering",
+      "domain": "量子/密码/网络/理论",
+      "scores": {
+        "G": 3.5,
+        "S": 2.5,
+        "C": 2,
+        "E": 5,
+        "R": 5,
+        "H": 2.5,
+        "X": 2.5,
+        "P": 4
+      },
+      "score": 42.9,
+      "momentum": 55.0,
+      "substance": 70.0,
+      "tier": "D 暂缓",
+      "sensitivity": {
+        "median_rank": 32.0,
+        "rank_p10": 31,
+        "rank_p90": 32,
+        "p_top10": 0.0
+      }
+    },
+    {
+      "id": "dynamic_gs",
+      "name_zh": "3D/4D高斯泼溅与神经渲染",
+      "name_en": "3D/4D Gaussian Splatting and Neural Rendering",
+      "domain": "具身/空间/生命科学交叉",
+      "scores": {
+        "G": 2,
+        "S": 1.5,
+        "C": 3,
+        "E": 5,
+        "R": 3.5,
+        "H": 2.5,
+        "X": 3,
+        "P": 5
+      },
+      "score": 33.4,
+      "momentum": 50.0,
+      "substance": 68.0,
+      "tier": "D 暂缓",
+      "sensitivity": {
+        "median_rank": 33.0,
+        "rank_p10": 33,
+        "rank_p90": 33,
+        "p_top10": 0.0
+      }
+    }
+  ],
+  "backtest": [
+    {
+      "name": "大语言模型 LLM",
+      "as_of": "2020-21",
+      "scores": {
+        "G": 5,
+        "S": 5,
+        "C": 5,
+        "E": 4,
+        "R": 4,
+        "H": 4,
+        "X": 5,
+        "P": 2
+      },
+      "outcome": "爆发并成为整个 CS 的通用底座（基准案例）",
+      "score": 92.0
+    },
+    {
+      "name": "扩散模型 Diffusion",
+      "as_of": "2021",
+      "scores": {
+        "G": 5,
+        "S": 5,
+        "C": 4,
+        "E": 4,
+        "R": 3,
+        "H": 5,
+        "X": 4,
+        "P": 1
+      },
+      "outcome": "爆发，成为图像/视频/分子生成的主流范式",
+      "score": 84.0
+    },
+    {
+      "name": "3D 高斯泼溅 3DGS",
+      "as_of": "2023",
+      "scores": {
+        "G": 5,
+        "S": 5,
+        "C": 4,
+        "E": 5,
+        "R": 3,
+        "H": 5,
+        "X": 3,
+        "P": 3
+      },
+      "outcome": "约 1 年内取代 NeRF，2026 年已进入 glTF/OpenUSD 标准化",
+      "score": 80.0
+    },
+    {
+      "name": "生成对抗网络 GAN",
+      "as_of": "2016",
+      "scores": {
+        "G": 5,
+        "S": 5,
+        "C": 4,
+        "E": 4,
+        "R": 3,
+        "H": 5,
+        "X": 3,
+        "P": 3
+      },
+      "outcome": "繁荣约 5 年，2021 后被扩散模型取代",
+      "score": 78.0
+    },
+    {
+      "name": "神经辐射场 NeRF",
+      "as_of": "2021",
+      "scores": {
+        "G": 5,
+        "S": 5,
+        "C": 4,
+        "E": 4,
+        "R": 2,
+        "H": 5,
+        "X": 2,
+        "P": 3
+      },
+      "outcome": "爆发约 2.5 年，2023 后被 3D 高斯泼溅大面积取代",
+      "score": 72.0
+    },
+    {
+      "name": "深度强化学习（游戏）",
+      "as_of": "2016",
+      "scores": {
+        "G": 5,
+        "S": 4,
+        "C": 4,
+        "E": 3,
+        "R": 4,
+        "H": 4,
+        "X": 3,
+        "P": 5
+      },
+      "outcome": "游戏外落地慢，沉寂后以 RLHF/RLVR 形式回归",
+      "score": 66.1
+    },
+    {
+      "name": "大语言模型 LLM（对照：今天）",
+      "as_of": "2026",
+      "scores": {
+        "G": 4,
+        "S": 1,
+        "C": 5,
+        "E": 5,
+        "R": 5,
+        "H": 3,
+        "X": 5,
+        "P": 3
+      },
+      "outcome": "对照组：重要但已是主流，不再是新兴方向，应被时机系数压低",
+      "score": 51.6
+    },
+    {
+      "name": "神经架构搜索 NAS",
+      "as_of": "2018",
+      "scores": {
+        "G": 5,
+        "S": 4,
+        "C": 3,
+        "E": 3,
+        "R": 3,
+        "H": 3,
+        "X": 2,
+        "P": 8
+      },
+      "outcome": "收益被随机搜索基线质疑，2021 后明显降温",
+      "score": 51.4
+    },
+    {
+      "name": "区块链（CS 研究）",
+      "as_of": "2018",
+      "scores": {
+        "G": 4,
+        "S": 4,
+        "C": 2,
+        "E": 3,
+        "R": 4,
+        "H": 3,
+        "X": 3,
+        "P": 12
+      },
+      "outcome": "收缩为密码学/共识等细分方向，泛化应用未兑现",
+      "score": 43.8
+    },
+    {
+      "name": "胶囊网络 CapsNet",
+      "as_of": "2018",
+      "scores": {
+        "G": 3,
+        "S": 4,
+        "C": 2,
+        "E": 4,
+        "R": 2,
+        "H": 4,
+        "X": 2,
+        "P": 6
+      },
+      "outcome": "未能规模化，基本消失",
+      "score": 41.7
+    },
+    {
+      "name": "元宇宙 Metaverse",
+      "as_of": "2021",
+      "scores": {
+        "G": 4,
+        "S": 4,
+        "C": 1,
+        "E": 2,
+        "R": 5,
+        "H": 2,
+        "X": 3,
+        "P": 12
+      },
+      "outcome": "资本退潮，研究热度回落",
+      "score": 37.5
+    }
+  ]
+}

@@ -104,7 +104,7 @@ def tier(score):
         return "B 值得投入"
     if score >= 60:
         return "C 观察"
-    return "D 暂缓/已主流"
+    return "D 暂缓"
 
 
 def load_fields():
@@ -127,6 +127,37 @@ def load_fields():
 
 def fmt_scores(s):
     return " ".join(f"{d}{s[d]:g}" for d in DIMS + ["P"])
+
+
+def write_cards(fields, sens):
+    lines = ["# 领域卡片（由 score.py 自动生成，勿手改；内容来自 evidence/*.json）", ""]
+    for i, f in enumerate(fields, 1):
+        s = sens[f["id"]]
+        lines += [
+            f"## {i}. {f['name_zh']} — {f['score']}（{f['tier']}）",
+            "",
+            f"*{f['name_en']}* · {f['domain']} · `{fmt_scores(f['scores'])}` · "
+            f"排名区间 {s['rank_p10']}–{s['rank_p90']}",
+            "",
+            f"**拐点事件**：{f['inflection_event']}",
+            "",
+            "| 维度 | 分 | 理由 |",
+            "|---|---|---|",
+        ]
+        for d in DIMS + ["P"]:
+            reason = f["rationale"][d].replace("|", "/").replace("\n", " ")
+            lines.append(f"| {DIM_NAMES[d]} {d} | {f['scores'][d]:g} | {reason} |")
+        for c in f.get("calibration", []):
+            lines.append(f"\n> 校准：{c['dim']} {c['from']:g} → {c['to']:g}，{c['reason']}")
+        lines += ["", "**关键证据**：", ""]
+        for e in f["key_evidence"]:
+            src = e["source"]
+            src = f"[来源]({src})" if src.startswith("http") else f"（{src}）"
+            lines.append(f"- {e['date']} {e['claim']} {src}")
+        lines += ["", "**开放问题**：", ""] + [f"- {x}" for x in f["open_problems"]]
+        lines += ["", "**切入点**：", ""] + [f"- {x}" for x in f["entry_points"]] + ["", "---", ""]
+    with open(os.path.join(HERE, "CARDS.md"), "w", encoding="utf-8") as fh:
+        fh.write("\n".join(lines))
 
 
 def main():
@@ -198,6 +229,8 @@ def main():
         )
     with open(os.path.join(HERE, "results.md"), "w", encoding="utf-8") as fh:
         fh.write("\n".join(lines) + "\n")
+
+    write_cards(fields, sens)
 
     print(f"{len(fields)} fields scored; top 10:")
     for f in fields[:10]:
