@@ -1,0 +1,944 @@
+[
+ {
+  "id": "clinical_llm_agents",
+  "name_zh": "临床大模型智能体（诊断对话 + EHR 交互智能体）",
+  "name_en": "Clinical LLM Agents (Diagnostic Dialogue & EHR-Interacting Agents)",
+  "domain": "医疗CS",
+  "scores": {
+   "G": 5,
+   "S": 4.5,
+   "C": 4,
+   "E": 3.5,
+   "R": 5,
+   "H": 4,
+   "X": 4,
+   "P": 7
+  },
+  "rationale": {
+   "G": "未找到精确年度论文计数；JBI 2026 系统综述（检索截至2025-10-21）称该方向过去两年呈指数增长、综合200+研究；2025-09至2026-08 一年内连续出现 FHIR-AgentBench、MedAgentBench v2、PhysicianBench、EHR-Complex（约5.2万任务）、CliniCARE-Bench、GPAgentBench-2K 等基准，定性判断 >100%/年。",
+   "S": "基准与环境刚刚成形，范式未统一（单体智能体 vs 多智能体编排如 MAI-DxO vs RL 训练的问诊策略），在 NLP/ML 顶会中仍是小份额；但工业界关注度已很高，故 4.5。",
+   "C": "AMIE（Nature 2025）在159个模拟病例上于32个维度中30个优于20名PCP；2025-04至11月 BIDMC 前瞻可行性研究100名真实患者，鉴别诊断包含最终诊断90%、零安全叫停；MAI-DxO 在304个NEJM病例上「最高85%」。但 PhysicianBench 上 GPT-5.5 仅 28.0% pass^3，MedAgentBench 最佳 69.67%（动作类仅54%），可靠性远未达标，故 4 而非 5。",
+   "E": "MedAgentBench（HAPI FHIR，100名合成患者、300个医生编写任务）、AgentClinic、FHIR-AgentBench 均开放；EHR-Complex 基于 MIMIC-IV（需 PhysioNet 认证且禁止发往云端 API）；真实院内 EHR 环境几乎不可得。",
+   "R": "Google（AMIE）、Microsoft（MAI-DxO）、OpenAI（ChatGPT for Clinicians、Penda 合作）、Epic 均有旗舰项目；2025 年美国数字健康风投 142 亿美元，其中 AI 公司占 54%，远超 >$1B 门槛。",
+   "H": "环境构建、工具调用可靠性（pass^k）、长程多步工作流、安全护栏、过程评估（CliniCARE-Bench 评调查轨迹）等均可用开源 7B-32B 模型与合成 FHIR 环境在学术算力下完成。",
+   "X": "医疗是高风险、长程、带写操作的智能体典型场景，方法（可验证环境、pass^k 可靠性、人机协同）可外溢到通用智能体与其他专业领域。",
+   "P": "临床验证缺口（AMIE 主研究用演员而非真实患者）、厂商自评（MAI-DxO 85% 为「最高」值、未见同行评审（待核实））、监管（FDA 截至2025年末尚未授权任何生成式AI设备）、被前沿大厂吸收的风险，合计扣 7。"
+  },
+  "inflection_event": "2025年为拐点年：AMIE 正式发表于 Nature（2025-06）并于 BIDMC 完成首个真实患者前瞻研究（2025-04至11月），MedAgentBench 登 NEJM AI（2025-08，待核实）、MAI-DxO 发布（2025-06），医疗 LLM 从「答题」转向「在 EHR 中执行任务、与患者多轮问诊」。",
+  "key_evidence": [
+   {
+    "claim": "AMIE 在随机双盲交叉 OSCE 研究中（159个病例、20名PCP、患者由演员扮演）诊断准确率更高，专科医生评估32维中30维占优",
+    "source": "https://ideas.repec.org/a/nat/nature/v642y2025i8067d10.1038_s41586-025-08866-7.html",
+    "date": "2025-06"
+   },
+   {
+    "claim": "AMIE 在 BIDMC 前瞻单臂可行性研究中与100名真实患者文本问诊，鉴别诊断含最终诊断90%、top-3 75%，无安全叫停；管理方案实用性与成本效益仍不如PCP",
+    "source": "https://arxiv.org/abs/2603.08448",
+    "date": "2026-03"
+   },
+   {
+    "claim": "MedAgentBench：300个医生编写任务、100名合成患者、FHIR 读写环境；最佳模型 Claude 3.5 Sonnet v2 总成功率 69.67%",
+    "source": "https://arxiv.org/abs/2501.14654",
+    "date": "2025-01"
+   },
+   {
+    "claim": "MAI-DxO 在由304个NEJM病例构建的 SD Bench 上最高诊断正确率85%，约为有经验医生的4倍（厂商自报）",
+    "source": "https://microsoft.ai/news/the-path-to-medical-superintelligence/",
+    "date": "2025-06"
+   },
+   {
+    "claim": "PhysicianBench：100个真实会诊任务、21个专科、平均27次工具调用；GPT-5.5 仅 28.0% pass^3",
+    "source": "https://arxiv.org/html/2605.02240v1",
+    "date": "2026-05"
+   },
+   {
+    "claim": "EHR-Complex 基于 MIMIC-IV 构建约5.2万任务、6类临床意图，评测12个智能体，人群级推理与编码落地问题持续存在",
+    "source": "https://arxiv.org/html/2606.23301",
+    "date": "2026-06"
+   },
+   {
+    "claim": "医疗AI智能体系统综述（JBI 2026）：综合200+研究，称过去两年呈指数增长（月份待核实）",
+    "source": "https://www.sciencedirect.com/science/article/pii/S1532046426000699",
+    "date": "2026-01"
+   },
+   {
+    "claim": "OpenAI×Penda Health 在肯尼亚15家诊所39,849次就诊中，使用 AI Consult 的临床医生诊断错误相对减少16%、治疗错误减少13%（OpenAI 参与的研究，同行评审状态待核实）",
+    "source": "https://openai.com/index/ai-clinical-copilot-penda-health",
+    "date": "2025-07"
+   }
+  ],
+  "open_problems": [
+   "如何把智能体在 EHR 中的写操作（下医嘱、改记录）可靠性从约50-70%提升到临床可接受的 pass^k 水平，并给出可审计的失败模式分类",
+   "如何在不接触真实患者数据的前提下构建高保真、可复现的训练/评测环境（合成 FHIR + 患者模拟器），并证明其结果迁移到真实临床",
+   "人机协同设计：智能体何时应升级给医生、如何呈现不确定性，才能在真实工作流中降低错误而非增加自动化偏差"
+  ],
+  "entry_points": [
+   "以 MedAgentBench / FHIR-AgentBench 为环境，用开源 7B-32B 模型做多轮工具调用的 RL（GRPO 类）训练，重点报告 pass^k 可靠性而非单次成功率",
+   "复用 NLP 的对话系统与信息寻求（question asking）经验，研究问诊智能体的「主动提问策略」与信息增益奖励，并在 AgentClinic 类环境中评测"
+  ]
+ },
+ {
+  "id": "medical_llm_evaluation_safety",
+  "name_zh": "医疗 LLM 评测、安全与幻觉",
+  "name_en": "Medical LLM Evaluation, Safety & Hallucination",
+  "domain": "医疗CS",
+  "scores": {
+   "G": 4.5,
+   "S": 4,
+   "C": 3.5,
+   "E": 4.5,
+   "R": 4,
+   "H": 5,
+   "X": 4,
+   "P": 4
+  },
+  "rationale": {
+   "G": "未找到精确论文计数；2025-05 HealthBench、2025-06 MedHELM、2025 MedHallu（EMNLP）、2026-04 HealthBench Professional、2026 Medmarks（ICML）、2026-09《When Rubrics Fail》等密集出现；JMIR 2025 综述已覆盖39个临床 LLM 基准，定性判断 60-100%/年。",
+   "S": "从选择题转向 rubric/真实任务评测的共识正在形成（HealthBench、MedHELM 成为事实标准），但「什么才算临床有效」仍无统一范式，故 4。",
+   "C": "该方向的拐点是「能力倒逼评测」：MedQA 上几乎所有新模型 >95% 已被 Vals.ai 归档；实践型基准仍只有约45-69%（JMIR 综述）；HealthBench Professional 中前沿模型约44-48 分 vs 医生约44（二手数据，待核实）。评测本身不是能力突破，给 3.5。",
+   "E": "HealthBench（5000段对话、48,562条 rubric 条目）开源；MedHELM 框架开源（121个任务、35-37个基准）；MedHallu 1万对；无需受限数据即可开展大部分工作。",
+   "R": "OpenAI、Stanford HAI/Microsoft、Google 均投入评测；但资金主要用于模型而非评测本身，给 4。",
+   "H": "评测是学术界最具比较优势的方向：低算力、需要方法论严谨性（LLM-judge 校准、rubric 有效性、对抗性幻觉测试），大量开放问题。",
+   "X": "rubric 评测、LLM-as-judge 校准、开放式长答案评估方法可外溢到所有专业领域（法律、金融）与通用对齐。",
+   "P": "厂商既出题又参赛的利益冲突（HealthBench Professional 被独立论文点名）、LLM 评委的可靠性、基准到临床结果的效度缺口；但监管/数据门槛低，扣 4。"
+  },
+  "inflection_event": "2025-05 OpenAI 发布 HealthBench（262名医生、5000段多轮对话、rubric 评分），同期 MedQA 饱和（>95%）；标志医疗 LLM 评测从「执照考试选择题」转向「真实对话 + 医生 rubric + 真实部署研究」。",
+  "key_evidence": [
+   {
+    "claim": "HealthBench：5000段多轮对话，每段配医生编写的 rubric，共48,562条评分标准，含 Consensus 与 Hard 子集",
+    "source": "https://arxiv.org/abs/2505.08775",
+    "date": "2025-05"
+   },
+   {
+    "claim": "MedHELM：与29名临床医生共建 5大类22子类121个任务；DeepSeek R1 与 o3-mini 胜率66%最高",
+    "source": "https://arxiv.org/pdf/2505.23802v2",
+    "date": "2025-06"
+   },
+   {
+    "claim": "MedQA 被 Vals.ai 归档：几乎所有新模型得分 >95%，前三均约96.4-96.5%",
+    "source": "https://www.vals.ai/benchmarks/medqa-08-12-2025",
+    "date": "2026-04"
+   },
+   {
+    "claim": "39个临床 LLM 基准系统综述：知识考试类 84-90%，实践类约45-69%，认为考试分数是临床就绪度的误导性代理（月份待核实）",
+    "source": "https://www.jmir.org/2025/1/e84120",
+    "date": "2025-12"
+   },
+   {
+    "claim": "HealthBench Professional：从15,079个候选中精选525个医生编写任务（50国26专科），并以无时限可上网的医生作为基线",
+    "source": "https://arxiv.org/pdf/2604.27470",
+    "date": "2026-04"
+   },
+   {
+    "claim": "MedHallu：1万对 PubMedQA 衍生问答，最佳模型检测「困难」幻觉 F1 仅 0.625",
+    "source": "https://arxiv.org/abs/2502.14302",
+    "date": "2025-02"
+   },
+   {
+    "claim": "临床笔记摘要中 12,999 条医生标注句子：幻觉率 1.47%、遗漏率 3.45%（npj Digital Medicine，日期待核实）",
+    "source": "https://doi.org/10.1038/s41746-025-01670-7",
+    "date": "2025-05"
+   },
+   {
+    "claim": "《When Rubrics Fail》：用 HealthBench 500段子集显示幻觉暴露 rubric 评测盲区",
+    "source": "https://arxiv.org/pdf/2609.12718",
+    "date": "2026-09"
+   }
+  ],
+  "open_problems": [
+   "rubric/LLM-judge 评分与真实临床结局（误诊、伤害）之间的效度如何建立，如何检测 rubric 漏掉的幻觉",
+   "如何在不依赖厂商的前提下构建防污染、可持续更新、跨语言（含中文）的真实临床任务评测",
+   "部署后评测：如何从真实使用日志（如每周3亿次健康咨询）中低成本地抽样、标注并监测安全风险"
+  ],
+  "entry_points": [
+   "研究医疗 LLM-as-judge 的校准与偏差（位置偏差、冗长偏差、对幻觉的盲区），与医生标注对比并提出修正方法——NLP 评测方法直接迁移",
+   "构建中文版 HealthBench 式 rubric 基准或对抗性幻觉测试集（植入错误细节、过时指南），填补非英语评测空白"
+  ]
+ },
+ {
+  "id": "medical_reasoning_models",
+  "name_zh": "医学推理模型（RLVR / 可验证奖励）",
+  "name_en": "Medical Reasoning Models (RL with Verifiable Rewards)",
+  "domain": "医疗CS",
+  "scores": {
+   "G": 5,
+   "S": 4,
+   "C": 4,
+   "E": 4.5,
+   "R": 4,
+   "H": 4.5,
+   "X": 3,
+   "P": 7
+  },
+  "rationale": {
+   "G": "2024-12 HuatuoGPT-o1 之后，2025 年内出现 Med-R1（2025-03）、MedReason（2025-04）、m1（test-time scaling，细节待核实）、DoctorAgent-RL（2025-05）、Fleming-R1（2025-09）、Baichuan-M2（2025-09）、Baichuan-M3（2026-02）等，2025-08 已有至少两篇专门综述（其一分析60篇代表性研究），2026 年又有 MR-Bench 综述，定性判断 >100%/年。",
+   "S": "方法高度沿用通用推理范式（GRPO + 可验证奖励 + 蒸馏 CoT），尚无医学专属共识（如何为开放式临床问题设计奖励），但跟随者众多，给 4。",
+   "C": "Baichuan-M2（32B）HealthBench Hard 34.7，当时仅次于 GPT-5；M3 自报 Hard 44.4 vs GPT-5.2-High 42.0；Med-R1 2B 模型较基座平均准确率 +29.94%；MedHELM 中推理模型胜率最高（66%）。均为自报、无独立复现，给 4。",
+   "E": "开源基座（Qwen 系列）、HuatuoGPT-o1 的4万可验证问题、MedReason 32,682条 KG 推理链、Baichuan-M2 权重均公开；MCQ 数据充足。",
+   "R": "百川等中国厂商、Google/OpenAI 通用推理模型投入巨大，但「医学专属推理模型」本身投入有限，给 4。",
+   "H": "7B-32B 规模的 RL 训练在学术算力可行；奖励设计、过程监督、开放式问题验证器等开放问题多。",
+   "X": "医学推理方法多为通用推理的应用，外溢有限；但「非数学领域的可验证奖励」问题对法律、科学等领域有借鉴，给 3。",
+   "P": "被通用前沿模型吸收的风险极高（GPT-5.4 在 ChatGPT for Clinicians 中胜过所有模型与医生，厂商自报）；MCQ 奖励易被投机、数据污染；自报结果难复现，扣 7。"
+  },
+  "inflection_event": "2024-12 HuatuoGPT-o1 首次在医学中用「验证器 + RL」（4万可验证问题）训练 o1 式推理；2025 年 DeepSeek-R1 之后 GRPO 在医学 VQA/问答/问诊中被大规模复用，Baichuan-M2（2025-09）把患者模拟器 + rubric 生成器做成大型验证器系统。",
+  "key_evidence": [
+   {
+    "claim": "HuatuoGPT-o1：验证器引导搜索复杂推理轨迹 + 基于验证器奖励的 RL，仅用4万可验证问题超过通用与医学基线",
+    "source": "https://arxiv.org/abs/2412.18925v1",
+    "date": "2024-12"
+   },
+   {
+    "claim": "Med-R1 用 GRPO 训练医学 VLM，覆盖8种影像模态，较基座 Qwen2-VL-2B 平均准确率提升 29.94%",
+    "source": "https://arxiv.org/html/2503.13939v4",
+    "date": "2025-03"
+   },
+   {
+    "claim": "MedReason：用医学知识图谱生成32,682条推理链，MedReason-8B 在 MedBullets 上比 Huatuo-o1-8B 高最多4.2%",
+    "source": "https://arxiv.org/html/2504.00993v1",
+    "date": "2025-04"
+   },
+   {
+    "claim": "Baichuan-M2：大型验证器系统（患者模拟器 + 临床 rubric 生成器 + RL），HealthBench 60.1、Hard 34.7（二手报道）",
+    "source": "https://arxiv.org/pdf/2509.02208",
+    "date": "2025-09"
+   },
+   {
+    "claim": "Baichuan-M3 自报 HealthBench Hard 44.4，高于 GPT-5.2-High 的 42.0，总分65.1",
+    "source": "https://arxiv.org/pdf/2602.06570",
+    "date": "2026-02"
+   },
+   {
+    "claim": "Fleming-R1：两阶段 RLVR（GRPO + 难样本挖掘），32B 接近 GPT-4o",
+    "source": "https://arxiv.org/pdf/2509.15279v1",
+    "date": "2025-09"
+   },
+   {
+    "claim": "医学推理系统综述：分析2022-2025年60篇代表性研究，覆盖 SFT、RL 与测试时方法",
+    "source": "https://arxiv.org/pdf/2508.00669",
+    "date": "2025-08"
+   }
+  ],
+  "open_problems": [
+   "开放式临床问题（管理方案、患者沟通）如何构造可靠且难以被投机的奖励：rubric 奖励、过程奖励与医生偏好如何结合",
+   "推理链是否忠实、是否真正提升安全性：长 CoT 在医学中的过度思考、错误自我说服与幻觉放大问题",
+   "医学专用小模型的推理能力相对通用前沿模型的价值在哪里（本地部署、隐私、成本），如何系统证明"
+  ],
+  "entry_points": [
+   "以 HealthBench rubric 为奖励信号，在开源 7B-14B 模型上做 rubric-based RL，并系统研究 LLM-judge 奖励被投机（reward hacking）的现象",
+   "研究医学推理链的忠实性与可解释性：对比 CoT 中引用的证据与最终答案的因果关系（NLP 可解释性方法直接复用）"
+  ]
+ },
+ {
+  "id": "generalist_multimodal_medical_fm",
+  "name_zh": "多模态/通用医学基础模型（含放射报告生成、3D 影像）",
+  "name_en": "Multimodal Generalist Medical Foundation Models",
+  "domain": "医疗CS",
+  "scores": {
+   "G": 4,
+   "S": 3.5,
+   "C": 3.5,
+   "E": 4,
+   "R": 4.5,
+   "H": 3.5,
+   "X": 4,
+   "P": 6
+  },
+  "rationale": {
+   "G": "未找到精确计数；2025-05 MedGemma、2025-07 技术报告、2026-01 MedGemma 1.5（扩展到 CT/MRI 3D 与全切片病理）、2025-12 Pillar-0（待核实）等持续迭代，第三方称 MedGemma 下载量达百万级、社区变体数百（待核实），判断约 40-80%/年。",
+   "S": "自 2023 Med-PaLM M 起已是成熟赛道，方法共识（通用 VLM + 医学继续预训练/指令微调）明确；3D 体数据仍属早期，综合 3.5。",
+   "C": "MedGemma 4B 在 MIMIC-CXR 报告生成 RadGraph F1 29.5→30.3（SOTA）；81% 报告被放射科医生认为可导致相似管理（Google 开发者博文，二手）；MedGemma 1.5 胸片定位 IoU +35%；但临床医生报告其漏诊确诊结核胸片（个例）。窄域胜利，给 3.5。",
+   "E": "MedGemma/MedSigLIP 开放权重（需同意 HAI-DEF 条款）、Merlin（MIT 许可）、Pillar-0 开源（待核实）；MIMIC-CXR 需 PhysioNet 认证。",
+   "R": "Google、Microsoft、阿里等大厂及 UC Berkeley/UCSF、Stanford 均投入，给 4.5。",
+   "H": "从头预训练需大算力；但基于开源权重的微调、3D 理解、纵向对比、报告评测指标等学术可做，给 3.5。",
+   "X": "医学多模态是影像、病理、文本的统一底座，外溢到临床智能体与评测，给 4。",
+   "P": "临床验证缺口（Google 声明不可直接临床使用）、FDA 截至2025年末尚未授权生成式 AI 设备、报告生成指标与临床效用脱节、数据访问，扣 6。"
+  },
+  "inflection_event": "2025-05 Google 开放 MedGemma（4B 多模态/27B 文本）与 MedSigLIP，首次让学术界拿到「可本地部署、性能接近闭源」的医学多模态模型；2026-01 MedGemma 1.5 扩展到 3D CT/MRI 与全切片病理。",
+  "key_evidence": [
+   {
+    "claim": "MedGemma 4B 在 MIMIC-CXR 胸片报告生成（Findings+Impression）RadGraph F1 29.5，微调后 30.3，达 SOTA",
+    "source": "https://arxiv.org/pdf/2507.05201",
+    "date": "2025-07"
+   },
+   {
+    "claim": "MedGemma 1.5：胸片解剖定位 IoU 提升35%，新增 CT/MRI 3D、全切片病理与文档理解",
+    "source": "https://papers.cool/arxiv/2604.05081",
+    "date": "2026-04"
+   },
+   {
+    "claim": "Merlin：3D 腹部 CT 视觉-语言模型，1.5万+ CT 扫描、180万 EHR 诊断码，MIT 许可公开权重",
+    "source": "https://www.huggingface.co/stanfordmimi/Merlin/tree/main",
+    "date": "2024-06"
+   },
+   {
+    "claim": "MedGemma 首批于2025-05发布、属 HAI-DEF 计划，1.5 版本于2026-01-13发布；下载量「百万级」为第三方估计（待核实）",
+    "source": "https://en.wikipedia.org/wiki/Gemma_(language_model)",
+    "date": "2026-01"
+   },
+   {
+    "claim": "FDA 数字健康咨询委员会（2025-11）讨论生成式 AI 心理健康设备；律所总结称 FDA 尚未授权任何生成式 AI 临床设备",
+    "source": "https://hlc.com/en/publications/fdas-digital-health-advisory-committee-weighs-guardrails-for-generative-ai-in-mental-health-devices",
+    "date": "2025-11"
+   }
+  ],
+  "open_problems": [
+   "3D 体数据（CT/MRI）与纵向多时间点影像的高效表征与报告生成，目前仍远落后于 2D 胸片",
+   "报告生成的临床有效性评价：RadGraph/BLEU 类指标与放射科医生判断、患者管理决策之间的对齐",
+   "细粒度定位与可追溯性：模型结论能否指回影像区域，从而支撑放射科医生复核"
+  ],
+  "entry_points": [
+   "在 MedGemma/MedSigLIP 上做报告生成的事实性校验（基于 RadGraph 的结构化一致性检查 + 不确定性表达），NLP 的事实一致性方法直接迁移",
+   "研究放射报告的评测指标：构建与医生错误分级对齐的自动指标，并在 MIMIC-CXR（需认证）或 CheXpert Plus 类公开数据上验证"
+  ]
+ },
+ {
+  "id": "pathology_foundation_models",
+  "name_zh": "病理基础模型",
+  "name_en": "Computational Pathology Foundation Models",
+  "domain": "医疗CS",
+  "scores": {
+   "G": 3.5,
+   "S": 3,
+   "C": 3.5,
+   "E": 3,
+   "R": 3.5,
+   "H": 3.5,
+   "X": 2.5,
+   "P": 6
+  },
+  "rationale": {
+   "G": "2023-2025 模型爆发（UNI/UNI2、Virchow/Virchow2、Prov-GigaPath、CONCH、TITAN、H-Optimus-0），2025-2026 进入「基准测试期」：PhenoBench、肾脏病理基准（2026-03）、CellPath-Bench（2026-08）、鲁棒性基准（2026-07）等；新模型增速放缓，判断约 30-50%/年。",
+   "S": "方法共识明确（DINOv2 式 ViT-H 切片编码器 + MIL/切片级聚合），已有 Trident/Patho-Bench 等标准工具，属已建立赛道，给 3。",
+   "C": "Prov-GigaPath 用170,000张 WSI 的13亿图块训练；但 2026-07 十二模型基准显示规模收益趋平、中等规模 UNI2/Virchow2 可匹敌更大模型；综述引述鲁棒性指数仅 Virchow2 >1（约1.2），多数模型按医院/扫描仪而非癌种聚类。给 3.5。",
+   "E": "多数权重开放但需签协议；预训练数据多为私有（MSKCC、Providence）；TCGA 公开但存在评测数据重叠风险。",
+   "R": "Tempus 以8125万美元收购 Paige（Paige 曾融资2.2亿美元）；Bioptimus 累计7600万美元；Microsoft/Providence 投入；整体 <$1B 且估值回落，给 3.5。",
+   "H": "切片级/多模态（病理+基因组+报告）建模、跨中心鲁棒性、小模型蒸馏等可做，但需病理专家标注，给 3.5。",
+   "X": "主要服务肿瘤病理，外溢有限，给 2.5。",
+   "P": "站点偏差、评测数据泄漏、规模收益递减、商业化受挫（Paige 收购价远低于融资额）、临床验证与监管，扣 6。"
+  },
+  "inflection_event": "2024 年 UNI（Nature Medicine）、Prov-GigaPath（Nature）、Virchow 等相继发表（背景知识），确立病理自监督基础模型范式；2025-2026 转入大规模独立基准与鲁棒性审视阶段。",
+  "key_evidence": [
+   {
+    "claim": "Tempus 以8125万美元（主要为股票）收购 Paige，核心资产是约700万张数字化病理切片数据；Paige 曾融资2.2亿美元",
+    "source": "https://www.fiercehealthcare.com/medtech/tempus-claims-ai-pathology-developer-paige-81m-deal",
+    "date": "2025-08"
+   },
+   {
+    "claim": "Bioptimus 完成4100万美元融资，累计7600万美元；其 H-Optimus-0 自称最大病理基础模型",
+    "source": "https://www.bioptimus.com/news/bioptimus-hits-76m-funding",
+    "date": "2025-01"
+   },
+   {
+    "claim": "12个病理基础模型 vs ResNet 鲁棒性基准：基础模型更鲁棒，但规模收益趋平，UNI2/Virchow2 等中等规模模型匹敌更大模型",
+    "source": "https://arxiv.org/abs/2607.04401",
+    "date": "2026-07"
+   },
+   {
+    "claim": "综述引述鲁棒性指数：仅 Virchow2 >1（约1.2），多数模型嵌入按医疗中心聚类，在未见中心性能大幅下降",
+    "source": "https://arxiv.org/html/2510.23807v1",
+    "date": "2025-10"
+   },
+   {
+    "claim": "CellPath-Bench：UNI2 获26项胜出 vs Virchow2 19项，排名随任务而变",
+    "source": "https://arxiv.org/pdf/2608.21060",
+    "date": "2026-08"
+   },
+   {
+    "claim": "肾脏病理基准同时评测 UNI、UNI2-h、Virchow2、Prov-GigaPath 等在切片级与图块级任务",
+    "source": "https://arxiv.org/pdf/2603.15967",
+    "date": "2026-03"
+   }
+  ],
+  "open_problems": [
+   "跨中心/跨扫描仪鲁棒性：如何让表征按生物学而非采集站点聚类",
+   "切片级（十万级图块）长上下文建模与病理-基因组-报告多模态对齐",
+   "规模收益递减之后，数据质量与临床监督信号如何替代参数规模"
+  ],
+  "entry_points": [
+   "把长上下文语言建模技术（稀疏注意力、状态空间模型、检索）迁移到全切片级聚合，在 TCGA 公开数据上与 TITAN/Prov-GigaPath 对比",
+   "做病理报告-切片的视觉语言对齐与报告生成（CONCH 类），发挥 NLP 背景"
+  ]
+ },
+ {
+  "id": "ehr_foundation_models",
+  "name_zh": "EHR / 结构化病历基础模型（医疗事件生成模型）",
+  "name_en": "EHR Foundation Models / Generative Medical Event Models",
+  "domain": "医疗CS",
+  "scores": {
+   "G": 4,
+   "S": 4.5,
+   "C": 4,
+   "E": 2.5,
+   "R": 4,
+   "H": 3,
+   "X": 4,
+   "P": 6
+  },
+  "rationale": {
+   "G": "未找到精确计数；2025 年出现三项标志性工作：Microsoft MIMIC-IV 缩放律（2025-05）、Epic/Microsoft CoMET（2025-08）、Delphi-2M（Nature 2025-09）；MEDS 数据标准截至2026-03 已被21家机构、27+篇论文使用，判断约 50-100%/年。",
+   "S": "缩放律刚被证明、社区小、标准（MEDS vs OMOP）与 tokenization 无共识，处于陡峭起飞前段，给 4.5。",
+   "C": "CoMET 在1.18亿患者、1150亿医疗事件上呈幂律缩放（最大计算最优约10亿参数），78个真实任务上零样本普遍匹敌或超过专用监督模型（30天再入院 AUROC 0.770 vs 0.717，二手）；Delphi-2M 预测1000+种疾病并在190万丹麦人群外部验证。类似 2020 年 GPT-3 的「缩放律时刻」，但仅限少数数据持有方，给 4。",
+   "E": "核心瓶颈：MIMIC-IV 规模不足以支撑大模型缩放（研究称会出现平台）；EHRSHOT 仅6,739名患者、CLMBR 权重需签协议；PhysioNet 2025-07 起按 DOJ 数据安全计划对部分受控数据集屏蔽中国等「关注国家」用户，给 2.5。",
+   "R": "Epic（Cosmos 数据）+ Microsoft、Google；但总体投入小于 LLM 主战场，给 4。",
+   "H": "模型训练受数据所限，学术界可做：表示/tokenization、MEDS 标准化管线、评测、合成轨迹、公平性；但需要医院合作，给 3。",
+   "X": "患者轨迹生成可外溢到数字孪生、合成数据、临床试验模拟、健康经济学，给 4。",
+   "P": "数据访问与隐私、跨机构可迁移性、数据偏差（UK Biobank 人群偏差）、临床验证缺口，扣 6。"
+  },
+  "inflection_event": "2025-08 Epic 与 Microsoft 发布 CoMET：在1.18亿患者、1150亿医疗事件上首次给出医疗事件数据的大规模缩放律，并在78个任务上零样本匹敌专用模型；同年 Delphi-2M 登 Nature，证明 GPT 式模型可生成20年疾病轨迹。",
+  "key_evidence": [
+   {
+    "claim": "CoMET：解码器 Transformer 在1.18亿患者、1150亿离散医疗事件上预训练，给出计算/数据/参数幂律，78个任务上普遍匹敌或超过监督模型",
+    "source": "https://arxiv.org/html/2508.12104v3",
+    "date": "2025-08"
+   },
+   {
+    "claim": "在 MIMIC-IV 患者时间线上发现抛物线 IsoFLOP 曲线与幂律；验证损失可预测零样本临床效用，但公开数据规模可能限制缩放",
+    "source": "https://arxiv.org/pdf/2505.22964",
+    "date": "2025-05"
+   },
+   {
+    "claim": "Delphi-2M：GPT 架构在40万 UK Biobank 参与者上训练，预测1000+种疾病，未改参数在190万丹麦人群外部验证，可生成合成健康轨迹",
+    "source": "https://www.ukbiobank.ac.uk/publications/learning-the-natural-history-of-human-disease-with-generative-transformers/",
+    "date": "2025-09"
+   },
+   {
+    "claim": "Epic 在2025年用户大会宣布开发 CoMET 用于真实世界证据与临床决策",
+    "source": "https://www.healthcareitnews.com/news/epic-unveils-ai-agents-showcases-new-foundational-models",
+    "date": "2025-08"
+   },
+   {
+    "claim": "EHRSHOT：6,739名患者纵向结构化数据、15个少样本任务；CLMBR-T-base 141M 参数在257万患者上预训练，权重需签研究使用协议",
+    "source": "https://arxiv.org/pdf/2307.02028",
+    "date": "2023-07"
+   },
+   {
+    "claim": "MEDS 数据标准截至2026-03 已被21家机构、至少27篇论文、17个数据集、12个算法使用",
+    "source": "https://www.ohdsi.org/wp-content/uploads/2026/05/Meds-Slidedeck.pdf",
+    "date": "2026-05"
+   },
+   {
+    "claim": "PhysioNet 依 DOJ 数据安全计划，对来自关注国家（含中国大陆、香港、澳门）IP 或机构的用户屏蔽部分受控数据集",
+    "source": "https://physionet.org/news/post/data-security-program-1/",
+    "date": "2025-07"
+   }
+  ],
+  "open_problems": [
+   "医疗事件的 tokenization（编码、数值化验、时间间隔）与跨机构/跨编码体系的可迁移性",
+   "生成式患者轨迹作为数字孪生的可信度：校准、反事实（干预）推断与偏差放大",
+   "如何在数据不出院的前提下预训练（联邦/合成数据蒸馏），以及公开数据规模不足时的缩放策略"
+  ],
+  "entry_points": [
+   "把 LM 的 tokenization 与缩放律研究经验迁移到 MEDS 格式的 MIMIC-IV/EHRSHOT 上（如数值 token 化、时间编码），这是 NLP 背景最直接的切入",
+   "研究 EHR 生成模型与临床文本（出院小结）的联合建模，或用 LLM 将结构化轨迹与文本对齐"
+  ]
+ },
+ {
+  "id": "wearable_physiological_fm",
+  "name_zh": "可穿戴与生理信号基础模型（ECG/PPG/传感器-语言）",
+  "name_en": "Wearable & Physiological Signal Foundation Models",
+  "domain": "医疗CS",
+  "scores": {
+   "G": 4,
+   "S": 4.5,
+   "C": 3.5,
+   "E": 2.5,
+   "R": 4,
+   "H": 3.5,
+   "X": 3.5,
+   "P": 5
+  },
+  "rationale": {
+   "G": "未找到精确计数；2024-10 Google LSM（ICLR 2025）、2025-06 SensorLM、2025-07 LSM-2 与 Apple WBM、2025-10 ECG-FM（JAMIA Open）、ECGFounder（NEJM AI）、2026-08 Samsung 宣布健康基础模型，判断约 50-100%/年。",
+   "S": "社区小、范式未定（原始波形 vs 分钟级汇总、行为数据 vs 传感器数据、传感器-语言模型刚出现），给 4.5。",
+   "C": "LSM 在4000万小时、16.5万人数据上证明缩放律；Apple WBM 用16.2万人、25亿小时数据评测57个任务；Apple 高血压提醒获 FDA 许可（2025-09）但敏感度仅41.2%、特异度92.3%。窄域胜利，给 3.5。",
+   "E": "大规模数据为 Apple/Google 私有；公开有 MIMIC-IV-ECG、PTB-XL（背景知识）、ECG-FM 开放权重与基准；ECGFounder 权重开放性待核实，给 2.5。",
+   "R": "Apple、Google、Samsung 均有项目，给 4。",
+   "H": "缺失数据建模、传感器-语言对齐、个性化、小模型端侧部署可学术开展，但大规模预训练数据难得，给 3.5。",
+   "X": "通用时间序列基础模型、传感器-语言模型可外溢到工业传感与物联网，给 3.5。",
+   "P": "数据私有、消费级与医疗级精度差距、自报验证（Apple 研究为公司资助）、标签稀缺，扣 5。"
+  },
+  "inflection_event": "2024-10 Google 发布 LSM（ICLR 2025），首次在4000万小时可穿戴数据上给出缩放律；2025-09 Apple Watch 基于 PPG 机器学习的高血压提醒获 FDA 许可，标志可穿戴 AI 进入大规模筛查。",
+  "key_evidence": [
+   {
+    "claim": "LSM：使用16.5万人、最多4000万小时的心率、HRV、加速度、皮电等分钟级数据，缩放律在插补、外推等任务成立",
+    "source": "https://arxiv.org/pdf/2410.13638",
+    "date": "2024-10"
+   },
+   {
+    "claim": "Apple 可穿戴行为基础模型：16.2万人、超25亿小时数据、57个健康任务，与原始传感器表征结合进一步提升",
+    "source": "https://arxiv.org/html/2507.00191v1",
+    "date": "2025-07"
+   },
+   {
+    "claim": "SensorLM：构建最大传感器-语言数据集，10.3万人、5970万小时",
+    "source": "https://alphaxiv.org/abs/2506.09108",
+    "date": "2025-06"
+   },
+   {
+    "claim": "ECG-FM：150万份12导联心电预训练，开放权重与 MIMIC-IV-ECG 基准；房颤 AUROC 0.996、LVEF≤40% AUROC 0.929",
+    "source": "https://pubmed.ncbi.nlm.nih.gov/41113504/",
+    "date": "2025-10"
+   },
+   {
+    "claim": "ECGFounder：1,077万份心电、182万名受试者、150个标签类别，可扩展到单导联",
+    "source": "https://arxiv.org/pdf/2410.04133",
+    "date": "2024-10"
+   },
+   {
+    "claim": "Apple 高血压提醒验证：训练数据超10万人、关键研究超2000人；第三方分析敏感度41.2%、特异度92.3%",
+    "source": "https://www.apple.com/sg/health/pdf/Hypertension_Notifications_Validation_Paper_September_2025.pdf",
+    "date": "2025-09"
+   }
+  ],
+  "open_problems": [
+   "真实世界数据高缺失率（LSM-2 报告160万个日窗口中无一完全无缺失）下的鲁棒预训练与推断",
+   "传感器-语言对齐：如何把生理信号转成可推理的语言描述并与 LLM 健康助手结合",
+   "从风险预测到临床可操作：低敏感度筛查如何与后续确认流程结合并评估净收益"
+  ],
+  "entry_points": [
+   "做传感器-语言模型：用 LLM 为 ECG/可穿戴时间序列生成描述并训练对比/生成式对齐（SensorLM 路线），在 MIMIC-IV-ECG + 报告文本上开展",
+   "把 LLM 健康助手与可穿戴数据结合的问答/摘要任务作为 NLP 侧切入（如解读一个月睡眠与心率数据）"
+  ]
+ },
+ {
+  "id": "ambient_clinical_documentation",
+  "name_zh": "环境式临床文档（AI 听写/Ambient Scribe）",
+  "name_en": "Ambient AI Clinical Documentation (AI Scribes)",
+  "domain": "医疗CS",
+  "scores": {
+   "G": 4.5,
+   "S": 2.5,
+   "C": 3.5,
+   "E": 2,
+   "R": 5,
+   "H": 2,
+   "X": 2.5,
+   "P": 8
+  },
+  "rationale": {
+   "G": "产业侧爆发：Abridge 2025-02 估值27.5亿美元、4个月后以53亿美元融资3亿美元，覆盖150+大型医疗系统；医生规律使用语音文档工具比例 2025-04 的20%→2026-01 的29%（二手，待核实）。",
+   "S": "已是产品化主流品类，技术范式（ASR + LLM 摘要 + EHR 集成）已形成共识，学术研究主要在评估层面，给 2.5。",
+   "C": "UCLA NEJM AI 三臂 RCT（238名医生）：Nabla 使每篇笔记书写时间相对对照多降9.5%（显著），DAX 不显著；JAMA Netw Open 质量改进研究：倦怠51.9%→38.8%（非随机）。效果真实但温和，给 3.5。",
+   "E": "真实诊室对话音频高度敏感、几乎无公开大规模数据；ACI-Bench 等小规模基准（背景知识），给 2。",
+   "R": "Abridge、Microsoft（DAX）、Nabla、Epic 等，资金远超 $1B，给 5。",
+   "H": "核心技术被产业吸收，学术空间主要在错误审计与评测，给 2。",
+   "X": "长对话摘要、事实一致性方法有一定外溢，但应用面窄，给 2.5。",
+   "P": "产业吸收风险最高、数据不可得、错误率显著（审计显示31.3%笔记有经核实的错误，JMIR 试点中遗漏18%、幻觉11.5%）、效果温和，扣 8。"
+  },
+  "inflection_event": "2025 年：Abridge 估值4个月内近翻倍至53亿美元，UCLA 在 NEJM AI 发表首批随机对照试验（2025-11），环境式文档成为医疗生成式 AI 第一个大规模落地品类。",
+  "key_evidence": [
+   {
+    "claim": "Abridge 由 a16z 领投融资3亿美元、估值约53亿美元，此前2025-02 估值27.5亿美元；覆盖150+大型医疗系统",
+    "source": "https://oodaloop.com/briefs/technology/abridge-whose-ai-app-takes-notes-for-doctors-valued-at-5-3-billion-at-funding",
+    "date": "2025-06"
+   },
+   {
+    "claim": "UCLA 三臂 RCT（238名门诊医生、14个专科）：Nabla 组每篇笔记书写时间相对对照多降9.5%且显著，DAX 组不显著",
+    "source": "https://www.uclahealth.org/news/release/ucla-study-finds-ai-scribes-may-reduce-documentation-time",
+    "date": "2025-11"
+   },
+   {
+    "claim": "六家医疗系统263名临床医生使用30天后，门诊倦怠率51.9%→38.8%（前后对照、非随机）（月份待核实）",
+    "source": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12492056/",
+    "date": "2025-10"
+   },
+   {
+    "claim": "31名医生7545篇笔记的试点：被审阅笔记中遗漏18%、幻觉11.5%、误纳入9.3%，2.5%含严重风险错误（月份待核实）",
+    "source": "https://medinform.jmir.org/2026/1/e86474",
+    "date": "2026-01"
+   },
+   {
+    "claim": "对三款商用 AI 听写在142次问诊、565篇笔记上的审计：31.3%笔记含经核实的错误，集中在过敏与用药信息",
+    "source": "https://huggingface.co/papers/2608.31017",
+    "date": "2026-08"
+   },
+   {
+    "claim": "2025年美国数字健康风投142亿美元，AI 公司占54%（2024年为37%）",
+    "source": "https://www.fiercehealthcare.com/digital-health/jpm26-digital-health-funding-hit-142b-2025-ai-companies-taking-lions-share-dollars",
+    "date": "2026-01"
+   }
+  ],
+  "open_problems": [
+   "笔记错误审计的标准化：不同审计间差异主要来自评审口径，缺乏统一的错误分类与严重度量表",
+   "遗漏检测与自动核查：如何自动发现对话中出现但笔记遗漏的关键信息（用药、过敏）",
+   "长期效果：对患者结局、医生技能退化与计费编码行为的影响"
+  ],
+  "entry_points": [
+   "用公开或合成医患对话数据构建笔记事实一致性/遗漏检测器（NLP 摘要评估方法直接迁移）",
+   "设计标准化 AI 笔记错误分类与自动审计基准，可与临床合作者在小规模真实数据上验证"
+  ]
+ },
+ {
+  "id": "patient_simulators_digital_twins",
+  "name_zh": "患者模拟器与医疗数字孪生（LLM 驱动）",
+  "name_en": "LLM Patient Simulators & Medical Digital Twins",
+  "domain": "医疗CS",
+  "scores": {
+   "G": 4,
+   "S": 5,
+   "C": 3,
+   "E": 4,
+   "R": 3,
+   "H": 5,
+   "X": 3.5,
+   "P": 7
+  },
+  "rationale": {
+   "G": "未找到精确计数；AgentClinic（2024-05起多版迭代）、DoctorAgent-RL（2025-05）、Baichuan-M2 将患者模拟器作为 RL 验证器（2025-09）、PatientHub 统一框架（2026-02）、JMIR 2026 系统综述与 AIMED 21项研究综述、Cureus 鲁棒性基准（2026-05），判断约 50-100%/年。",
+   "S": "社区小，保真度度量互不一致（PatientHub 动机即为各研究 rubric 不统一），无共识范式，给 5。",
+   "C": "AgentClinic 显示 MedQA 改为序贯问诊后诊断准确率可降至原来的十分之一以下，证明模拟器能暴露静态基准看不到的缺陷；Baichuan-M2 用模拟器做大规模 RL；但模拟器本身的真实性未被严格验证，给 3。",
+   "E": "仅需开源 LLM 与公开病例（MedQA、NEJM 病例），无受限数据门槛，给 4。",
+   "R": "以学术为主，百川等少数企业内部使用，给 3。",
+   "H": "非常适合学术：低算力、无数据门槛、开放问题多（保真度、多样性、可控性），给 5。",
+   "X": "医生智能体 RL 环境、医学教育、评测三用；「用户模拟器」问题与通用对话系统/智能体评测共享，给 3.5。",
+   "P": "LLM 模拟 LLM 的循环性与 sim-to-real 缺口、学习收益证据薄弱（多为评分而非对照学习结局）、易被纳入临床智能体方向，扣 7。"
+  },
+  "inflection_event": "2025 年患者模拟器从「教学工具」变成「RL 训练环境」：DoctorAgent-RL（2025-05）与 Baichuan-M2（2025-09）用模拟患者 + 评估器为多轮问诊提供奖励；同期 Delphi-2M 证明生成式模型可产生合成疾病轨迹，数字孪生有了数据侧基础。",
+  "key_evidence": [
+   {
+    "claim": "AgentClinic：9个专科、7种语言的多模态智能体基准；MedQA 改为序贯对话后诊断准确率可降至原来的十分之一以下；患者智能体所用 LLM 显著影响结果",
+    "source": "https://arxiv.org/abs/2405.07960v4",
+    "date": "2024-10"
+   },
+   {
+    "claim": "DoctorAgent-RL：医生智能体与患者智能体多轮交互，由会诊评估器给奖励进行 RL，并构建 MTMedDialog 数据集",
+    "source": "https://arxiv.org/abs/2505.19630v3",
+    "date": "2025-05"
+   },
+   {
+    "claim": "PatientHub：统一的患者模拟框架与模块化 LLM-judge 评估器，动机是各研究的 rubric 与协议不一致",
+    "source": "https://arxiv.org/pdf/2602.11684",
+    "date": "2026-02"
+   },
+   {
+    "claim": "LLM 虚拟患者系统综述：评测指标分5类，真实性多以幻觉率与保真度衡量；疾病覆盖、多病共存与评测标准化均不足（月份待核实）",
+    "source": "https://medinform.jmir.org/2026/1/e79039/PDF",
+    "date": "2026-01"
+   },
+   {
+    "claim": "日语问诊虚拟患者鲁棒性基准：评测病例保真、对话连续性与约束遵守，作者强调不代表可部署",
+    "source": "https://assets.cureus.com/uploads/original_article/pdf/485892/20260618-261691-ziqwms.pdf",
+    "date": "2026-05"
+   },
+   {
+    "claim": "Baichuan-M2 的验证器系统包含患者模拟器与临床评分生成器，用于 RL 训练（二手中文技术解读）",
+    "source": "https://arxiv.org/pdf/2509.02208",
+    "date": "2025-09"
+   }
+  ],
+  "open_problems": [
+   "如何定量验证模拟患者的保真度（与真实患者对话分布对齐、信息逐步披露、情绪与依从性），而不是只靠 LLM 评委打分",
+   "多样性与长尾：如何模拟罕见病、多病共存、低健康素养、不同文化语言的患者",
+   "用模拟器训练出的医生智能体能否迁移到真实患者，sim-to-real 差距如何度量"
+  ],
+  "entry_points": [
+   "以真实医患对话语料为参照，提出患者模拟器的分布级保真度指标（用户模拟器评估是对话系统的老问题，NLP 背景直接适用）",
+   "构建可控（人格、健康素养、隐瞒信息）的患者模拟器并作为 RL 环境，研究医生智能体策略对模拟器偏差的敏感性"
+  ]
+ },
+ {
+  "id": "genomic_language_models",
+  "name_zh": "基因组语言模型（DNA/RNA 语言模型）",
+  "name_en": "Genomic Language Models (DNA/RNA LMs)",
+  "domain": "医疗CS",
+  "scores": {
+   "G": 4,
+   "S": 4,
+   "C": 3.5,
+   "E": 4.5,
+   "R": 4,
+   "H": 3.5,
+   "X": 4,
+   "P": 6
+  },
+  "rationale": {
+   "G": "未找到精确计数；Evo 2（2025-02 预印本，2026 Nature）、AlphaGenome（2026-01 Nature 并开源）、GPN 系列、DART-Eval 等基准与2026年批评性预印本持续增加，判断约 40-80%/年。",
+   "S": "范式之争未定：纯自监督 DNA LM（Evo 2）vs 监督式序列-功能模型（AlphaGenome，U-Net+Transformer）vs 比对型（GPN-MSA），给 4。",
+   "C": "Evo 2（40B，约9万亿碱基对、100万 token 上下文）零样本预测 BRCA1 等变异效应；AlphaGenome 26项任务中25项匹敌或超过 SOTA（二手，另有24/26说法）；但 DART-Eval 显示 DNA LM 在多数任务上相对基线无显著收益，GPN-MSA 指出人类 DNA LM 无监督预测不如保守性分数。给 3.5。",
+   "E": "Evo 2 权重、训练代码与 OpenGenome2 数据完全开放；AlphaGenome 开源；公开基因组数据丰富，给 4.5。",
+   "R": "Arc Institute、NVIDIA、Google DeepMind 投入，给 4。",
+   "H": "评测、可解释性（Evo 2 已显示学到外显子边界等特征）、下游微调可在学术算力做，但需要生物学知识，给 3.5。",
+   "X": "生物学通用底座（变异解读、序列设计），给 4。",
+   "P": "可复现性（NVIDIA 复现 BRCA1 示例称多数配置下结果近随机）、相对简单基线收益不明、校准问题、生物安全（排除人类病原体）、与医疗 CS 的距离，扣 6。"
+  },
+  "inflection_event": "2025-02 Arc Institute 与 NVIDIA 发布 Evo 2（40B，全开源，2026 年发表于 Nature）；2026-01 DeepMind AlphaGenome 发表于 Nature 并开源，基因组模型进入「百万碱基上下文 + 单碱基分辨率」时代。",
+  "key_evidence": [
+   {
+    "claim": "Evo 2 发表于 Nature：40B 参数、约9万亿 DNA 碱基对、100万 token 上下文、单核苷酸分辨率，零样本预测 BRCA1 等临床变异效应；权重、代码与 OpenGenome2 全部开放",
+    "source": "https://astrobiology.com/2026/03/with-evo-2-ai-can-model-and-design-the-genetic-code-for-all-domains-of-life.html",
+    "date": "2026-03"
+   },
+   {
+    "claim": "AlphaGenome 于2026-01-28 发表于 Nature 并开源，输入最多100万碱基对，预测11种模态的基因组读数",
+    "source": "https://gigazine.net/gsc_news/en/20260129-google-deepmind-alphagenome-open-source/",
+    "date": "2026-01"
+   },
+   {
+    "claim": "DART-Eval（NeurIPS 2024）：当前 DNA LM 表现不一致，大多数任务相对替代基线无显著收益且计算成本高得多",
+    "source": "https://arxiv.org/abs/2412.05430v1",
+    "date": "2024-12"
+   },
+   {
+    "claim": "GPN-MSA 指出此前人类 DNA LM（如 Nucleotide Transformer）的无监督变异效应预测不如简单保守性分数",
+    "source": "https://www.biorxiv.org/content/10.1101/2023.10.10.561776.full.pdf",
+    "date": "2023-10"
+   },
+   {
+    "claim": "NVIDIA BioNeMo 复现 Evo 2 BRCA1 零样本示例时注明：除特定配置外结果近乎随机（日期待核实）",
+    "source": "https://docs.nvidia.com/bionemo-framework/latest/main/examples/bionemo-evo2/zeroshot_brca1/",
+    "date": "2025-06"
+   },
+   {
+    "claim": "AlphaGenome 用户审视其变异效应预测能力；DeepMind 研究者表示尚未为个人基因组预测设计或验证（日期待核实）",
+    "source": "https://www.genomeweb.com/informatics/google-alphagenome-users-scrutinize-ai-models-ability-predict-variant-effects",
+    "date": "2026-02"
+   }
+  ],
+  "open_problems": [
+   "自监督 DNA LM 相对保守性分数、监督式序列-功能模型的真实增益在哪里，如何设计无泄漏的公平基准",
+   "变异效应分数的跨位点校准与临床可用阈值",
+   "长上下文（百万碱基）模型的可解释性：机制性发现能否转为可验证的生物学假设"
+  ],
+  "entry_points": [
+   "把 NLP 的探针（probing）与稀疏自编码器可解释性方法用于 Evo 2 表征，寻找可验证的生物学特征",
+   "做严格基准：在 ClinVar/MAVE 上对比 Evo 2、AlphaGenome、GPN-MSA、CADD，并研究长上下文与 tokenization 的作用"
+  ]
+ },
+ {
+  "id": "medical_segmentation_fm",
+  "name_zh": "医学影像分割基础模型（MedSAM 等）",
+  "name_en": "Medical Image Segmentation Foundation Models",
+  "domain": "医疗CS",
+  "scores": {
+   "G": 2.5,
+   "S": 2,
+   "C": 3,
+   "E": 4.5,
+   "R": 2.5,
+   "H": 3,
+   "X": 2.5,
+   "P": 5
+  },
+  "rationale": {
+   "G": "未找到精确计数；SAM（2023）后 MedSAM（2024）、MedSAM2（2025-04）持续迭代，但已是 MICCAI 常规主题，判断约 10-30%/年（背景知识为主）。",
+   "S": "成熟赛道：nnU-Net 为强共识基线，可提示分割已成标准工具，给 2。",
+   "C": "MedSAM2 用45.5万对3D图像-掩码与7.6万视频帧训练，人机协同标注降低成本85%以上；但 nnU-Net Revisited 显示许多声称的架构增益在严格验证下不成立，给 3。",
+   "E": "MedSAM2 代码、权重与标注数据公开；大量公开分割数据集，给 4.5。",
+   "R": "学术为主（多伦多大学/Vector 等），工业投入有限，给 2.5。",
+   "H": "可做但多为增量改进，给 3。",
+   "X": "主要服务标注与影像分析流水线，给 2.5。",
+   "P": "强基线难以超越、增量化、可复现性问题，扣 5。"
+  },
+  "inflection_event": "2023 年 Meta SAM 发布后的医学适配（MedSAM，2024 Nature Communications，背景知识），2025-04 MedSAM2 扩展到 3D 与视频；拐点已过。",
+  "key_evidence": [
+   {
+    "claim": "MedSAM2：基于 SAM2，用45.5万+ 3D 图像-掩码对与7.6万帧训练，人机协同标注降低人工成本85%以上",
+    "source": "https://arxiv.org/abs/2504.03600v1",
+    "date": "2025-04"
+   },
+   {
+    "claim": "nnU-Net Revisited（MICCAI 2024）：在严格验证下，CNN 型 U-Net 变体与 nnU-Net 仍最佳，许多 Transformer/Mamba 增益不成立",
+    "source": "https://arxiv.org/abs/2404.09556v2",
+    "date": "2024-04"
+   },
+   {
+    "claim": "评论指出 MedSAM2 仍需领域特定训练，尚非完全通用工具（月份待核实）",
+    "source": "https://themenonlab.blog/blog/medical-sam2-3d-medical-image-segmentation",
+    "date": "2025-05"
+   },
+   {
+    "claim": "MedGemma 1.5 等通用多模态模型已开始集成定位/分割能力（胸片 IoU +35%），挤压专用分割基础模型空间",
+    "source": "https://papers.cool/arxiv/2604.05081",
+    "date": "2026-04"
+   }
+  ],
+  "open_problems": [
+   "可提示分割在罕见结构与跨模态上的零样本可靠性与不确定性估计",
+   "与语言模型结合的指代分割（文本描述 → 3D 掩码）",
+   "严格、公平地与 nnU-Net 比较的评测规范"
+  ],
+  "entry_points": [
+   "做文本驱动的指代分割（放射报告句子 → 病灶掩码），把 NLP 与分割结合",
+   "以人机协同标注为场景研究主动学习与标注成本建模"
+  ]
+ },
+ {
+  "id": "ai_regulatory_science_monitoring",
+  "name_zh": "医疗 AI 监管科学与部署后监测",
+  "name_en": "Medical AI Regulatory Science & Post-Deployment Monitoring",
+  "domain": "医疗CS",
+  "scores": {
+   "G": 3.5,
+   "S": 4.5,
+   "C": 2.5,
+   "E": 2.5,
+   "R": 3,
+   "H": 4,
+   "X": 3,
+   "P": 5
+  },
+  "rationale": {
+   "G": "需求快速增长：FDA AI 设备清单 2025-05 为1,016个，2025年末约1,430-1,451个（不同统计口径），2025 全年约295项许可（行业分析，待核实）；FDA 2025-11 召开 DHAC 会议、2025 年征集真实世界性能评估意见（FDA-2025-N-4203）、2026-08 发布生成式 AI 设备讨论稿，判断约 30-60%/年。",
+   "S": "CS 社区小，生成式 AI 的上市后监测无共识方法（FDA 仍在征集意见），给 4.5。",
+   "C": "非能力驱动，而是部署规模倒逼：工具多为概念与统计方法，给 2.5。",
+   "E": "FDA 设备清单公开，但部署后真实数据（日志、结局）几乎不可得，给 2.5。",
+   "R": "FDA、CHAI、医疗系统、律所与合规公司，资金有限，给 3。",
+   "H": "漂移检测、再基准化、标签迁移、子群体性能监测等统计/ML 方法可学术完成，给 4。",
+   "X": "ML 监测与 MLOps 方法通用，给 3。",
+   "P": "需部署方数据与合作、政策易变、发表周期长，扣 5。"
+  },
+  "inflection_event": "2025-11 FDA 数字健康咨询委员会讨论生成式 AI 设备的全生命周期与上市后漂移监测，随后 2026-08 FDA 发布生成式 AI 医疗设备讨论稿（征求意见截至2026-10-19），首次系统提出定期再基准化、抽样医生复核与漂移监测。",
+  "key_evidence": [
+   {
+    "claim": "截至2025-05，FDA 已授权1,016个 AI/ML 设备",
+    "source": "https://jmai.amegroups.org/article/view/10846/html",
+    "date": "2025-05"
+   },
+   {
+    "claim": "FDA AI 设备清单截至2025年末累计约1,451个，2026-03 数据库达1,524条（FDA 称清单不全）（月份待核实）",
+    "source": "https://intuitionlabs.ai/articles/fda-ai-medical-device-tracker",
+    "date": "2026-04"
+   },
+   {
+    "claim": "DHAC 2025-11-06 会议：支持全生命周期方法，指出 AI 设备对输入数据变化高度敏感、需漂移/偏差检测与回滚标准；律所称 FDA 尚未授权生成式 AI 临床设备",
+    "source": "https://hlc.com/en/publications/fdas-digital-health-advisory-committee-weighs-guardrails-for-generative-ai-in-mental-health-devices",
+    "date": "2025-11"
+   },
+   {
+    "claim": "FDA 征集 AI 设备真实世界性能评估意见（Docket FDA-2025-N-4203），涵盖指标、监测触发条件与人机交互（月份待核实）",
+    "source": "https://healthcarefinancenews.com/news/fda-requests-comment-performance-ai-enabled-medical-devices",
+    "date": "2025-10"
+   },
+   {
+    "claim": "FDA 数字健康卓越中心2026-08-18 发布生成式 AI 设备讨论稿，提出定期再基准化、抽样医生复核与漂移监测，意见截至2026-10-19",
+    "source": "https://www.arnoldporter.com/en/perspectives/advisories/2026/09/fda-seeks-public-feedback-on-regulatory-approach-for-generative-ai-enabled-medical-devices",
+    "date": "2026-09"
+   }
+  ],
+  "open_problems": [
+   "生成式 AI 设备的上市后监测：无标签条件下如何检测性能退化与基础模型版本更换带来的行为漂移",
+   "预定变更控制计划（PCCP）下模型更新的统计保证与回滚标准",
+   "跨机构、跨人群的性能稳定性与公平性监测指标"
+  ],
+  "entry_points": [
+   "研究 LLM 输出的无标签漂移检测（嵌入分布、LLM-judge 抽样复核）与基础模型版本更换的行为差异度量",
+   "针对 FDA 讨论稿的问题做方法论文：再基准化频率、样本量与置信度设计"
+  ]
+ },
+ {
+  "id": "federated_privacy_medical_learning",
+  "name_zh": "隐私保护/联邦医疗学习",
+  "name_en": "Privacy-Preserving & Federated Medical Learning",
+  "domain": "医疗CS",
+  "scores": {
+   "G": 1.5,
+   "S": 2,
+   "C": 2,
+   "E": 3,
+   "R": 2.5,
+   "H": 3,
+   "X": 3,
+   "P": 6
+  },
+  "rationale": {
+   "G": "已成熟甚至降温：2024 系统综述612篇中仅5.2%为真实应用；2026 范围综述772篇中仅25篇（3.2%）为真实部署，判断 <10%/年的实质增长。",
+   "S": "方法共识（FedAvg 及变体、差分隐私）早已形成，进入饱和期，给 2。",
+   "C": "真实部署性能接近集中式基线，但无能力拐点，给 2。",
+   "E": "框架（Flower、NVFlare 等，背景知识）开源，但多中心真实部署需要基础设施，给 3。",
+   "R": "NVIDIA、Owkin 等，投入有限，给 2.5。",
+   "H": "基础设施与组织问题多于算法问题，学术空间有限，给 3。",
+   "X": "隐私计算方法通用，给 3。",
+   "P": "临床转化极低、瓶颈在组织而非算法、隐私机制未经验证，扣 6。"
+  },
+  "inflection_event": "无近期拐点；2019-2021 年 FL 在医学影像与 EXAM（COVID）研究中的高峰（背景知识）之后，2024-2026 综述显示真实部署率仅3-5%。",
+  "key_evidence": [
+   {
+    "claim": "Cell Reports Medicine 2024 系统综述：612篇文章中仅5.2%涉及 FL 的真实应用（月份待核实）",
+    "source": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10897620",
+    "date": "2024-02"
+   },
+   {
+    "claim": "2026 范围综述：772篇 PubMed 论文中仅25篇（3.2%）为真实部署，瓶颈主要是基础设施与组织问题而非算法（月份待核实）",
+    "source": "https://epjst.epj.org/articles/epjst/abs/first/11734_2026_Article_2475/11734_2026_Article_2475.html",
+    "date": "2026-06"
+   },
+   {
+    "claim": "医学影像 FL 差距分析：7个部署维度中6个存在高严重度差距，评价以技术指标为主、与价值医疗脱节（月份待核实）",
+    "source": "https://orbilu.uni.lu/bitstream/10993/65947/1/Paper-0007.pdf",
+    "date": "2025-06"
+   },
+   {
+    "claim": "PhysioNet 2025-09 明确禁止将 MIMIC 数据经 API 发往第三方 LLM 服务，推荐本地部署——隐私约束转向「本地 LLM」而非 FL",
+    "source": "https://physionet.org/news/post/llm-responsible-use/",
+    "date": "2025-09"
+   }
+  ],
+  "open_problems": [
+   "联邦微调/联邦评测大模型（LoRA 级通信）在多医院场景的可行性与收益",
+   "隐私机制（差分隐私、安全聚合）在真实部署中的经验验证",
+   "非独立同分布、部分标注下的稳健聚合"
+  ],
+  "entry_points": [
+   "联邦 LoRA 微调医学 LLM 并量化通信/隐私/性能三者权衡",
+   "研究 LLM 在临床文本上的记忆与成员推断风险（NLP 隐私攻击方法迁移）"
+  ]
+ },
+ {
+  "id": "medical_knowledge_editing",
+  "name_zh": "医学知识编辑与持续更新",
+  "name_en": "Medical Knowledge Editing & Continual Updating",
+  "domain": "医疗CS",
+  "scores": {
+   "G": 3,
+   "S": 4,
+   "C": 2,
+   "E": 4,
+   "R": 1.5,
+   "H": 4.5,
+   "X": 3,
+   "P": 7
+  },
+  "rationale": {
+   "G": "小而增长：MedLaSA（2024-02）、MedEditBench（2025-06）、MultiMedEdit（2025-08）、MedREK/MedVersa 批量编辑（2025-10）、EACL 2026 严格评测框架，约每年数篇到十余篇，判断约 30-50%/年。",
+   "S": "小社区、无共识，但面临被 RAG/智能体检索替代的结构性风险，给 4。",
+   "C": "定位-编辑类方法对无关知识有副作用；批量编辑困难；未找到以「过时指南→新指南」为核心的基准，给 2。",
+   "E": "MedLaSA、MedEditBench、MedVersa 等基准与临床指南文本公开，给 4。",
+   "R": "以学术为主，未见大厂专门投入，给 1.5。",
+   "H": "低算力、开放问题多，给 4.5。",
+   "X": "持续学习/知识更新是通用问题，给 3。",
+   "P": "被 RAG 与工具调用吸收的风险高、参数编辑在高风险场景难以审计、临床价值未证明，扣 7。"
+  },
+  "inflection_event": "无明确拐点；2024-02 MedLaSA 提出医学专属编辑基准，2025 年转向批量编辑（MedVersa）与多模态编辑（MultiMedEdit）。",
+  "key_evidence": [
+   {
+    "claim": "MedLaSA：层级自适应医学模型编辑，构建两个医学编辑基准，强调更严格的局部性指标",
+    "source": "https://www.arxiv.org/abs/2402.18099",
+    "date": "2024-02"
+   },
+   {
+    "claim": "MedEditBench：评估现有知识编辑方法在医学领域的有效性，提出三种编辑范式",
+    "source": "https://arxiv.org/abs/2506.03490v2",
+    "date": "2025-06"
+   },
+   {
+    "claim": "MedREK/MedVersa：首个医学批量编辑基准，指出定位-编辑方法对无关知识有副作用，提出检索式编辑",
+    "source": "https://arxiv.org/html/2510.13500v2",
+    "date": "2025-10"
+   },
+   {
+    "claim": "MultiMedEdit：将医学知识编辑扩展到多模态与 VQA 场景",
+    "source": "https://arxiv.org/html/2508.07022v1",
+    "date": "2025-08"
+   }
+  ],
+  "open_problems": [
+   "指南版本化：模型如何识别并替换被新版指南推翻的旧建议，并在多跳推理中一致使用",
+   "参数编辑 vs 检索增强 vs 工具调用在医学更新场景的系统对比与成本收益",
+   "编辑后的可审计性：如何证明编辑未引入新的临床错误"
+  ],
+  "entry_points": [
+   "构建「指南时间版本」基准（同一问题在不同年份指南下答案不同），评估编辑、RAG 与长上下文三条路线",
+   "研究医学 LLM 的时间知识感知：模型是否知道自身知识的截止与过时风险"
+  ]
+ }
+]
