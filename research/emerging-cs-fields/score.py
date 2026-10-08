@@ -107,9 +107,9 @@ def tier(score):
     return "D 暂缓"
 
 
-def load_fields():
+def load_fields(evidence_dir):
     fields = []
-    for path in sorted(glob.glob(os.path.join(HERE, "evidence", "*.json"))):
+    for path in sorted(glob.glob(os.path.join(evidence_dir, "*.json"))):
         with open(path, encoding="utf-8") as fh:
             for f in json.load(fh):
                 if "counts" in f:
@@ -129,7 +129,7 @@ def fmt_scores(s):
     return " ".join(f"{d}{s[d]:g}" for d in DIMS + ["P"])
 
 
-def write_cards(fields, sens):
+def write_cards(fields, sens, out_dir):
     lines = ["# 领域卡片（由 score.py 自动生成，勿手改；内容来自 evidence/*.json）", ""]
     for i, f in enumerate(fields, 1):
         s = sens[f["id"]]
@@ -156,7 +156,7 @@ def write_cards(fields, sens):
             lines.append(f"- {e['date']} {e['claim']} {src}")
         lines += ["", "**开放问题**：", ""] + [f"- {x}" for x in f["open_problems"]]
         lines += ["", "**切入点**：", ""] + [f"- {x}" for x in f["entry_points"]] + ["", "---", ""]
-    with open(os.path.join(HERE, "CARDS.md"), "w", encoding="utf-8") as fh:
+    with open(os.path.join(out_dir, "CARDS.md"), "w", encoding="utf-8") as fh:
         fh.write("\n".join(lines))
 
 
@@ -164,9 +164,12 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--samples", type=int, default=5000)
     ap.add_argument("--seed", type=int, default=20261006)
+    ap.add_argument("--dir", default=HERE,
+                    help="directory holding evidence/*.json; outputs are written there too")
     args = ap.parse_args()
+    out_dir = os.path.abspath(args.dir)
 
-    fields = load_fields()
+    fields = load_fields(os.path.join(out_dir, "evidence"))
     for f in fields:
         f["score"] = round(emergence_score(f["scores"]), 1)
         f["momentum"] = round(sub_index(f["scores"], MOMENTUM), 1)
@@ -191,7 +194,7 @@ def main():
         ],
         "backtest": backtest,
     }
-    with open(os.path.join(HERE, "results.json"), "w", encoding="utf-8") as fh:
+    with open(os.path.join(out_dir, "results.json"), "w", encoding="utf-8") as fh:
         json.dump(results, fh, ensure_ascii=False, indent=2)
 
     lines = [
@@ -227,10 +230,10 @@ def main():
             f"| {b['name']} | {b['as_of']} | **{b['score']}** | "
             f"`{fmt_scores(b['scores'])}` | {b['outcome']} |"
         )
-    with open(os.path.join(HERE, "results.md"), "w", encoding="utf-8") as fh:
+    with open(os.path.join(out_dir, "results.md"), "w", encoding="utf-8") as fh:
         fh.write("\n".join(lines) + "\n")
 
-    write_cards(fields, sens)
+    write_cards(fields, sens, out_dir)
 
     print(f"{len(fields)} fields scored; top 10:")
     for f in fields[:10]:
