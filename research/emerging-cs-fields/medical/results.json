@@ -1,0 +1,554 @@
+{
+  "weights": {
+    "G": 0.25,
+    "C": 0.25,
+    "E": 0.1,
+    "R": 0.1,
+    "H": 0.1,
+    "X": 0.2
+  },
+  "fields": [
+    {
+      "id": "clinical_llm_agents",
+      "name_zh": "临床大模型智能体（诊断对话 + EHR 交互智能体）",
+      "name_en": "Clinical LLM Agents (Diagnostic Dialogue & EHR-Interacting Agents)",
+      "domain": "医疗CS",
+      "scores": {
+        "G": 5,
+        "S": 4.5,
+        "C": 4,
+        "E": 3.5,
+        "R": 5,
+        "H": 4,
+        "X": 4,
+        "P": 7
+      },
+      "score": 74.7,
+      "momentum": 90.0,
+      "substance": 82.0,
+      "tier": "B 值得投入",
+      "sensitivity": {
+        "median_rank": 1.0,
+        "rank_p10": 1,
+        "rank_p90": 1,
+        "p_top10": 1.0
+      }
+    },
+    {
+      "id": "medical_llm_evaluation_safety",
+      "name_zh": "医疗 LLM 评测、安全与幻觉",
+      "name_en": "Medical LLM Evaluation, Safety & Hallucination",
+      "domain": "医疗CS",
+      "scores": {
+        "G": 4.5,
+        "S": 4,
+        "C": 3.5,
+        "E": 4.5,
+        "R": 4,
+        "H": 5,
+        "X": 4,
+        "P": 4
+      },
+      "score": 70.7,
+      "momentum": 80.0,
+      "substance": 86.0,
+      "tier": "B 值得投入",
+      "sensitivity": {
+        "median_rank": 2.0,
+        "rank_p10": 2,
+        "rank_p90": 2,
+        "p_top10": 1.0
+      }
+    },
+    {
+      "id": "medical_reasoning_models",
+      "name_zh": "医学推理模型（RLVR / 可验证奖励）",
+      "name_en": "Medical Reasoning Models (RL with Verifiable Rewards)",
+      "domain": "医疗CS",
+      "scores": {
+        "G": 5,
+        "S": 4,
+        "C": 4,
+        "E": 4.5,
+        "R": 4,
+        "H": 4.5,
+        "X": 3,
+        "P": 7
+      },
+      "score": 67.7,
+      "momentum": 90.0,
+      "substance": 76.0,
+      "tier": "C 观察",
+      "sensitivity": {
+        "median_rank": 3.0,
+        "rank_p10": 3,
+        "rank_p90": 4,
+        "p_top10": 1.0
+      }
+    },
+    {
+      "id": "patient_simulators_digital_twins",
+      "name_zh": "患者模拟器与医疗数字孪生（LLM 驱动）",
+      "name_en": "LLM Patient Simulators & Medical Digital Twins",
+      "domain": "医疗CS",
+      "scores": {
+        "G": 4,
+        "S": 5,
+        "C": 3,
+        "E": 4,
+        "R": 3,
+        "H": 5,
+        "X": 3.5,
+        "P": 7
+      },
+      "score": 66.0,
+      "momentum": 70.0,
+      "substance": 76.0,
+      "tier": "C 观察",
+      "sensitivity": {
+        "median_rank": 4.0,
+        "rank_p10": 3,
+        "rank_p90": 6,
+        "p_top10": 1.0
+      }
+    },
+    {
+      "id": "ehr_foundation_models",
+      "name_zh": "EHR / 结构化病历基础模型（医疗事件生成模型）",
+      "name_en": "EHR Foundation Models / Generative Medical Event Models",
+      "domain": "医疗CS",
+      "scores": {
+        "G": 4,
+        "S": 4.5,
+        "C": 4,
+        "E": 2.5,
+        "R": 4,
+        "H": 3,
+        "X": 4,
+        "P": 6
+      },
+      "score": 65.2,
+      "momentum": 80.0,
+      "substance": 70.0,
+      "tier": "C 观察",
+      "sensitivity": {
+        "median_rank": 5.0,
+        "rank_p10": 3,
+        "rank_p90": 6,
+        "p_top10": 1.0
+      }
+    },
+    {
+      "id": "genomic_language_models",
+      "name_zh": "基因组语言模型（DNA/RNA 语言模型）",
+      "name_en": "Genomic Language Models (DNA/RNA LMs)",
+      "domain": "医疗CS",
+      "scores": {
+        "G": 4,
+        "S": 4,
+        "C": 3.5,
+        "E": 4.5,
+        "R": 4,
+        "H": 3.5,
+        "X": 4,
+        "P": 6
+      },
+      "score": 63.8,
+      "momentum": 75.0,
+      "substance": 80.0,
+      "tier": "C 观察",
+      "sensitivity": {
+        "median_rank": 6.0,
+        "rank_p10": 5,
+        "rank_p90": 7,
+        "p_top10": 1.0
+      }
+    },
+    {
+      "id": "wearable_physiological_fm",
+      "name_zh": "可穿戴与生理信号基础模型（ECG/PPG/传感器-语言）",
+      "name_en": "Wearable & Physiological Signal Foundation Models",
+      "domain": "医疗CS",
+      "scores": {
+        "G": 4,
+        "S": 4.5,
+        "C": 3.5,
+        "E": 2.5,
+        "R": 4,
+        "H": 3.5,
+        "X": 3.5,
+        "P": 5
+      },
+      "score": 62.9,
+      "momentum": 75.0,
+      "substance": 68.0,
+      "tier": "C 观察",
+      "sensitivity": {
+        "median_rank": 7.0,
+        "rank_p10": 6,
+        "rank_p90": 7,
+        "p_top10": 1.0
+      }
+    },
+    {
+      "id": "generalist_multimodal_medical_fm",
+      "name_zh": "多模态/通用医学基础模型（含放射报告生成、3D 影像）",
+      "name_en": "Multimodal Generalist Medical Foundation Models",
+      "domain": "医疗CS",
+      "scores": {
+        "G": 4,
+        "S": 3.5,
+        "C": 3.5,
+        "E": 4,
+        "R": 4.5,
+        "H": 3.5,
+        "X": 4,
+        "P": 6
+      },
+      "score": 59.9,
+      "momentum": 75.0,
+      "substance": 80.0,
+      "tier": "D 暂缓",
+      "sensitivity": {
+        "median_rank": 8.0,
+        "rank_p10": 8,
+        "rank_p90": 8,
+        "p_top10": 1.0
+      }
+    },
+    {
+      "id": "ai_regulatory_science_monitoring",
+      "name_zh": "医疗 AI 监管科学与部署后监测",
+      "name_en": "Medical AI Regulatory Science & Post-Deployment Monitoring",
+      "domain": "医疗CS",
+      "scores": {
+        "G": 3.5,
+        "S": 4.5,
+        "C": 2.5,
+        "E": 2.5,
+        "R": 3,
+        "H": 4,
+        "X": 3,
+        "P": 5
+      },
+      "score": 53.0,
+      "momentum": 60.0,
+      "substance": 62.0,
+      "tier": "D 暂缓",
+      "sensitivity": {
+        "median_rank": 9.0,
+        "rank_p10": 9,
+        "rank_p90": 9,
+        "p_top10": 1.0
+      }
+    },
+    {
+      "id": "pathology_foundation_models",
+      "name_zh": "病理基础模型",
+      "name_en": "Computational Pathology Foundation Models",
+      "domain": "医疗CS",
+      "scores": {
+        "G": 3.5,
+        "S": 3,
+        "C": 3.5,
+        "E": 3,
+        "R": 3.5,
+        "H": 3.5,
+        "X": 2.5,
+        "P": 6
+      },
+      "score": 46.0,
+      "momentum": 70.0,
+      "substance": 60.0,
+      "tier": "D 暂缓",
+      "sensitivity": {
+        "median_rank": 10.0,
+        "rank_p10": 10,
+        "rank_p90": 11,
+        "p_top10": 0.6516
+      }
+    },
+    {
+      "id": "medical_knowledge_editing",
+      "name_zh": "医学知识编辑与持续更新",
+      "name_en": "Medical Knowledge Editing & Continual Updating",
+      "domain": "医疗CS",
+      "scores": {
+        "G": 3,
+        "S": 4,
+        "C": 2,
+        "E": 4,
+        "R": 1.5,
+        "H": 4.5,
+        "X": 3,
+        "P": 7
+      },
+      "score": 44.3,
+      "momentum": 50.0,
+      "substance": 64.0,
+      "tier": "D 暂缓",
+      "sensitivity": {
+        "median_rank": 11.0,
+        "rank_p10": 10,
+        "rank_p90": 12,
+        "p_top10": 0.2822
+      }
+    },
+    {
+      "id": "ambient_clinical_documentation",
+      "name_zh": "环境式临床文档（AI 听写/Ambient Scribe）",
+      "name_en": "Ambient AI Clinical Documentation (AI Scribes)",
+      "domain": "医疗CS",
+      "scores": {
+        "G": 4.5,
+        "S": 2.5,
+        "C": 3.5,
+        "E": 2,
+        "R": 5,
+        "H": 2,
+        "X": 2.5,
+        "P": 8
+      },
+      "score": 43.0,
+      "momentum": 80.0,
+      "substance": 56.0,
+      "tier": "D 暂缓",
+      "sensitivity": {
+        "median_rank": 12.0,
+        "rank_p10": 11,
+        "rank_p90": 12,
+        "p_top10": 0.0662
+      }
+    },
+    {
+      "id": "medical_segmentation_fm",
+      "name_zh": "医学影像分割基础模型（MedSAM 等）",
+      "name_en": "Medical Image Segmentation Foundation Models",
+      "domain": "医疗CS",
+      "scores": {
+        "G": 2.5,
+        "S": 2,
+        "C": 3,
+        "E": 4.5,
+        "R": 2.5,
+        "H": 3,
+        "X": 2.5,
+        "P": 5
+      },
+      "score": 35.2,
+      "momentum": 55.0,
+      "substance": 60.0,
+      "tier": "D 暂缓",
+      "sensitivity": {
+        "median_rank": 13.0,
+        "rank_p10": 13,
+        "rank_p90": 13,
+        "p_top10": 0.0
+      }
+    },
+    {
+      "id": "federated_privacy_medical_learning",
+      "name_zh": "隐私保护/联邦医疗学习",
+      "name_en": "Privacy-Preserving & Federated Medical Learning",
+      "domain": "医疗CS",
+      "scores": {
+        "G": 1.5,
+        "S": 2,
+        "C": 2,
+        "E": 3,
+        "R": 2.5,
+        "H": 3,
+        "X": 3,
+        "P": 6
+      },
+      "score": 26.5,
+      "momentum": 35.0,
+      "substance": 58.0,
+      "tier": "D 暂缓",
+      "sensitivity": {
+        "median_rank": 14.0,
+        "rank_p10": 14,
+        "rank_p90": 14,
+        "p_top10": 0.0
+      }
+    }
+  ],
+  "backtest": [
+    {
+      "name": "大语言模型 LLM",
+      "as_of": "2020-21",
+      "scores": {
+        "G": 5,
+        "S": 5,
+        "C": 5,
+        "E": 4,
+        "R": 4,
+        "H": 4,
+        "X": 5,
+        "P": 2
+      },
+      "outcome": "爆发并成为整个 CS 的通用底座（基准案例）",
+      "score": 92.0
+    },
+    {
+      "name": "扩散模型 Diffusion",
+      "as_of": "2021",
+      "scores": {
+        "G": 5,
+        "S": 5,
+        "C": 4,
+        "E": 4,
+        "R": 3,
+        "H": 5,
+        "X": 4,
+        "P": 1
+      },
+      "outcome": "爆发，成为图像/视频/分子生成的主流范式",
+      "score": 84.0
+    },
+    {
+      "name": "3D 高斯泼溅 3DGS",
+      "as_of": "2023",
+      "scores": {
+        "G": 5,
+        "S": 5,
+        "C": 4,
+        "E": 5,
+        "R": 3,
+        "H": 5,
+        "X": 3,
+        "P": 3
+      },
+      "outcome": "约 1 年内取代 NeRF，2026 年已进入 glTF/OpenUSD 标准化",
+      "score": 80.0
+    },
+    {
+      "name": "生成对抗网络 GAN",
+      "as_of": "2016",
+      "scores": {
+        "G": 5,
+        "S": 5,
+        "C": 4,
+        "E": 4,
+        "R": 3,
+        "H": 5,
+        "X": 3,
+        "P": 3
+      },
+      "outcome": "繁荣约 5 年，2021 后被扩散模型取代",
+      "score": 78.0
+    },
+    {
+      "name": "神经辐射场 NeRF",
+      "as_of": "2021",
+      "scores": {
+        "G": 5,
+        "S": 5,
+        "C": 4,
+        "E": 4,
+        "R": 2,
+        "H": 5,
+        "X": 2,
+        "P": 3
+      },
+      "outcome": "爆发约 2.5 年，2023 后被 3D 高斯泼溅大面积取代",
+      "score": 72.0
+    },
+    {
+      "name": "深度强化学习（游戏）",
+      "as_of": "2016",
+      "scores": {
+        "G": 5,
+        "S": 4,
+        "C": 4,
+        "E": 3,
+        "R": 4,
+        "H": 4,
+        "X": 3,
+        "P": 5
+      },
+      "outcome": "游戏外落地慢，沉寂后以 RLHF/RLVR 形式回归",
+      "score": 66.1
+    },
+    {
+      "name": "大语言模型 LLM（对照：今天）",
+      "as_of": "2026",
+      "scores": {
+        "G": 4,
+        "S": 1,
+        "C": 5,
+        "E": 5,
+        "R": 5,
+        "H": 3,
+        "X": 5,
+        "P": 3
+      },
+      "outcome": "对照组：重要但已是主流，不再是新兴方向，应被时机系数压低",
+      "score": 51.6
+    },
+    {
+      "name": "神经架构搜索 NAS",
+      "as_of": "2018",
+      "scores": {
+        "G": 5,
+        "S": 4,
+        "C": 3,
+        "E": 3,
+        "R": 3,
+        "H": 3,
+        "X": 2,
+        "P": 8
+      },
+      "outcome": "收益被随机搜索基线质疑，2021 后明显降温",
+      "score": 51.4
+    },
+    {
+      "name": "区块链（CS 研究）",
+      "as_of": "2018",
+      "scores": {
+        "G": 4,
+        "S": 4,
+        "C": 2,
+        "E": 3,
+        "R": 4,
+        "H": 3,
+        "X": 3,
+        "P": 12
+      },
+      "outcome": "收缩为密码学/共识等细分方向，泛化应用未兑现",
+      "score": 43.8
+    },
+    {
+      "name": "胶囊网络 CapsNet",
+      "as_of": "2018",
+      "scores": {
+        "G": 3,
+        "S": 4,
+        "C": 2,
+        "E": 4,
+        "R": 2,
+        "H": 4,
+        "X": 2,
+        "P": 6
+      },
+      "outcome": "未能规模化，基本消失",
+      "score": 41.7
+    },
+    {
+      "name": "元宇宙 Metaverse",
+      "as_of": "2021",
+      "scores": {
+        "G": 4,
+        "S": 4,
+        "C": 1,
+        "E": 2,
+        "R": 5,
+        "H": 2,
+        "X": 3,
+        "P": 12
+      },
+      "outcome": "资本退潮，研究热度回落",
+      "score": 37.5
+    }
+  ]
+}
